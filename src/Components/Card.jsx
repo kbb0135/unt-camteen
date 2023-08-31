@@ -14,6 +14,7 @@ const Card = ({ title, price, location, imageSrc, rating }) => {
       <p className="card__location">{location}</p>
     </div>
   );
+  
 };
 
 export default Card;

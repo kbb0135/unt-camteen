@@ -1,0 +1,3 @@
+This will be the place to wrap the components created by us in
+react to wrap between NavBar and footer. This will help us to 
+manage our pages and not get confused.

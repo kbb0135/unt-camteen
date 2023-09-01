@@ -1,6 +1,6 @@
 /build
 /Admin_Backend
 /node_modules
-/src/reportWebVitals.js
 /test
+/src/reportWebVitals.js
 /src/App.test.js

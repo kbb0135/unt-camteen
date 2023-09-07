@@ -1,0 +1,25 @@
+.cart-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.total-calories {
+    display: flex;
+    flex-direction: column;
+    background: var(--untBackground);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    position: sticky;
+    z-index: 5;
+    bottom: 20px;
+    width: 95%;
+    align-self: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: #fff;
+}

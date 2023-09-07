@@ -1,0 +1,99 @@
+.review-container {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.review-row {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.food-container {
+    flex: 1;
+    min-width: 400px;
+    transition: transform 0.2s ease-in-out;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+
+.food-container:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+.food-image-container {
+    width: 100%;
+}
+
+.food-name {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.star-container {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-reviews {
+    color: #808080;
+}
+
+.half-star {
+    color: #ffc30b;
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.rating-value {
+    color: black;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star {
+    font-size: 20px;
+    color: #ffc30b;
+}
+
+.leave-review {
+    padding: 16px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: var(--untBackground);
+    color: var(--white);
+    color: white;
+    cursor: pointer;
+}
+
+.food-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.food-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}

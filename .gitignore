@@ -16,6 +16,5 @@
 /ui-debug.log
 /functions/ui-debug.log
 /functions/node_modules
-/public
 /firebase.json
-/public
+

@@ -5,7 +5,6 @@ const serviceAccount = require('./AdminCredential.json')
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
-console.log("1")
 
 try {
     const prompt = require('prompt-sync')();

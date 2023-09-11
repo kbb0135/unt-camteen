@@ -51,7 +51,6 @@ export default function AdminAddDelete() {
       <h1>Restaurant Menu</h1>
       <button onClick={async() => setIsFormOpen(true)}>Add New Item</button>
       {isFormOpen && <ItemForm onAdd={handleAdd} /> }
-      <button onClick= {addData}>ClickMe</button>
       <div className="menu-items">
         {menuItems.map((item) => (
           <MenuItem

@@ -16,14 +16,6 @@ const firebaseConfig = {
   appId: "1:140302535825:web:727dd419caa128d7218330"
 };
 
-const adminConfig = {
-  apiKey: "AIzaSyC3a4JeNuNxOHuEayMqYARf7Fb2uCP9a08",
-  authDomain: "admin-unt.firebaseapp.com",
-  projectId: "admin-unt",
-  storageBucket: "admin-unt.appspot.com",
-  messagingSenderId: "300309001057",
-  appId: "1:300309001057:web:964e1c0dd35af979eb8b20"
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

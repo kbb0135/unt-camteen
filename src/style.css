@@ -260,7 +260,19 @@ img
   justify-content: center;
 
 }
+.add-delete {
+  background-color: var(--untBackground);
+  color: var(--white);
+  border-radius: 3px;
+  height: 20px;
+  width: 115px;
+  margin-top: 10;
+  font-size: x-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+}
 
   .headNavbar {
     background-color: var(--untBackground); 

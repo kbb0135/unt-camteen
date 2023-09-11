@@ -4,11 +4,11 @@ import SignUp from './Models/SignUp.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import HomePage from './Pages/HomePage.jsx';
 import MenuPage from './Pages/MenuPage.jsx';
-import AdminAddMenu from './Models/AdminAddMenu.jsx';
+import AdminAddMenu from './Admin/AdminAddMenu.jsx';
 import OTPSender from './Models/OTPSender.jsx';
 import Reviews from './Models/Reviews.jsx'; 
 import Cart from "./Models/Cart"; 
-
+import AdminAddDelete from './Admin/AdminAddDelete.jsx'
 const App = () => {
   return (
     
@@ -22,6 +22,8 @@ const App = () => {
               <Route path = "/sendotp" element={<OTPSender />} />
               <Route path = "/reviews" element={<Reviews />}/>
               <Route path ="/your-cart" element={<Cart />} />
+              <Route path = "/admincd" element = {<AdminAddDelete />} />
+              
       </Routes>
   )
 }

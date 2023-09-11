@@ -58,6 +58,7 @@ export default function AdminAddDelete() {
             item={item}
             onDelete={handleDelete}
             onEdit={handleEdit}
+            
           />
         ))}
       </div>

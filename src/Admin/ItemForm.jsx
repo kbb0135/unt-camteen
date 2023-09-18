@@ -3,11 +3,13 @@ import { db, storage } from '../firebase.js'
 import { Timestamp, doc, setDoc } from "firebase/firestore"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+
 const ItemForm = ({ onAdd }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState('');
+  
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];

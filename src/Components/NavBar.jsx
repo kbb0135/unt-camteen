@@ -30,7 +30,7 @@ const Navbar = () => {
       <Link to="/your-cart" className={pathName === "/your-cart" ? "nav-head-active": "nav-head"}>
         <img className='cart-icon' src={Cart} alt="Cart"/>
       </Link>
-      <input class="search" type="search" placeholder="Search..."></input>
+      <input className="search" type="search" placeholder="Search..."></input>
       </ul>
       
     </nav>

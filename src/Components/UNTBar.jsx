@@ -5,7 +5,7 @@ import '../style.css';
 
 const UNTBar = () => {
     return (
-        <div class="untbar">
+        <div className="untbar">
             <div className="untHeaderCol1">
                 <div className="untImg">
                      <img src={Eagle} alt="UNT_Eagle" className="untbar-eagle"/>
@@ -16,8 +16,8 @@ const UNTBar = () => {
            
             <div className='untHeaderCol2'>
                 <div className='untHeaderTitle'>
-                    <h3 class="untbarText">UNIVERSITY OF NORTH TEXAS</h3>
-                    <h2 class="untbarText">UNT CAFTERIA</h2>
+                    <h3 className="untbarText">UNIVERSITY OF NORTH TEXAS</h3>
+                    <h2 className="untbarText">UNT CAFTERIA</h2>
                 </div>
                 
             </div>
@@ -25,7 +25,7 @@ const UNTBar = () => {
            
             <div className='untHeaderCol3'>
                 <div className='untHeaderLogin'>
-                    <button className='Header_btn'>Login</button>
+                    <button classNameName='Header_btn'>Login</button>
                     <a href={SignUp}><p>No Account? Sign UP HERE</p></a>
                 </div>
                

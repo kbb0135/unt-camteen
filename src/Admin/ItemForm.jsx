@@ -9,6 +9,7 @@ const ItemForm = ({ onAdd }) => {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
   const [category, setCategory] = useState('');
+  const[addValue, setAddValue] = useState()
   
 
   const handleImageChange = (e) => {
@@ -20,6 +21,13 @@ const ItemForm = ({ onAdd }) => {
     setCategory(event.target.value); // Update selected category
   }
 
+  const handleAddEvent =(e)=> {
+    const addValue = e.target.value
+    if(!isNaN && parseInt(addValue) >0) {
+      setAddValue(addValue)
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.trim() === '' || isNaN(price) || parseFloat(price) <= 0) {
@@ -28,16 +36,17 @@ const ItemForm = ({ onAdd }) => {
     }
 
     const newItem = {
-      id: Date.now(),
+      id: name,
       name: name,
-      categories: e.target[2].value,
+      category: e.target[2].value,
       price: parseFloat(price),
       image: URL.createObjectURL(image), // Convert the uploaded image to a URL
-      img: e.target[3].files[0]
+      img: e.target[3].files[0],
+      quantity: e.target[4].value
     };
     onAdd(newItem);
     const addData = async () => {
-      console.log(newItem.categories)
+      console.log(newItem.category)
       try {
         const storageRef = ref(storage, newItem.name);
         const uploadTask = uploadBytesResumable(storageRef, newItem.img);
@@ -67,13 +76,19 @@ const ItemForm = ({ onAdd }) => {
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
               console.log('File available at', downloadURL);
-              await setDoc(doc(db, newItem.categories, newItem.name), {
+              newItem.image = downloadURL;
+              
+              await setDoc(doc(db, newItem.category, newItem.name), {
                 Name: newItem.name,
                 Price: price,
                 ImageURL: downloadURL,
-                date: Timestamp.now()
+                date: Timestamp.now(),
+                category:category,
+                quantity: e.target[4].value
               });
+              
               alert("Database created")
+              newItem.category = category;
             });
 
 
@@ -120,6 +135,10 @@ const ItemForm = ({ onAdd }) => {
         <div>
           <label>Image:</label>
           <input type="file" accept=".png,.jpg,.jpeg" onChange={handleImageChange} />
+        </div>
+        <div>
+        <label>Item Quantity:</label>
+        <input type='number' min= '1' max = "50"  value={addValue} onChange = {handleAddEvent}/>
         </div>
         <button type="submit">Add</button>
       </form>

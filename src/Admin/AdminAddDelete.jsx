@@ -4,7 +4,9 @@ import './AdminMenu.css';
 import MenuItem from './MenuItem.jsx';
 import ItemForm from './ItemForm';
 import { db } from '../firebase.js'
-import { getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
 
 export default function AdminAddDelete() {
   const [menuItems, setMenuItems] = useState([]);
@@ -16,7 +18,8 @@ export default function AdminAddDelete() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return entrees;
     } catch (error) {
@@ -32,7 +35,8 @@ export default function AdminAddDelete() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return sides;
     } catch (error) {
@@ -48,7 +52,8 @@ export default function AdminAddDelete() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return drink;
     } catch (error) {
@@ -64,9 +69,13 @@ export default function AdminAddDelete() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
+        
       }));
+      console.log(snapshot)
       return desert;
+
     } catch (error) {
       console.log(error);
       return [];
@@ -101,18 +110,34 @@ export default function AdminAddDelete() {
   //   localStorage.setItem('menuItems', JSON.stringify(menuItems));
   // };
 
-  const handleDelete = (itemId) => {
+  const handleDelete = async(itemId) => {
     // Remove the item from menuItems
-    const updatedMenuItems = menuItems.filter((item) => item.id !== itemId);
-    setMenuItems(updatedMenuItems);
+    const deleteIndex = menuItems.findIndex((item) => item.id === itemId);
+    const storage = getStorage();
+    
+    
+    if (deleteIndex !== -1) {
+      const deletedItem = menuItems[deleteIndex];
+      const updatedMenuItems = menuItems.filter((item) => item.id !== itemId);
+      await deleteDoc(doc(db, deletedItem.category, deletedItem.id))
+      const img = ref(storage, deletedItem.id);
+      deleteObject(img).then(()=> {
+        console.log("image deleted");
+      })
+      .catch ((error)=> {
+        console.log ("Error deleting image", error );
+      })
+      setMenuItems(updatedMenuItems);
+      console.log("Deleted Item:", deletedItem);
+      console.log("Item deleted from firestore");
+    }
 
-    // Save the updated menuItems to local storage
-    // saveMenuItem(updatedMenuItems);
   };
 
-  const handleAdd = (newItem) => {
+  const handleAdd = async(newItem) => {
     // Add the new item to menuItems
     const updatedMenuItems = [...menuItems, newItem];
+   
     setMenuItems(updatedMenuItems);
     setIsFormOpen(false);
 
@@ -120,12 +145,53 @@ export default function AdminAddDelete() {
     // saveMenuItem(updatedMenuItems);
   };
 
-  const handleEdit = (editedItem) => {
+  const handleEdit = async(editedItem) => {
+    const dataValue = ({
+      id: " ",
+      category: " "
+    })
     const updatedItems = menuItems.map((item) =>
       item.id === editedItem.id ? editedItem : item
     );
+   
+    const data = menuItems.map((item) => {
+      if(item.id === editedItem.id) {
+        dataValue.id = item.id
+        dataValue.category=item.category
+        console.log("edited item ="+item.id);
+        return editedItem
+      }
+      else {
+        return item
+      }
+    }
+    
+      
+    ); 
     if (editedItem.price > 0 && editedItem.name) {
-      setMenuItems(updatedItems);
+      // console.log("editedItem" +editedItem.price)
+      // console.log(editedItem.name)
+      // console.log("categories = "+editedItem.category)
+      // console.log(editedItem.id)
+      // console.log("Menu ="+data.useId)
+      // console.log(editedItem.image)
+      const editData = doc(db, dataValue.category, dataValue.id);
+      console.log("dataValue"+dataValue.id)
+      console.log("dataValue"+dataValue.category)
+      try {
+        await updateDoc(editData, {
+          Name: editedItem.name,
+          Price: editedItem.price
+  
+        })
+  
+  
+        setMenuItems(updatedItems);
+      }
+      catch(error) {
+        console.log(error)
+      }
+     
 
       // Save the updated menuItems to local storage
       // saveMenuItem(updatedItems);

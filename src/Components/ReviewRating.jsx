@@ -8,7 +8,7 @@ export const ReviewRating = ({rating, totalReviews}) => {
                 })}
                 {decimalPointInRating ? (
                     <span style={{ width: `${decimalPointInRating}em`}}
-                    class= "half-star">
+                    className= "half-star">
                         &#9733; 
                     </span>)   :   (
                     "" )

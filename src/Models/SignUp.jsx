@@ -38,6 +38,7 @@ function SignUp() {
             email: email
           })
           console.log("I am here too")
+         
 
           // ...
         })
@@ -49,7 +50,7 @@ function SignUp() {
 
 
       console.log("here")
-      navigate("/")
+      navigate("/home")
     }
 
     catch { }

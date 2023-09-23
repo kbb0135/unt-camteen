@@ -1,23 +1,31 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import SignUpPage from "./Pages/SignUpPage.jsx";
-import LoginPage from "./Pages/LoginPage.jsx";
-import HomePage from "./Pages/HomePage.jsx";
-import MenuPage from "./Pages/MenuPage.jsx";
-import AdminAddMenu from "./Models/AdminAddMenu.jsx";
-import OTPSender from "./Models/OTPSender.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./Pages/HomePage"
+import AuthPage from "./Pages/AuthPage";
+import SignUp from "./Models/SignUp";
+import Login from "./Models/Login";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
+    children: [
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+    ],
+  },
+]);
 
 const App = () => {
-  return (
-    <Routes>
-      <Route default path="/" element={<HomePage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage/>}/>
-      <Route path="/menu" element={<MenuPage />} />
-      <Route path="/adminmenu" element={<AdminAddMenu />} />
-      <Route path="/sendotp" element={<OTPSender />} />
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 };
 export default App;

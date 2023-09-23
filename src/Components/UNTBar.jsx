@@ -1,6 +1,5 @@
 import React from 'react';
 import Eagle from '../Assets/Logo.png';
-import SignUp from '../Pages/SignUpPage';
 import '../style.css';
 
 const UNTBar = () => {
@@ -26,7 +25,7 @@ const UNTBar = () => {
             <div className='untHeaderCol3'>
                 <div className='untHeaderLogin'>
                     <button className='Header_btn'>Login</button>
-                    <a href={SignUp}><p>No Account? Sign UP HERE</p></a>
+                    <a ><p>No Account? Sign UP HERE</p></a>
                 </div>
                
 

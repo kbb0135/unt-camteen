@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./Pages/HomePage"
+import HomePage from "./Pages/HomePage";
 import AuthPage from "./Pages/AuthPage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";

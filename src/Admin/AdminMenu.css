@@ -1,0 +1,33 @@
+/* App.css */
+.menu {
+    text-align: center;
+  }
+  
+  .menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .menu-item {
+    width: calc(25% - 10px); /* Four items per row with a gap of 10px */
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .menu-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .menu-item-details {
+    margin-top: 10px;
+  }
+  
+
+  

@@ -4,6 +4,11 @@ import HomePage from "./Pages/HomePage";
 import AuthPage from "./Pages/AuthPage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
+import MenuPage from "./Pages/MenuPage";
+import OTPSender from "./Models/OTPSender.jsx";
+import Reviews from "./Models/Reviews.jsx";
+import Cart from "./Models/Cart"; 
+import AdminAddDelete from './Admin/AdminAddDelete.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +28,25 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/menu",
+    element: <MenuPage/>,
+  },
+  {
+    path: "/sendotp",
+    element: <OTPSender/>
+  }, {
+    path: "/reviews",
+    element: <Reviews/>,
+  },
+  {
+    path: "/cart",
+    element: <Cart />
+  },
+  {
+    path: "/adminmenu",
+    element: <AdminAddDelete/>
+  }
 ]);
 
 const App = () => {

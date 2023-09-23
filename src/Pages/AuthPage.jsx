@@ -1,7 +1,4 @@
 import React from "react";
-import SignUp from "../Models/SignUp";
-import Login from "../Models/Login";
-import BurgerImg from "../Assets/burger.jpg";
 import { Outlet } from "react-router-dom";
 function AuthPage() {
   return (

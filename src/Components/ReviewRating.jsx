@@ -1,3 +1,4 @@
+import React  from 'react';
 export const ReviewRating = ({rating, totalReviews}) => {
     const decimalPointInRating = rating - parseInt(rating); 
     return (

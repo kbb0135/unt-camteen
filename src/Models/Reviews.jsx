@@ -1,5 +1,4 @@
 import React from "react";
-import chickenBurger from "../Assets/chicken-burger.png";
 import chickenPizza from "../Assets/chicken-pizza.png";
 import FoodContainer from "../Components/FoodContainer";
 import GarlicButter from "../Assets/garlic-butter-chicken-wings.png";

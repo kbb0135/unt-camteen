@@ -158,7 +158,7 @@ export default function AdminAddDelete() {
       if(item.id === editedItem.id) {
         dataValue.id = item.id
         dataValue.category=item.category
-        console.log("edited item ="+item.id);
+        // console.log("edited item ="+item.id);
         return editedItem
       }
       else {
@@ -169,6 +169,7 @@ export default function AdminAddDelete() {
       
     ); 
     if (editedItem.price > 0 && editedItem.name) {
+      console.log(data)
       // console.log("editedItem" +editedItem.price)
       // console.log(editedItem.name)
       // console.log("categories = "+editedItem.category)

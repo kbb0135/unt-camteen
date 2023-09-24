@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import "../style.css";
 import "../Auth.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -39,7 +39,7 @@ function SignUp() {
           navigate("/");
         })
         .catch((error) => {
-          const errorMessage = error.message;
+          // const errorMessage = error.message;
           setSignUpError(error.message);
           return;
           // ..
@@ -154,6 +154,7 @@ function SignUp() {
               value={password}
               onChange={(e) => handlePasswordChange(e)}
               placeholder="Enter 6+ characters password"
+              autoComplete="on"
               required
             />
           </div>
@@ -168,6 +169,7 @@ function SignUp() {
               value={confirmPassword}
               onChange={(e) => handleConfirmPassword(e.target.value, password)}
               placeholder="Re-enter your password"
+              autoComplete="on"
               required
             />
           </div>

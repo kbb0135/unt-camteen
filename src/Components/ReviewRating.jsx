@@ -1,8 +1,7 @@
 import React,{useState} from 'react';
-export const ReviewRating = () => {
-    const [rating, setRating] = useState(0);
+export const ReviewRating = ({rating, onChange}) => {
     const handle=(newRating) => {
-      setRating(newRating)}
+      onChange(newRating)}
       console.log("set rating"+rating)
   return (
     <div>

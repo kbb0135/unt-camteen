@@ -16,10 +16,12 @@ function Menu() {
         image: doc.data().ImageURL
       }));
       return entrees;
-    } catch (error) {
+    }
+    catch (error) {
       alert(error);
       return [];
     }
+        
   };
   //getting side dishes from the collection
   const getSide = async () => {
@@ -103,8 +105,8 @@ function Menu() {
         />
 
       ))}
-      
-      
+
+
     </div>
 
   )

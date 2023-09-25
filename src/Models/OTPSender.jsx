@@ -2,10 +2,9 @@ import React from 'react'
 import { auth, db } from "../firebase"
 import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, sendSignInLinkToEmail } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
 
 export default function OTPSender() {
-    const navigate = useNavigate();
+    
     const Submit = (event) => {
         event.preventDefault();
         const email = event.target[0].value;

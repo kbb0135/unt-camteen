@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <ul className="nav-links">
-        <Link to ="/home" className={pathName === "/home" ? "nav-head active-nav": "nav-head"}>
+        <Link to ="/" className={pathName === "/home" ? "nav-head active-nav": "nav-head"}>
           <li className="nav-item">Home</li>
         </Link>
         <Link to = "/menu"className= {pathName === "/menu" ? "nav-head active-nav" : "nav-head"}>

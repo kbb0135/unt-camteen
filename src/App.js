@@ -1,28 +1,55 @@
-import React from 'react';
-import {Route, Routes} from 'react-router-dom';
-import SignUp from './Models/SignUp.jsx';
-import LoginPage from './Pages/LoginPage.jsx';
-import HomePage from './Pages/HomePage.jsx';
-import MenuPage from './Pages/MenuPage.jsx';
-import OTPSender from './Models/OTPSender.jsx';
-import Reviews from './Models/Reviews.jsx'; 
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import AuthPage from "./Pages/AuthPage";
+import SignUp from "./Models/SignUp";
+import Login from "./Models/Login";
+import MenuPage from "./Pages/MenuPage";
+import OTPSender from "./Models/OTPSender.jsx";
+import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart"; 
 import AdminAddDelete from './Admin/AdminAddDelete.jsx'
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
+    children: [
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/menu",
+    element: <MenuPage/>,
+  },
+  {
+    path: "/sendotp",
+    element: <OTPSender/>
+  }, {
+    path: "/reviews",
+    element: <Reviews/>,
+  },
+  {
+    path: "/cart",
+    element: <Cart />
+  },
+  {
+    path: "/adminmenu",
+    element: <AdminAddDelete/>
+  }
+]);
+
 const App = () => {
-  return (
-    
-      <Routes>
-        
-              <Route default path="/" element={<LoginPage />} />
-              <Route path='/signup' element={<SignUp/>} />
-              <Route path = '/home' element={<HomePage />} />
-              <Route path = "/menu" element={<MenuPage />} />
-              <Route path = "/sendotp" element={<OTPSender />} />
-              <Route path = "/reviews" element={<Reviews />}/>
-              <Route path ="/your-cart" element={<Cart />} />
-              <Route path = "/adminmenu" element = {<AdminAddDelete />} />
-              
-      </Routes>
-  )
-}
+  return <RouterProvider router={router} />;
+};
 export default App;

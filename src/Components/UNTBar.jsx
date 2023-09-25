@@ -18,7 +18,7 @@ const UNTBar = () => {
 
                 // }
                 setUser(user);
-                console.log(user)
+                // console.log(user)
             }
             else {
                 setUser(null);
@@ -67,10 +67,10 @@ const UNTBar = () => {
                     ) : (
                         // If user is not logged in, display login button and signup link
                         <>
-                            <Link to="/">
+                            <Link to="/auth/login">
                                 <button className='Header_btn'>Login</button>
                             </Link>
-                            <Link to="/signup">
+                            <Link to="/auth/signup">
                                 <p>No Account? Sign Up HERE</p>
                             </Link>
                         </>

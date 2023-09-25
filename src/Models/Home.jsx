@@ -10,9 +10,14 @@ import {
 //This is reference to get the data from firestore
 function Home() {
   const getData =async() => {
+    try {
     const colRef = doc(db, "Drink", "sprite")
     const docSnap = await getDoc(colRef);
     console.log(docSnap.data().Name)
+    }
+    catch(error) {
+      console.log(error.message)
+    }
     // getDocs(colRef)
     // .then((snapshot) => {
     //     //console.log(snapshot.docs)

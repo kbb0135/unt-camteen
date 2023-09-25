@@ -17,7 +17,7 @@ import FrenchFries from "../Assets/french-fries.png";
 import ChickenWings from "../Assets/chicken-wings.png";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import "../review.css";
+import "../style/review.css";
 
 export default function Reviews() {
   return (

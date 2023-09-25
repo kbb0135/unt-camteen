@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../style.css';
-import './AdminMenu.css';
+import '../style/style.css';
+import '../style/AdminMenu.css';
 import MenuItem from './MenuItem.jsx';
 import ItemForm from './ItemForm';
 import { db } from '../firebase.js'

@@ -1,6 +1,6 @@
 import React from 'react'; 
-import "../calorie-viewer.css"; 
-import "../review.css"; 
+import "../style/calorie-viewer.css"; 
+import "../style/review.css"; 
 
 function CartContainer ({
     foodImage, foodName, foodAmount, foodCalorie, foodPrice

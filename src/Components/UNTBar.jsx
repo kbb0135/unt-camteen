@@ -3,7 +3,7 @@ import Eagle from '../Assets/Logo.png';
 import { auth } from '../firebase.js';
 // import { getDoc,doc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import '../style.css';
+import '../style/style.css';
 import { Link } from 'react-router-dom';
 
 const UNTBar = () => {

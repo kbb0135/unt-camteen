@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../style.css";
-import "../Auth.css";
+import "../style/style.css";
+import "../style/Auth.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";

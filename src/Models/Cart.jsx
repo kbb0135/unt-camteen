@@ -1,5 +1,5 @@
 import React from 'react'; 
-import "../style.css"; 
+import "../style/style.css"; 
 import chickenPizza from "../Assets/chicken-pizza.png"; 
 import GarlicButter from "../Assets/garlic-butter-chicken-wings.png"; 
 import Kebab from "../Assets/kebab.png"; 

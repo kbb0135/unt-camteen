@@ -9,6 +9,7 @@ admin.initializeApp({
 });
 
 try {
+    
     // const prompt = require('prompt-sync')();
     // const email = prompt("Admin Email:");
     // admin.auth().createUser({

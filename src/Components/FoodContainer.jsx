@@ -11,10 +11,10 @@ const FoodContainer = ({ item }) => {
     const [rate, setRate] = useState(0)
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
-            console.log("here")
+    
             if (user) {
                 const uid = user.uid
-                console.log(uid)
+    
                 try {
                     const docRef = await doc(db, uid, item.name)
                     const snapShot = await getDoc(docRef)
@@ -31,7 +31,6 @@ const FoodContainer = ({ item }) => {
 
         })
     },[item])
-        console.log(1)
         const handleRating = async (newRating) => {
             console.log(2)
             try {

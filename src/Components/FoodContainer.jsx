@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../style.css'
+import '../style/style.css'
 import { ReviewRating } from "./ReviewRating";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';

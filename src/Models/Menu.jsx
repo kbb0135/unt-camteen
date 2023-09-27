@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MenuItem from '../Components/MenuItem';
-import '../style.css';
-import '../Admin/AdminMenu.css';
+import '../style/style.css';
+import '../style/AdminMenu.css';
 import { db } from '../firebase.js'
 import { getDocs, collection } from 'firebase/firestore'
 function Menu() {

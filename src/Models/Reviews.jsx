@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import FoodContainer from "../Components/FoodContainer";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import "../review.css";
-import '../Admin/AdminMenu.css';
+import "../style/review.css";
+import '../style/AdminMenu.css';
 import { getDocs, collection } from 'firebase/firestore'
 import { db} from '../firebase.js'
 

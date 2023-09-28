@@ -56,6 +56,7 @@ const FoodContainer = ({ item }) => {
         }
         console.log("logout check")
 
+<<<<<<< HEAD
     }
 
 
@@ -84,3 +85,31 @@ const FoodContainer = ({ item }) => {
 }
 
 export default FoodContainer
+=======
+
+        return (
+            <div className='food-container'>
+                <div>
+                    <div className="food-image-container">
+                        <img src={item.image} alt={item.name} />
+                    </div>
+                    <div className='food-info'>
+                        <span>{item.name}</span><br></br>
+                        <span>${item.price}</span><br></br>
+                        <span>{item.quantity}</span>
+                        <ReviewRating
+                            rating={rate}
+                            onChange={handleRating}
+
+                        />
+                        {/* <div className='leave-review'>Leave a review.</div> */}
+                    </div>
+
+
+                </div>
+            </div >
+        ); 
+    }; 
+
+export default FoodContainer; 
+>>>>>>> d59b2022a54e5d988c473d34c1658d3ddb354b81

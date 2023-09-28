@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react'
-<<<<<<< HEAD
-import '../style.css'
-=======
 import '../style/style.css'
->>>>>>> Manoj
 import { ReviewRating } from "./ReviewRating";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';
@@ -87,8 +83,4 @@ const FoodContainer = ({ item }) => {
         ); 
     }; 
 
-<<<<<<< HEAD
-export default FoodContainer
-=======
 export default FoodContainer; 
->>>>>>> Manoj

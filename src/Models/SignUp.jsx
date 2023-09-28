@@ -44,7 +44,7 @@ function SignUp() {
           return;
           // ..
         });
-    } catch {}
+    } catch { }
   };
   const handleFnChange = (e) => {
     setFirstName(e.target.value);
@@ -89,113 +89,115 @@ function SignUp() {
     }
   };
   return (
-    <div className={`auth-form  ${signUpError && "box-invalid"}`}>
-      <div>
-        <div className="form-name">Create an account</div>
-        {signUpError !== "" && (
-          <span className="te-invalid">
-            <FaExclamationTriangle />
-            {signUpError}
-          </span>
-        )}
-      </div>
-      <form onSubmit={handleSubmit} className="flex-col">
-        <div className="flex-row gap-8">
+    <div className="auth-page flex-row jc-center ali-center">
+      <div className={`auth-form  ${signUpError && "box-invalid"}`}>
+        <div>
+          <div className="form-name">Create an account</div>
+          {signUpError !== "" && (
+            <span className="te-invalid">
+              <FaExclamationTriangle />
+              {signUpError}
+            </span>
+          )}
+        </div>
+        <form onSubmit={handleSubmit} className="flex-col">
+          <div className="flex-row gap-8">
+            <div>
+              <label htmlFor="firstName">First Name:</label>
+              <div className="flex-row ali-center jc-sb">
+                <input
+                  type="text"
+                  id="firstName"
+                  className="firstName"
+                  value={firstName}
+                  onChange={(e) => handleFnChange(e)}
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="lastName">Last Name:</label>
+              <div className="flex-row ali-center jc-sb">
+                <input
+                  type="text"
+                  id="lastName"
+                  className="lastName"
+                  value={lastName}
+                  onChange={(e) => handleLnChange(e)}
+                  placeholder="Last name"
+                  required
+                />
+              </div>
+            </div>
+          </div>
           <div>
-            <label htmlFor="firstName">First Name:</label>
+            <label htmlFor="email">Email:</label>
             <div className="flex-row ali-center jc-sb">
               <input
-                type="text"
-                id="firstName"
-                className="firstName"
-                value={firstName}
-                onChange={(e) => handleFnChange(e)}
-                placeholder="First Name"
+                type="email"
+                id="email"
+                className="email"
+                value={email}
+                onChange={(e) => handleEmailChange(e)}
+                placeholder="Email"
                 required
               />
             </div>
           </div>
           <div>
-            <label htmlFor="lastName">Last Name:</label>
+            <label htmlFor="password">Password:</label>
             <div className="flex-row ali-center jc-sb">
               <input
-                type="text"
-                id="lastName"
-                className="lastName"
-                value={lastName}
-                onChange={(e) => handleLnChange(e)}
-                placeholder="Last name"
+                type="password"
+                id="password"
+                className="password"
+                value={password}
+                onChange={(e) => handlePasswordChange(e)}
+                placeholder="Enter 6+ characters password"
+                autoComplete="on"
                 required
               />
             </div>
           </div>
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <div className="flex-row ali-center jc-sb">
-            <input
-              type="email"
-              id="email"
-              className="email"
-              value={email}
-              onChange={(e) => handleEmailChange(e)}
-              placeholder="Email"
-              required
-            />
+          <div>
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <div className="flex-row ali-center jc-sb">
+              <input
+                type="password"
+                id="confirmPassword"
+                className="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => handleConfirmPassword(e.target.value, password)}
+                placeholder="Re-enter your password"
+                autoComplete="on"
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <div className="flex-row ali-center jc-sb">
-            <input
-              type="password"
-              id="password"
-              className="password"
-              value={password}
-              onChange={(e) => handlePasswordChange(e)}
-              placeholder="Enter 6+ characters password"
-              autoComplete="on"
-              required
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <div className="flex-row ali-center jc-sb">
-            <input
-              type="password"
-              id="confirmPassword"
-              className="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => handleConfirmPassword(e.target.value, password)}
-              placeholder="Re-enter your password"
-              autoComplete="on"
-              required
-            />
-          </div>
-        </div>
-        <button
-          className="primary-button flex-1"
-          type="submit"
-          disabled={
-            !(
-              FnCheck &&
-              LnCheck &&
-              emailCheck &&
-              passwordCheck &&
-              confirmPasswordCheck
-            )
-          }
-        >
-          Sign Up
-        </button>
-      </form>
+          <button
+            className="primary-button flex-1"
+            type="submit"
+            disabled={
+              !(
+                FnCheck &&
+                LnCheck &&
+                emailCheck &&
+                passwordCheck &&
+                confirmPasswordCheck
+              )
+            }
+          >
+            Sign Up
+          </button>
+        </form>
 
-      <div className="flex-row jc-center te-size-14 te-color-gray-2">
-        Already have an account?
-        <Link to="/auth/login" className="te-size-14 te-color-primary-green-md">
-          Log in
-        </Link>
+        <div className="flex-row jc-center te-size-14 te-color-gray-2">
+          Already have an account?
+          <Link to="/auth/login" className="te-size-14 te-color-primary-green-md">
+            Log in
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,30 +1,62 @@
 import React, { useState } from "react";
-import "../style.css";
+import "../style/style.css";
+import "../style/Auth.css"
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth} from "firebase/auth";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     // handle sign up logic
     const email = event.target[0].value;
     const password = event.target[1].value;
-
+    try {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        // const user = userCredential.user;
-        navigate("/");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setLoginError(errorMessage);
-      });
+    const userCredential = await signInWithEmailAndPassword(
+      auth, email, password)
+      const user = userCredential.user;
+      if(user) {
+        const idTokenResult = await user.getIdTokenResult();
+        const isAdmin = idTokenResult.claims.admin;
+        if(isAdmin) {
+          navigate("/adminmenu");
+          console.log("User is an admin");
+        }
+        else {
+          navigate("/");
+          console.log("User is not an admin");
+        }
+      }
+      else {
+        console.log("User is not authenticated");
+      }
+    
+      // if(idToken.token === true) {
+      //   navigate("/adminmenu")
+      //   console.log("admin")
+      // }
+      // else {
+      //   navigate("/")
+      //   console.log("here")
+      // }
+      
+      // .then((userCredential) => {
+      //   // Signed in
+      //   // const user = userCredential.user;
+      //   navigate("/");
+      // })
+      // .catch((error) => {
+      //   const errorMessage = error.message;
+      //   setLoginError(errorMessage);
+      // });
+    }
+    catch(error) {
+      console.log(error)
+    }
   };
 
   return (

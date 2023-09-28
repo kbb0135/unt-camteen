@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import React,{useState} from 'react';
 export const ReviewRating = ({rating, onChange}) => {
     const handle=(newRating) => {
       onChange(newRating)}
       console.log("set rating"+rating)
+=======
+import React from 'react';
+export const ReviewRating = ({rating, onChange}) => {
+    const handle=(newRating) => {
+      onChange(newRating)}
+>>>>>>> Manoj
   return (
     <div>
       <p>Your Rating: {rating} stars</p>

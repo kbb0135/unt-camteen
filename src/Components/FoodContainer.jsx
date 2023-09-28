@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
+<<<<<<< HEAD
 import '../style.css'
+=======
+import '../style/style.css'
+>>>>>>> Manoj
 import { ReviewRating } from "./ReviewRating";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';
@@ -11,10 +15,10 @@ const FoodContainer = ({ item }) => {
     const [rate, setRate] = useState(0)
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
-            console.log("here")
+    
             if (user) {
                 const uid = user.uid
-                console.log(uid)
+    
                 try {
                     const docRef = await doc(db, uid, item.name)
                     const snapShot = await getDoc(docRef)
@@ -31,7 +35,6 @@ const FoodContainer = ({ item }) => {
 
         })
     },[item])
-        console.log(1)
         const handleRating = async (newRating) => {
             console.log(2)
             try {
@@ -81,7 +84,11 @@ const FoodContainer = ({ item }) => {
 
                 </div>
             </div >
-        )
-    }
+        ); 
+    }; 
 
+<<<<<<< HEAD
 export default FoodContainer
+=======
+export default FoodContainer; 
+>>>>>>> Manoj

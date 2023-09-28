@@ -1,9 +1,7 @@
-
 import React from 'react';
-import '../style.css'; // Import CSS file for Navbar component
+import '../style/style.css'; // Import CSS file for Navbar component
 import { Link } from 'react-router-dom';
 import Cart from '../Assets/cart.svg'; 
-
 
 const Navbar = () => {
   const pathName = window.location.pathname; 

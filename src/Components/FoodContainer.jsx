@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../style/style.css'
-import  {ReviewRating}  from "./ReviewRating.jsx";
+import { ReviewRating } from "./ReviewRating";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
@@ -11,50 +11,52 @@ const FoodContainer = ({ item }) => {
     const [rate, setRate] = useState(0)
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
-
+    
             if (user) {
                 const uid = user.uid
-
+    
                 try {
                     const docRef = await doc(db, uid, item.name)
                     const snapShot = await getDoc(docRef)
-                    if (snapShot.exists()) {
+                    if(snapShot.exists()) {
                         const userData = snapShot.data()
                         setRate(userData.rating)
                     }
-
-
                 }
-                catch (error) {
+                catch(error) {
                     console.log(error)
                 }
             }
 
 
         })
-    }, [item])
-    const handleRating = async (newRating) => {
-        const user = auth.currentUser
-        try {
-            if (user) {
-                const uid = user.uid
-                console.log(uid)
-                setDoc(doc(db, uid, item.name), {
-                    rating: newRating
+    },[item])
+        const handleRating = async (newRating) => {
+            console.log(2)
+            try {
+                onAuthStateChanged(auth, async (user) => {
+                    console.log("here")
+                    if (user) {
+                        const uid = user.uid
+                        console.log(uid)
+                        await setDoc(doc(db, uid, item.name), {
+                            rating: newRating
+                        })
+                        setRate(newRating)
+                        console.log("here")
+                    }
+                    else {
+                        alert("User must be logged in to provide ratings")
+                        console.log("Something is wrong")
+                    }
                 })
-                setRate(newRating)
+            }
+            catch (error) {
+                console.log(error);
                 console.log("here")
             }
-            else {
-                alert("User must be logged in to provide ratings")
-                console.log("Something is wrong")
-            }
+
         }
-        catch (error) {
-            console.log(error);
-            console.log("here")
-        }
-        console.log("logout check")
 
 
         return (
@@ -80,6 +82,5 @@ const FoodContainer = ({ item }) => {
             </div >
         ); 
     }; 
-}
 
-export default FoodContainer;
+export default FoodContainer; 

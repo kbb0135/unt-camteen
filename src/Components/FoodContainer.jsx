@@ -80,7 +80,7 @@ const FoodContainer = ({ item }) => {
 
                 </div>
             </div >
-        )
-    }
+        ); 
+    }; 
 
-export default FoodContainer
+export default FoodContainer; 

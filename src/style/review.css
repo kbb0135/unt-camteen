@@ -2,79 +2,94 @@
     height: 100%;
     width: 100%;
     padding-top: 20px;
-}
-
-.review-row {
+  }
+  
+  .review-row {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
     flex-wrap: wrap;
     gap: 20px;
     padding-bottom: 20px;
-}
-
-.food-container {
+  }
+  
+  .loading {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  .food-container {
     flex: 1;
     min-width: 400px;
     transition: transform 0.2s ease-in-out;
     padding: 8px;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-}
-
-
-.food-container:hover {
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+  
+  .food-container:hover {
     transform: scale(1.01);
     cursor: pointer;
-}
-
-.food-image-container {
+  }
+  
+  .food-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-}
-
-.food-name {
+    & img {
+      max-width: 100%;
+    }
+  }
+  
+  .food-name {
     font-size: 26px;
     font-weight: 800;
-}
-
-.star-container {
+  }
+  
+  .star-container {
     display: flex;
     gap: 6px;
     justify-content: center;
     align-items: center;
-}
-
-.total-reviews {
+  }
+  
+  .total-reviews {
     color: #808080;
-}
-
-.half-star {
+  }
+  
+  .half-star {
     color: #ffc30b;
     font-size: 20px;
     position: relative;
     display: inline-block;
     overflow: hidden;
-}
-
-.rating-value {
+  }
+  
+  .rating-value {
     color: black;
     font-weight: 800;
     font-size: 20px;
-}
-
-.star-rating {
+  }
+  
+  .star-rating {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.star {
+  }
+  
+  .star {
     font-size: 20px;
     color: #ffc30b;
-}
-
-.leave-review {
+  }
+  
+  .leave-review {
     padding: 16px;
     border-radius: 5px;
     text-align: center;
@@ -82,18 +97,110 @@
     color: var(--white);
     color: white;
     cursor: pointer;
-}
-
-.food-image {
+  }
+  
+  .food-image {
     width: 100%;
     height: 500px;
     object-fit: cover;
-}
-
-.food-info {
+  }
+  
+  .food-info {
     display: flex;
     flex-direction: column;
     gap: 16px;
     justify-content: center;
     align-items: center;
-}
+  }
+  
+  /*  */
+  .show-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .show-more-btn {
+    border: none;
+    background: none;
+    max-width: max-content;
+    color: #339714;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .show-more-btn:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+  
+  .feedback-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+    transition: transform 0.2s ease-in-out;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    margin: 5px;
+  }
+  .comments-section {
+    margin: 40px;
+    & h2 {
+      color: black;
+      font-size: 24px;
+      font-family: Fira Sans Extra Condensed;
+      font-weight: 400;
+    }
+  }
+  .comments-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+  .user-comment {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: space-between;
+  }
+  .username-and-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: fit-content;
+    color: black;
+    font-size: 15px;
+    font-weight: 300;
+    text-transform: capitalize;
+    word-wrap: break-word;
+  }
+  
+  .rating-and-comment {
+    color: black;
+    font-size: 16px;
+    font-family: Fira Sans Extra Condensed;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .date {
+    align-self: flex-end;
+    color: #707070;
+    font-size: 15px;
+    font-family: Fira Sans Extra Condensed;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: capitalize;
+    word-wrap: break-word;
+  }

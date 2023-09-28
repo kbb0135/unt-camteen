@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../style/style.css'
-import { ReviewRating } from "./ReviewRating";
+import  {ReviewRating}  from "./ReviewRating.jsx";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
@@ -80,5 +80,6 @@ const FoodContainer = ({ item }) => {
             </div >
         ); 
     }; 
+}
 
-export default FoodContainer; 
+export default FoodContainer;

@@ -1,23 +1,22 @@
-export const ReviewRating = ({rating, totalReviews}) => {
-    const decimalPointInRating = rating - parseInt(rating); 
-    return (
-        <div className= "star-container">
-            <div className= "star-rating">
-                {[...Array(parseInt(rating))].map((star)=> {
-                    return <span className="star">&#9733;</span>
-                })}
-                {decimalPointInRating ? (
-                    <span style={{ width: `${decimalPointInRating}em`}}
-                    class= "half-star">
-                        &#9733; 
-                    </span>)   :   (
-                    "" )
-                }
-            </div>
-            <div className="total-reviews">
-                <span className="rating-value">{rating}</span>
-                {`(${totalReviews} Reviews)`}
-            </div>
-        </div>
-    ); 
+import React from 'react';
+export const ReviewRating = ({rating, onChange}) => {
+    const handle=(newRating) => {
+      onChange(newRating)}
+  return (
+    <div>
+      <p>Your Rating: {rating} stars</p>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          onClick={() => handle(star)}
+          style={{
+            cursor: 'pointer',
+            color: star <= rating ? 'gold' : 'gray',
+          }}
+        >
+          ★
+        </span>
+      ))}
+    </div>
+  )
 };

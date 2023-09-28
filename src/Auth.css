@@ -1,0 +1,28 @@
+@import "style.css";
+
+.auth-page {
+  width: 100vw;
+  width: 100svw;
+  height: 100vh;
+  height: 100svh;
+  background-color: var(--off-white);
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  background-color: var(--white);
+  padding: 48px 48px;
+  gap: 32px;
+  box-shadow: 4px 4px 8px var(--gray-8);
+  box-sizing: border-box;
+}
+.auth-form form {
+  gap: 24px;
+}
+.form-name {
+  font-size: 32px;
+  color: var(--gray-3);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}

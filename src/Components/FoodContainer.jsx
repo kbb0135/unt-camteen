@@ -56,32 +56,29 @@ const FoodContainer = ({ item }) => {
         }
         console.log("logout check")
 
-    }
+
+        return (
+            <div className='food-container'>
+                <div>
+                    <div className="food-image-container">
+                        <img src={item.image} alt={item.name} />
+                    </div>
+                    <div className='food-info'>
+                        <span>{item.name}</span><br></br>
+                        <span>${item.price}</span><br></br>
+                        <span>{item.quantity}</span>
+                        <ReviewRating
+                            rating={rate}
+                            onChange={handleRating}
+
+                        />
+                        {/* <div className='leave-review'>Leave a review.</div> */}
+                    </div>
 
 
-    return (
-        <div className='food-container'>
-            <div>
-                <div className="food-image-container">
-                    <img src={item.image} alt={item.name} />
                 </div>
-                <div className='food-info'>
-                    <span>{item.name}</span><br></br>
-                    <span>${item.price}</span><br></br>
-                    <span>{item.quantity}</span>
-                    <ReviewRating
-                        rating={rate}
-                        onChange={handleRating}
+            </div >
+        ); 
+    }; 
 
-                    />
-                    {/* <div className='leave-review'>Leave a review.</div> */}
-                </div>
-
-
-            </div>
-        </div >
-    )
-}
-
-export default FoodContainer
-
+export default FoodContainer; 

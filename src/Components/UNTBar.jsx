@@ -18,7 +18,6 @@ const UNTBar = () => {
                 user.getIdTokenResult()
                 // }
                 setUser(user);
-                console.log("test")
                 
                  console.log((await user.getIdTokenResult()).claims.admin)
                  

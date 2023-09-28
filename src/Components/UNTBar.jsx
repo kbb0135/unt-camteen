@@ -3,26 +3,31 @@ import Eagle from '../Assets/Logo.png';
 import { auth } from '../firebase.js';
 // import { getDoc,doc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import '../style.css';
+import '../style/style.css';
 import { Link } from 'react-router-dom';
 
 const UNTBar = () => {
     const [user, setUser] = useState('');
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth,async (user) => {
             if (user) {
                 // const getData = async()=> {
                 //     const docRef = doc(db,"Users",user.uid)
                 //     const docSnap = await getDoc(docRef);
                 //     setUser(docSnap.data())
-
+                user.getIdTokenResult()
                 // }
                 setUser(user);
-                // console.log(user)
+                console.log("test")
+                
+                 console.log((await user.getIdTokenResult()).claims.admin)
+                 
             }
             else {
                 setUser(null);
             }
+            // firebase.auth().currentUser.getIdTokenResult()
+            
         })
         return () => unsubscribe();
     }, []);

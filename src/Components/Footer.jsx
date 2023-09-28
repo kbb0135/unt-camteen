@@ -3,7 +3,7 @@ import Eagle from '../Assets/eagle.png';
 import Email from '../Assets/email.png';
 import Phone from '../Assets/phone.png';
 import Location from '../Assets/location-pin.png';
-import '../style.css'; // Import CSS file for Navbar component
+import "../style/style.css"; // Import CSS file for Navbar component
 
 const Footer = () => {
     return (

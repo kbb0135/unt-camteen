@@ -43,11 +43,10 @@ const FoodContainer = ({ item }) => {
                             rating: newRating
                         })
                         setRate(newRating)
-                        console.log("here")
+                        
                     }
                     else {
                         alert("User must be logged in to provide ratings")
-                        console.log("Something is wrong")
                     }
                 })
             }

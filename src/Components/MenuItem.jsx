@@ -5,10 +5,18 @@ const MenuItem = ({ item }) => {
     return (
         <div className="menu-item">
             <div>
-                <img src={item.image} alt={item.name} /> 
-                <span>{item.name}</span><br></br>
-                <span>${item.price}</span><br></br>
-                <span>{item.quantity}</span>
+                <img className="card-img" src={item.image} alt={item.name} /> 
+                <div className="card-container">
+                    <div className="card-info">
+                        <h3 className="card-text">{item.name}</h3>
+                        <h4 className="card-text">${item.price}</h4>
+                        <span>{item.quantity}</span>
+                    </div>
+                    <div className="card-btn">
+                        <button>+</button>
+                    </div>
+                </div>
+               
             </div>
         </div >
     )

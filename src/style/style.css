@@ -140,6 +140,9 @@ input:focus-visible {
   justify-content: flex-start;
   align-items: center;
 }
+.navbar:hover {
+  
+}
 
 .nav-links {
   list-style: none;

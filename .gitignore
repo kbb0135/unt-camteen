@@ -16,8 +16,10 @@
 /ui-debug.log
 /functions/ui-debug.log
 /functions/node_modules
-/firebase.json
-/functions/TestFirebase.js
-/TestFile
-/GoD
+/firebase.json 
 /src/App.js
+/functions
+/functions/test.js
+/src/TestCase.jsx
+/src/MenuItem.jsx
+/src/ItemEditor.jsx

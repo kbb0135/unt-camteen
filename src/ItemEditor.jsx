@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './firebase.js';
 import { doc, updateDoc } from 'firebase/firestore';
+import admin from 'firebase-admin';
 
 const ItemEditor = ({ itemId, onClose }) => {
   const [item, setItem] = useState({});

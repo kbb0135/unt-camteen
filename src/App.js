@@ -13,7 +13,7 @@ import AdminAddDelete from './Admin/AdminAddDelete.jsx'
 import { auth } from './firebase.js'
 import AdminNotification from "./Admin/AdminNotification.jsx";
 import Notification from "./Models/Notification.jsx";
-import TestCase from "./TestCase.jsx";
+import TestCase from "./TestCase.js";
 const router = createBrowserRouter([
   {
     path: "/",

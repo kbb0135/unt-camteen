@@ -13,6 +13,7 @@ import AdminAddDelete from './Admin/AdminAddDelete.jsx'
 import { auth } from './firebase.js'
 import AdminNotification from "./Admin/AdminNotification.jsx";
 import Notification from "./Models/Notification.jsx";
+import TestCase from "./TestCase.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
   {
     path: "/notification",
     element: <Notification />
-  }
+  },
+  {
+    path: "/test",
+    element: <TestCase />
+  },
 ]);
 
 const App = () => {

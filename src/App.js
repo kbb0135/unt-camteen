@@ -6,6 +6,7 @@ import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
 import MenuPage from "./Pages/MenuPage";
+import MenuItemPage from "./Pages/MenuItemPage.jsx";
 import OTPSender from "./Models/OTPSender.jsx";
 import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/menu",
     element: <MenuPage/>,
+  },
+  {
+    path: "/menuitem",
+    element: <MenuItemPage/>,
   },
   {
     path: "/sendotp",

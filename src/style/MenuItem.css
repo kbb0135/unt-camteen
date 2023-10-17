@@ -1,0 +1,20 @@
+.menu-item-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.menu-item-pic {
+    width: 270px;
+    margin: 20px;
+}
+
+.menu-item-info {
+    margin: 0px, 40px;
+}
+
+.menu-item-cal-box {
+    border: 10px;
+    border-color: black;
+    
+}

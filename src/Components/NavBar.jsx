@@ -14,8 +14,8 @@ const Navbar = () => {
         <Link to = "/menu"className= {pathName === "/menu" ? "nav-head active-nav" : "nav-head"}>
           <li className="nav-item">Menu</li>
         </Link>
-        <Link to = "/hoursandlocation" className={pathName === "/hoursandlocation" ? "nav-head active-nav" :"nav-head"}>
-          <li className="nav-item">Hours And Location</li>
+        <Link to = "/notification" className={pathName === "/notification" ? "nav-head active-nav" :"nav-head"}>
+          <li className="nav-item">Notification</li>
         </Link>
         <Link to = "/recreationactivities" className={pathName === "/recreationactivities" ? "nav-head active-nav":"nav-head"}>
           <li className="nav-item">Recreation Activities</li>

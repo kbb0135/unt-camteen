@@ -12,6 +12,9 @@ import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
 import AdminAddDelete from './Admin/AdminAddDelete.jsx'
 import { auth } from './firebase.js'
+import AdminNotification from "./Admin/AdminNotification.jsx";
+import Notification from "./Models/Notification.jsx";
+import TestCase from "./TestCase.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +56,19 @@ const router = createBrowserRouter([
   {
     path: "/adminmenu",
     element: <AdminAddDelete/>
+  },
+  {
+    path: "/adminnotification",
+    element: <AdminNotification/>
+  },
+  
+  {
+    path: "/notification",
+    element: <Notification />
+  },
+  {
+    path: "/test",
+    element: <TestCase />
   }
 ]);
 

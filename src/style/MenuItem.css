@@ -14,7 +14,6 @@
 }
 
 .menu-item-cal-box {
-    border: 10px;
-    border-color: black;
-    
+    border: 2px solid black;
+    margin: auto, auto, auto, 10px;
 }

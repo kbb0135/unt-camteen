@@ -103,7 +103,7 @@ function Menu() {
     setData()
   }, []);
   return (
-    <CartProvider>
+
     <div className="menu-items">
       {menuItems.map((item) => (
         <MenuItem
@@ -113,11 +113,7 @@ function Menu() {
         />
 
       ))}
-       <CartData cart={cart} />
-
-
     </div>
-    </CartProvider>
 
   )
 

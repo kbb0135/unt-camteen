@@ -2,12 +2,15 @@
 import React from 'react'
 import {useCart} from './CartContext'
 import "../style/Cart.css";
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Cart() {
     const { cartItems, removeFromCart, addToCart } = useCart(); 
 
   return (
     <div>
+    <Header />
       <h2>Cart</h2>
       <ul>
         {cartItems.map((item) => (
@@ -19,6 +22,7 @@ export default function Cart() {
           </li>
         ))}
       </ul>
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -4,8 +4,12 @@ import '../style/style.css';
 import '../style/AdminMenu.css';
 import { db } from '../firebase.js'
 import { getDocs, collection } from 'firebase/firestore'
+import CartData from './cartData';
+import { CartProvider, useCart } from './CartContext.jsx';
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
+  const [cart, setCart] = useState([]);
+  
   const getEntrees = async () => {
     try {
       const snapshot = await getDocs(collection(db, "Entrees"));
@@ -72,6 +76,10 @@ function Menu() {
       return [];
     }
   };
+  const addToCart = (item) => {
+    console.log("adding to cart", item)
+    setCart([...cart, item]);
+  };
 
   //use effect feature to update the item as soon
   // as the state changes
@@ -97,17 +105,21 @@ function Menu() {
     setData()
   }, []);
   return (
+    <CartProvider>
     <div className="menu-items">
       {menuItems.map((item) => (
         <MenuItem
           key={item.id}
           item={item}
+          onAddToCart = {addToCart}
         />
 
       ))}
+       <CartData cart={cart} />
 
 
     </div>
+    </CartProvider>
 
   )
 

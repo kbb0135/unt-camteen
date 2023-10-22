@@ -1,85 +1,106 @@
-import React from 'react'; 
-import "../style/style.css"; 
-import chickenPizza from "../Assets/chicken-pizza.png"; 
-import GarlicButter from "../Assets/garlic-butter-chicken-wings.png"; 
-import Kebab from "../Assets/kebab.png"; 
-import Salmon from "../Assets/salmon.png"; 
-import SaladBowl from "../Assets/vegan-salad-bowl.png"; 
-import ChickenWings from "../Assets/chicken-wings.png"; 
-import Header from "../Components/Header"; 
-import Footer from "../Components/Footer"; 
-import CartContainer from "../Components/CartContainer"; 
-import {cartData} from "../Models/cartData"; 
+// import React, { useState } from 'react';
 
-function Cart() {
-    var totalCalories = 0; 
-    var totalPrice = 0; 
+// function Product({ product, onAddToCart }) {
+//   return (
+//     <div className="product">
+//       <img src={product.image} alt={product.name} />
+//       <h3>{product.name}</h3>
+//       <p>Price: ${product.price.toFixed(2)}</p>
+//       <button onClick={() => onAddToCart(product)}>Add to Cart</button>
+//     </div>
+//   );
+// }
 
-    for (let items in cartData) {
-        totalCalories = totalCalories + cartData[items].quantity * cartData[items].calorie; 
-        totalPrice = totalPrice + cartData[items].price; 
-    }
+// function CartItem({ item, onRemoveFromCart }) {
+//   return (
+//     <div className="cart-item">
+//       <span>{item.name}</span>
+//       <span>Quantity: {item.quantity}</span>
+//       <span>Total: ${item.price.toFixed(2)}</span>
+//       <button onClick={() => onRemoveFromCart(item)}>Remove</button>
+//     </div>
+//   );
+// }
 
+// function ShoppingCart({ cart, onRemoveFromCart }) {
+//   return (
+//     <div className="shopping-cart">
+//       <h2>Your Cart</h2>
+//       {cart.map((item) => (
+//         <CartItem key={item.id} item={item} onRemoveFromCart={onRemoveFromCart} />
+//       ))}
+//     </div>
+//   );
+// }
+
+// function Cart() {
+//   const [products] = useState([
+//     { id: 1, name: 'Product 1', price: 10.99, image: 'product1.jpg' },
+//     { id: 2, name: 'Product 2', price: 5.99, image: 'product2.jpg' },
+//     // Add more products here
+//   ]);
+
+//   const [cart, setCart] = useState([]);
+
+//   const addToCart = (product) => {
+//     const existingItemIndex = cart.findIndex((item) => item.id === product.id);
+
+//     if (existingItemIndex !== -1) {
+//       const updatedCart = [...cart];
+//       updatedCart[existingItemIndex].quantity += 1;
+//       updatedCart[existingItemIndex].price += product.price;
+//       setCart(updatedCart);
+//     } else {
+//       setCart([...cart, { ...product, quantity: 1 }]);
+//     }
+//   };
+
+//   const removeFromCart = (itemToRemove) => {
+//     const updatedCart = cart.filter((item) => item.id !== itemToRemove.id);
+//     setCart(updatedCart);
+//   };
+
+//   return (
+//     <div className="App">
+//       <h1>Shopping Cart</h1>
+//       <div className="products">
+//         {products.map((product) => (
+//           <Product key={product.id} product={product} onAddToCart={addToCart} />
+//         ))}
+//       </div>
+//       <ShoppingCart cart={cart} onRemoveFromCart={removeFromCart} />
+//     </div>
+//   );
+// }
+
+// export default Cart;
+import React from 'react';
+import CartItem from "./CartItem.jsx";
+import CartData from './cartData.jsx';
+
+function Cart({ cart }) {
+  if (!cart || cart.length === 0) {
     return (
-        <div>
-            <Header />
-            <div className= "cart-container">
-                <div className='review-row'>
-                    <CartContainer
-                        foodImage= {chickenPizza} 
-                        foodName = {"Chicken Pizza"}
-                        foodAmount = {cartData["chicken pizza"].quantity}
-                        foodCalorie={cartData["chicken pizza"].calorie}
-                        foodPrice = {cartData["chicken pizza"].price}
-                    />
-                    <CartContainer
-                        foodImage= {GarlicButter} 
-                        foodName = {"Garlic Butter Chicken"}
-                        foodAmount = {cartData["garlic butter chicken"].quantity}
-                        foodCalorie={cartData["garlic butter chicken"].calorie}
-                        foodPrice = {cartData["garlic butter chicken"].price}
-                    />
-                    <CartContainer
-                        foodImage= {Kebab} 
-                        foodName = {"Chicken Kebab"}
-                        foodAmount = {cartData["kebab"].quantity}
-                        foodCalorie={cartData["kebab"].calorie}
-                        foodPrice = {cartData["kebab"].price}
-                    />
-                </div>
-                <div className='review-row'>
-                    <CartContainer
-                        foodImage= {SaladBowl} 
-                        foodName = {"Salad Bowl"}
-                        foodAmount = {cartData["salad bowl"].quantity}
-                        foodCalorie={cartData["salad bowl"].calorie}
-                        foodPrice = {cartData["salad bowl"].price}
-                    />
-                    <CartContainer
-                        foodImage= {Salmon} 
-                        foodName = {"Salmon"}
-                        foodAmount = {cartData["salmon"].quantity}
-                        foodCalorie={cartData["salmon"].calorie}
-                        foodPrice = {cartData["salmon"].price}
-                    />
-                    <CartContainer
-                        foodImage= {ChickenWings} 
-                        foodName = {"Chicken Wings"}
-                        foodAmount = {cartData["chicken wings"].quantity}
-                        foodCalorie={cartData["chicken wings"].calorie}
-                        foodPrice = {cartData["chicken wings"].price}
-                    />
-                </div>
-                <div className='total-calories'>
-                    <div className='food-name'>Your Order Details</div>
-                    <div>Total Calories: {totalCalories} cal</div>
-                    <div>Total Price: $ {totalPrice} </div>
-
-                </div>
-            </div>
-            <Footer />
-        </div>
+      <div className="shopping-cart">
+        <h2>Your Cart</h2>
+        <p>Your cart is empty</p>
+      </div>
     );
+  }
+
+  return (
+    <div className="shopping-cart">
+      <h2>Your Cart</h2>
+      {cart.map((item) => (
+        
+        <CartItem key={item.id} item={item} />
+        
+      ))}
+      <CartData cart={cart} />
+    </div>
+  );
 }
 
-export default Cart; 
+export default Cart;
+
+

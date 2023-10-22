@@ -4,8 +4,6 @@ import '../style/style.css';
 import '../style/AdminMenu.css';
 import { db } from '../firebase.js'
 import { getDocs, collection } from 'firebase/firestore'
-import CartData from './cartData';
-import { CartProvider, useCart } from './CartContext.jsx';
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
   const [cart, setCart] = useState([]);

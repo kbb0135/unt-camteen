@@ -8,7 +8,6 @@ const HomePage = () => {
     <div>
         <Header/>
         <Home />
-        
         <Footer/>
         
     </div>

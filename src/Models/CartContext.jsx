@@ -1,6 +1,9 @@
 import React, {createContext, useContext, useState} from 'react';
 
 const CartContext = createContext();
+function displayMessage() {
+  const NotificationElement = document.getElementById('')
+}
 
 export function useCart () {
     return useContext(CartContext);
@@ -22,6 +25,7 @@ export function CartProvider({ children }) {
           }
           return cartItem;
         });
+
   
         setCartItems(updatedCart);
       } else {
@@ -34,6 +38,7 @@ export function CartProvider({ children }) {
       const updatedCart = cartItems.reduce((accumulator, currentItem) => {
         if (currentItem.id === itemId) {
           if (currentItem.quantity > 1) {
+            console.log("remove-",currentItem.quantity)
             accumulator.push({ ...currentItem, quantity: currentItem.quantity - 1 });
           }
         } else {

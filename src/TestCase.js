@@ -20,6 +20,7 @@ export default function TestCase (){
                         setRate(userData.rating)
                     }
                 }
+                
                 catch(error) {
                     console.log(error)
                 }

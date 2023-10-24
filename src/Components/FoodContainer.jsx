@@ -3,7 +3,7 @@ import '../style/style.css'
 import { ReviewRating } from "./ReviewRating";
 import { auth, db } from '../firebase.js'
 import { onAuthStateChanged } from 'firebase/auth';
-import { setDoc, doc, getDoc } from 'firebase/firestore';
+import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 
 
@@ -13,10 +13,9 @@ const FoodContainer = ({ item }) => {
         onAuthStateChanged(auth, async (user) => {
     
             if (user) {
-                const uid = user.uid
     
                 try {
-                    const docRef = await doc(db, uid, item.name)
+                    const docRef = await doc(db, user.email, item.name)
                     const snapShot = await getDoc(docRef)
                     if(snapShot.exists()) {
                         const userData = snapShot.data()
@@ -39,9 +38,20 @@ const FoodContainer = ({ item }) => {
                     if (user) {
                         const uid = user.uid
                         console.log(uid)
-                        await setDoc(doc(db, uid, item.name), {
+                        const docRef = await doc(db, user.email, item.name)
+                        const snapShot = await getDoc(docRef)
+                        if(snapShot.exists()) {
+                          await updateDoc(docRef, {
                             rating: newRating
+                          })
+
+                        }
+                        else {
+                          await setDoc(doc(db, user.email, item.name), {
+                          rating: newRating
                         })
+                        }
+                        
                         setRate(newRating)
                         
                     }

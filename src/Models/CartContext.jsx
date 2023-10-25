@@ -46,7 +46,7 @@ export function CartProvider({ children }) {
     }
     else {
       onAuthStateChanged(auth, async (user) => {
-        console.log("test1")
+        console.log("user",user);
         if (user) {
           try {
             const docRef = await doc(db, user.email, item.name)

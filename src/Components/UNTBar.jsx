@@ -17,7 +17,6 @@ const UNTBar = () => {
                     const snapShot = await getDoc(docRef)
                     const userData = snapShot.data();
                     setUserName(userData.FirstName)
-                    
                 }
                 catch {}
                 // const getData = async()=> {

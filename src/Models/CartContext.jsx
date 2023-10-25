@@ -129,7 +129,6 @@ export function CartProvider({ children }) {
               })
               console.log("remove data c")
             }
-            
           })
         }
 

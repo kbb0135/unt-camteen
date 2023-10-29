@@ -24,7 +24,6 @@ export function CartProvider({ children }) {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-
         const snapShot = await getDocs(collection(db, user.email));
         const userData = await snapShot.docs.map((doc) => ({
           name: doc.data().name,

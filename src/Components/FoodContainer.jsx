@@ -15,7 +15,7 @@ const FoodContainer = ({ item }) => {
             if (user) {
     
                 try {
-                    const docRef = await doc(db, user.email, item.name)
+                    const docRef = await doc(db, "Rating"+user.email, item.name+"Rating")
                     const snapShot = await getDoc(docRef)
                     if(snapShot.exists()) {
                         const userData = snapShot.data()
@@ -38,7 +38,7 @@ const FoodContainer = ({ item }) => {
                     if (user) {
                         const uid = user.uid
                         console.log(uid)
-                        const docRef = await doc(db, user.email, item.name)
+                        const docRef = await doc(db, "Rating"+user.email, item.name+"Rating")
                         const snapShot = await getDoc(docRef)
                         if(snapShot.exists()) {
                           await updateDoc(docRef, {
@@ -47,7 +47,7 @@ const FoodContainer = ({ item }) => {
 
                         }
                         else {
-                          await setDoc(doc(db, user.email, item.name), {
+                          await setDoc(doc(db, "Rating"+user.email, item.name+"Rating"), {
                           rating: newRating
                         })
                         }

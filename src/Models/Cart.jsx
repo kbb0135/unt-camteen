@@ -32,11 +32,11 @@ export default function Cart() {
         <div>
           <ul>
             {cartItems.map((item) => (
-              <li key={item.id} className="cart-item">
+              <li key={item.id} index = {item.name}className="cart-item">
                 <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
                 <button onClick={() => addToCart(item)} className="plus-btn">+</button>
                 <div className="itemName-div">{item.quantity}</div>
-                <button onClick={() => removeFromCart(item.id)} className="minus-btn">-</button>
+                <button onClick={() => removeFromCart(item.name)} className="minus-btn">-</button>
               </li>
             ))}
           </ul>

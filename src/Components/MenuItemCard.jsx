@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { useCart } from '../Models/CartContext';
 import {Notifier} from './Notifier';
 
-const MenuItem = ({ item }) => {
+const MenuItemCard = ({ item }) => {
     const { addToCart } = useCart();
     const [message, setMessage] = useState('');
     const handleAddToCart = () => {
@@ -33,4 +33,4 @@ const MenuItem = ({ item }) => {
         </div >
     )
 }
-export default MenuItem;
+export default MenuItemCard;

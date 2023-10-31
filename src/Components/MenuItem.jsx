@@ -1,7 +1,15 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { useCart } from '../Models/CartContext';
+import {Notifier} from './Notifier';
 
 const MenuItem = ({ item }) => {
-    
+    const { addToCart } = useCart();
+    const [message, setMessage] = useState('');
+    const handleAddToCart = () => {
+        addToCart(item);
+        setMessage('Added to cart!!');
+    }
+
     return (
         <div className="menu-item">
             <div>

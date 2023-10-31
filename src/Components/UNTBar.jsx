@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Eagle from '../Assets/Logo.png';
-import { auth } from '../firebase.js';
-// import { getDoc,doc } from 'firebase/firestore';
+import { auth,db } from '../firebase.js';
+import { getDoc,doc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import '../style/style.css';
 import { Link } from 'react-router-dom';
 
 const UNTBar = () => {
     const [user, setUser] = useState('');
+    const [userName, setUserName] = useState('');
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth,async (user) => {
             if (user) {
+                try {
+                    const docRef = await doc(db, "Users", user.uid)
+                    const snapShot = await getDoc(docRef)
+                    const userData = snapShot.data();
+                    setUserName(userData.FirstName)
+                }
+                catch {}
                 // const getData = async()=> {
                 //     const docRef = doc(db,"Users",user.uid)
                 //     const docSnap = await getDoc(docRef);
@@ -20,6 +28,7 @@ const UNTBar = () => {
                 setUser(user);
                 
                  console.log((await user.getIdTokenResult()).claims.admin)
+                 console.log(user)
                  
             }
             else {
@@ -65,7 +74,7 @@ const UNTBar = () => {
                     {user ? (
                         // If user is logged in, display user's name and logout button
                         <>
-                            <p>Welcome, {user.email}</p>
+                            <p>Welcome, {userName}</p>
                             <button className='Header_btn' onClick={handleLogOut}>Logout</button>
                         </>
                     ) : (

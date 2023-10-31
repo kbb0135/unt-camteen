@@ -15,17 +15,22 @@ const MenuItem = ({ item }) => {
     return (
         <div className="menu-item">
             <div>
-                <img src={item.image} alt={item.name} />
-                <span>{item.name}</span><br></br>
-                <span>${item.price}</span><br></br>
-                <span>{item.quantity}</span>
-                <div>
-                    <button onClick={handleAddToCart}>Add to Cart</button>
-                    <Notifier message={message} setMessage={setMessage}/>
+                <img className="card-img" src={item.image} alt={item.name} /> 
+                <div className="card-container">
+                    <div className="card-info">
+                        <h3 className="card-text">{item.name}</h3>
+                        <h4 className="card-text">${item.price}</h4>
+                        <span>{item.quantity}</span>
+                    </div>
+                    <div>
+                        <button onClick={handleAddToCart}>Add to Cart</button>
+                        <Notifier message={message} setMessage={setMessage}/>
                 </div>
+                        
+                </div>
+               
             </div>
         </div >
     )
 }
-
 export default MenuItem;

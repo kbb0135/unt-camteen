@@ -97,7 +97,7 @@ function Login() {
         </form>
         <div className="flex-row jc-center te-size-14 te-color-gray-2">
           Don't have an account?
-          <Link to="/signup" className="te-size-14 te-color-primary-green-md">
+          <Link to="/auth/signup" className="te-size-14 te-color-primary-green-md">
             Sign Up
           </Link>
         </div>

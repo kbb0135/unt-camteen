@@ -10,6 +10,8 @@ const MenuItem = ({ item }) => {
         setMessage('Added to cart!!');
     }
 
+
+    
     return (
         <div className="menu-item">
             <div>

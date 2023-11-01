@@ -19,7 +19,7 @@ const UNTBar = () => {
                 // }
                 setUser(user);
                 
-                 console.log((await user.getIdTokenResult()).claims.admin)
+                console.log((await user.getIdTokenResult()).claims.admin)
                  
             }
             else {

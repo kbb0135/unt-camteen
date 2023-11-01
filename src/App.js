@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthPage from './Pages/AuthPage.jsx'
+import AuthPage from "./Pages/AuthPage.jsx";
 // import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
@@ -9,8 +9,8 @@ import MenuPage from "./Pages/MenuPage";
 import OTPSender from "./Models/OTPSender.jsx";
 import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
-import AdminAddDelete from './Admin/AdminAddDelete.jsx'
-import { auth } from './firebase.js'
+import AdminAddDelete from "./Admin/AdminAddDelete.jsx";
+import { auth } from "./firebase.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,29 +32,41 @@ const router = createBrowserRouter([
   },
   {
     path: "/menu",
-    element: <MenuPage/>,
+    element: <MenuPage />,
   },
   {
     path: "/sendotp",
-    element: <OTPSender/>
-  }, {
+    element: <OTPSender />,
+  },
+  {
     path: "/reviews",
-    element: <Reviews/>,
+    element: <Reviews />,
   },
   {
     path: "/cart",
-    element: <Cart />
+    element: <Cart />,
   },
   {
     path: "/adminmenu",
-    element: <AdminAddDelete/>
-  }
+    element: <AdminAddDelete />,
+  },
 ]);
+export const ThemeContext = createContext(null);
 
 const App = () => {
+  const [isDarkMode, toggleDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
-  return <RouterProvider router={router} />;
-}
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <div className={isDarkMode? "dark-mode": null}>
+        <RouterProvider router={router} />
+      </div>
+      ;
+    </ThemeContext.Provider>
+  );
+};
 export default App;
 
 // const App = () => {
@@ -127,4 +139,3 @@ export default App;
 // };
 
 // export default App;
-

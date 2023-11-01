@@ -1,5 +1,4 @@
 import React from 'react';
-import Eagle from '../Assets/eagle.png';
 import Email from '../Assets/email.png';
 import Phone from '../Assets/phone.png';
 import Location from '../Assets/location-pin.png';
@@ -13,7 +12,6 @@ const Footer = () => {
 
         <footer className="footerDiv">
             <div className="footerUNTCol">
-                <img src={Eagle} alt="UNTBird" className="EagleImg"></img>
             </div>
 
 

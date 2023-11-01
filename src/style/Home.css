@@ -1,0 +1,116 @@
+.feature {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  color: var(--primary-color);
+  gap: 2rem;
+  padding-top: 4rem;
+}
+.feature svg {
+  font-size: 6rem;
+}
+.feature > span {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  font-weight: var(--font-weight-medium);
+}
+.landing p {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  color: var(--text-color);
+}
+.slogan {
+  flex:1;
+  font-size: 6rem;
+  position: relative;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
+  font-family: "Playfair Display";
+  box-sizing: border-box;
+}
+.slogan p {
+  max-width: 30rem;
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+}
+
+h3 {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-color);
+  font-size: 3rem;
+  margin: 0;
+}
+h4 {
+  font-weight: normal;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  margin: 0;
+}
+.landing{
+  width: 100%;
+  max-width: 100%;
+  height: 100svh;
+  box-sizing: border-box;
+  padding: 2rem 6rem;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--on-primary-color);
+}
+.landing img{
+  max-width: 100%;
+  max-height: 100%;
+}
+.landing > :nth-child(1){
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+.landing > :nth-child(2){
+  flex: 2;
+  padding-bottom: 6rem;
+}
+.landing-button{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+}
+.landing-button > :nth-child(1){
+  flex:1;
+}
+.landing-button >:nth-child(2){
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.open-hours{
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--on-primary-color);
+  padding: 0 6rem;
+}
+.open-hours div{
+  display: flex;
+  flex-direction: row;
+}
+.hour-des{
+ color: var(--text-color);
+ display: flex;
+ flex-direction: column;
+}
+@media (width < 1080px) {
+  .landing {
+    flex-direction: column;
+  }
+  .landing > :nth-child(2){
+    display: none;
+  }
+  .landing-button > :nth-child(1){
+    display: none;
+  }
+}

@@ -6,9 +6,8 @@ import ItemForm from './ItemForm';
 import { db } from '../firebase.js'
 import { getDocs, collection, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import NavBar from "./NavBar.jsx"
 import Footer from '../Components/Footer';
-import UNTBar from '../Components/UNTBar';
+import Header from '../Components/Header';
 
 
 
@@ -209,8 +208,7 @@ export default function AdminAddDelete() {
 
   return (
     <div>
-      <UNTBar />
-      <NavBar />
+      <Header/>
       <div className="menu">
         <h1>UNT-Canteen</h1>
         <button onClick={async () => setIsFormOpen(true)}>Add New Item</button>

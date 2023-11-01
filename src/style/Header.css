@@ -6,7 +6,7 @@ header {
   background-color: var(--on-primary-color);
   z-index: 9999;
 }
-ul {
+header ul {
   margin: 0;
   padding: 0;
   padding-right: 6rem;
@@ -17,13 +17,18 @@ ul {
   gap: 3rem;
   z-index: 9000;
 }
-
-a {
+header li{
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+header a {
   font-size: 1.5rem;
   color: var(--text-color);
   font-weight: var(--font-weight-medium);
 }
-ul li a:hover {
+header ul li a:hover {
   text-decoration: none;
   color: var(--text-color-hover);
 }
@@ -99,7 +104,7 @@ ul li a:hover {
     background-color: var(--on-primary-color);
     padding: 2rem 4rem;
   }
-  ul {
+  header ul {
     padding-top: 8rem;
     padding-right: 0;
     position: fixed;
@@ -109,7 +114,7 @@ ul li a:hover {
     border-left: 0.25rem solid var(--primary-color);
     transform: translateX(100%);
   }
-  ul[navclosed="false"] {
+  header ul[navclosed="false"] {
     transform: translateX(0%);
     transition: transform 0.2s ease-out;
   }

@@ -98,14 +98,6 @@ button {
   font-family: "Roboto", Arial, sans-serif;
   font-size: 1rem;
 }
-section {
-  width: 100vw;
-  width: 100svw;
-  height: calc(100vh - 64px - 4rem);
-  height: calc(100svh - 64px - 4rem);
-  padding: 4rem;
-  box-sizing: border-box;
-}
 a {
   text-decoration: none;
 }
@@ -165,48 +157,6 @@ input:focus-visible {
   height: 7rem;
 }
 
-/* Navbar Home Menu Part */
-.navbar {
-  background-color: var(--black);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.navbar:hover {
-  
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  padding-left: 100px;
-}
-
-.nav-item {
-  margin-right: 1rem;
-  color: var(--white);
-}
-.nav-head {
-  text-decoration: none;
-}
-
-.nav-item {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.8rem;
-}
-
-.nav-item :hover {
-  background-color: var(--white);
-  color: var(--black);
-}
-
-.untbar {
-  display: flex;
-  background-color: var(--untBackground);
-  color: var(--white);
-  padding-top: 2vh;
-}
 
 .untHeaderTitle {
   flex-grow: 1;

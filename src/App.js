@@ -6,11 +6,15 @@ import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
 import MenuPage from "./Pages/MenuPage";
+import MenuItemPage from "./Pages/MenuItemPage.jsx";
 import OTPSender from "./Models/OTPSender.jsx";
 import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
-import AdminAddDelete from "./Admin/AdminAddDelete.jsx";
-import { auth } from "./firebase.js";
+import AdminAddDelete from './Admin/AdminAddDelete.jsx'
+import { auth } from './firebase.js'
+import AdminNotification from "./Admin/AdminNotification.jsx";
+import Notification from "./Models/Notification.jsx";
+import TestCase from "./TestCase.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +39,14 @@ const router = createBrowserRouter([
     element: <MenuPage />,
   },
   {
+    path: "/menuItemPage",
+    element: <MenuItemPage/>
+  },
+  {
+    path: "/menuItemPage",
+    element: <MenuItemPage/>
+  },
+  {
     path: "/sendotp",
     element: <OTPSender />,
   },
@@ -48,8 +60,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/adminmenu",
-    element: <AdminAddDelete />,
+    element: <AdminAddDelete/>
   },
+  {
+    path: "/adminnotification",
+    element: <AdminNotification/>
+  },
+  
+  {
+    path: "/notification",
+    element: <Notification />
+  },
+  {
+    path: "/test",
+    element: <TestCase />
+  }
 ]);
 export const ThemeContext = createContext(null);
 

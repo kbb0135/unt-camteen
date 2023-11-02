@@ -28,6 +28,7 @@ const Header = () => {
         //     const docRef = doc(db,"Users",user.uid)
         //     const docSnap = await getDoc(docRef);
         //     setUser(docSnap.data())
+        //console.log(user)
         user.getIdTokenResult();
         // }
         setUser(user);
@@ -76,7 +77,7 @@ const Header = () => {
             {user ? (
               // If user is logged in, display user's name and logout button
               <>
-                <p>Welcome, {user.email}</p>
+                <p>Welcome, {user.displayName}</p>
                 <button onClick={handleLogOut}>Logout</button>
               </>
             ) : (

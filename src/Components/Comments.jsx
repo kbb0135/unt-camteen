@@ -1,17 +1,16 @@
 import React from 'react'; 
-import Star from '../Assets/Star.png'; 
-import { UserRating} from './UserRating'; 
+import Star from './Star';
 
-const Comment = ({ username, comment, date, imageSrc, rating}) => {
+const Comment = ({id, username, comment, date, imageSrc, rating}) => {
     return (
-        <div className="comments-container">
+        <div className="comments-container" key={id}>
             <div className="user-comment">
                 <div className="username-and-image">
-                    <img classname="userImage card__image" src={imageSrc} alt="user-image" />
+                    <img className="userImage card__image" src={imageSrc} alt="user profile" />
                     <p className="usename">{username}</p>
                 </div>
                 <div className="rating-and-comment">
-                    <UserRating rating= {rating}/>
+                    <Star stars={rating} />
                     <p>{comment}</p>
                 </div>
             </div>

@@ -1,206 +1,435 @@
 .review-container {
-    height: 100%;
-    width: 100%;
-    padding-top: 20px;
-  }
-  
-  .review-row {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-bottom: 20px;
-  }
-  
-  .loading {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.review-row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+
+/* -------------- */
+/* FOOD SECTION */
+/* -------------- */
+.food-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.food {
+box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+border-radius: 11px;
+overflow: hidden;
+transition: all 0.4s;
+}
+
+
+.food:hover {
+transform: translateY(-1.2rem);
+box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
+}
+
+.img-container {
+  height: 250px;
+}
+
+.food-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #2d2f31;
+  padding-bottom: 0.5rem;
+}
+
+.food-category {
+  color: #2d2f31;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  padding: 2px 1rem;
+  background-color: #eceb98;
+}
+
+.food-price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4d3105;
+  margin: 0;
+  padding-top: 0.5rem;
+}
+
+.food-content {
+  padding: 1.5rem 0 1.5rem 2rem;
+  margin: 0;
+}
+
+.rating-value {
+  color: #4d3105;
+  font-weight: 700; 
+  font-size: 1.125rem;
+  margin-right: 4px;
+}
+
+.rating-star {
+  font-size: 1.25rem;
+  margin-right: 8px;
+
+}
+
+.review-count {
+  color: #808080;
+  font-size: 1rem;
+}
+
+.review-btn {
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  margin-top: 1.5rem;
+  transition: all 0.3s;
+}
+
+.review-btn:hover {
+  background-color: #008c39;
+}
+/* -------------- */
+/* SHOW MORE SECTION */
+/* -------------- */
+.show-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.show-more-btn {
+  border: 1px solid #00461d;
+  padding: 1rem 2.5rem;
+  background: #fff;
+  max-width: max-content;
+  color: #00461d;
+  font-size: 1.25rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.show-more-btn:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #008c39;
+  border-color: transparent;
+}
+
+
+/* -------------- */
+/* FEEDBACK SECTION */
+/* -------------- */
+
+.feedback {
+  display: grid;
+/* 2/3 = 66.6% + 1/3 = 33.3% */
+grid-template-columns: 2fr 1fr;
+box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+border-radius: 11px;
+margin: 0 9rem 3rem 9rem;
+
+background-image: linear-gradient(to right bottom, #33a361, #008c39);
+overflow: hidden;
+color: #00461d;
+}
+
+.feedback-form {
+  padding: 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.25rem;
+  column-gap: 2rem;
+}
+
+.feedback-form textarea {
+  grid-column: span 2;
+  padding-right: 0rem;
+}
+
+.feedback-head {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  padding-top: 2rem;
+}
+
+.feedback-subhead {
+  font-size: 1.125rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.feedback-input {
+width: 100%;
+height: 2.5rem;
+}
+
+.feedback-img-box {
+background-image: linear-gradient(
+    to right bottom,
+    rgba(48, 231, 121, 0.35),
+    rgba(12, 137, 62, 0.35)),
+  url('../Assets/eating.jpg');
+background-size: cover;
+background-position: center;
+}
+
+.feedback-submit {
+padding: 1rem 2rem;
+font-weight: 600;
+font-size: 1.125rem;
+letter-spacing: 2px;
+background-color: #00461d;
+transition: all 0.3s;
+}
+
+.feedback-submit:hover {
+background-color: #fff;
+color: #00461d;
+}
+
+/* -------------- */
+/* REVIEW SECTION */
+/* -------------- */
+.container {
+padding: 3rem 6rem;
+/* background-color: #eee; */
+}
+
+.rev {
+display: flex;
+column-gap: 6rem;
+padding-bottom: 4rem;
+}
+
+.rev-img-box {
+height: 350px;
+width: 500px;
+}
+.rev-img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.rev-name {
+font-size: 1.875rem;
+margin: 0;
+padding: 0;
+font-weight: 700;
+}
+
+.rev-category{
+text-transform: uppercase;
+display: inline-block;
+background-color: #eceb98;
+font-size: 0.75rem;
+padding: 4px 1rem;
+}
+
+.rev-desc {
+margin: 0;
+padding: 0;
+font-size: 0.875rem;
+color: #6a6f73
+}
+
+.rev-price {
+font-size: 1.5rem;
+font-weight: 700;
+margin: 0;
+padding-top: 0.5rem;
+}
+
+.star-content {
+display: flex;
+padding-top: 0.875rem;
+gap: 4px;
+font-size: 1.125rem;
+}
+.star-icon {
+color: #b4690e
+}
+.star-count {
+margin: 0;
+color: #b4690e;
+font-weight: 600;
+}
+.rev-count {
+margin: 0;
+color: #6a6f73;
+margin-left: 4px;
+}
+
+
+/* -------------- */
+/* NUTRIENT SECTION */
+/* -------------- */
+.cal-cell {
+margin: 0;
+padding: 0;
+padding: 1rem 2rem;
+}
+
+.cal-table {
+margin-top: 2rem;
+border-collapse: collapse;
+color: #006228
+}
+.cal-table-head {
+background-color: #33a361;
+color: #e6f4eb
+}
+tr td {
+font-size: 1.25rem;
+font-weight: 500;
+}
+
+/*  */
+
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.comments-section {
+  padding: 3rem 6rem;
+  & h2 {
     color: black;
     font-size: 24px;
-    font-weight: 400;
-  }
-  .food-container {
-    flex: 1;
-    min-width: 400px;
-    transition: transform 0.2s ease-in-out;
-    padding: 8px;
-    border-radius: 5px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  }
-  
-  .food-container:hover {
-    transform: scale(1.01);
-    cursor: pointer;
-  }
-  
-  .food-image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    & img {
-      max-width: 100%;
-    }
-  }
-  
-  .food-name {
-    font-size: 26px;
-    font-weight: 800;
-  }
-  
-  .star-container {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .total-reviews {
-    color: #808080;
-  }
-  
-  .half-star {
-    color: #ffc30b;
-    font-size: 20px;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-  }
-  
-  .rating-value {
-    color: black;
-    font-weight: 800;
-    font-size: 20px;
-  }
-  
-  .star-rating {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .star {
-    font-size: 20px;
-    color: #ffc30b;
-  }
-  
-  .leave-review {
-    padding: 16px;
-    border-radius: 5px;
-    text-align: center;
-    background-color: var(--untBackground);
-    color: var(--white);
-    color: white;
-    cursor: pointer;
-  }
-  
-  .food-image {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-  }
-  
-  .food-info {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /*  */
-  .show-more {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-  .show-more-btn {
-    border: none;
-    background: none;
-    max-width: max-content;
-    color: #339714;
-    font-size: 20px;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .show-more-btn:hover {
-    transform: scale(1.01);
-    cursor: pointer;
-  }
-  
-  .feedback-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px;
-  }
-  .feedback-form {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    width: 100%;
-    transition: transform 0.2s ease-in-out;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    margin: 5px;
-  }
-  .comments-section {
-    margin: 40px;
-    & h2 {
-      color: black;
-      font-size: 24px;
-      font-family: Fira Sans Extra Condensed;
-      font-weight: 400;
-    }
-  }
-  .comments-container {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-  }
-  .user-comment {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    justify-content: space-between;
-  }
-  .username-and-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: fit-content;
-    color: black;
-    font-size: 15px;
-    font-weight: 300;
-    text-transform: capitalize;
-    word-wrap: break-word;
-  }
-  
-  .rating-and-comment {
-    color: black;
-    font-size: 16px;
     font-family: Fira Sans Extra Condensed;
     font-weight: 400;
-    word-wrap: break-word;
   }
-  
-  .date {
-    align-self: flex-end;
-    color: #707070;
-    font-size: 15px;
-    font-family: Fira Sans Extra Condensed;
-    font-style: italic;
-    font-weight: 300;
-    text-transform: capitalize;
-    word-wrap: break-word;
-  }
+}
+.comments-container {
+  display: flex;
+  flex-direction: column;
+}
+.user-comment {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  /* justify-content: space-between; */
+}
+.username-and-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: fit-content;
+  color: black;
+  font-size: 15px;
+  font-weight: 300;
+  text-transform: capitalize;
+  word-wrap: break-word;
+}
+
+.rating-and-comment {
+  color: black;
+  font-size: 16px;
+  font-family: Fira Sans Extra Condensed;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.date {
+  align-self: flex-end;
+  color: #707070;
+  font-size: 15px;
+  font-family: Fira Sans Extra Condensed;
+  font-style: italic;
+  font-weight: 300;
+  text-transform: capitalize;
+  word-wrap: break-word;
+}
+
+/* -------------- */
+/* REVIEW FORM SECTION */
+/* -------------- */
+
+.rev-form {
+/* background-color: #fcfcfc ; */
+/* box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075); */
+padding: 2rem 3rem;
+}
+
+.rev-form-head {
+font-size: 2rem;
+font-weight: 600;
+color: #a6a9ab;
+text-align: center;
+margin: 0;
+}
+
+.rev-form-stars {
+padding: 1rem 0;
+/* background-color: #00461d; */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.rev-form-star {
+margin-left: 0.5rem;
+font-size: 2rem;
+transition: all 0.3s;
+}
+
+.rev-form-star:hover {
+cursor: pointer;
+}
+
+.rev-form-btn {
+padding: 1rem 2rem;
+font-weight: 600;
+letter-spacing: 1px;
+transition: all 0.3;
+}
+
+.rev-form-btn:hover {
+background-color: #008c39;
+}
+
+.comment-show-more-btn {
+display: flex;
+align-items: center;
+justify-content: center;
+
+}

@@ -25,3 +25,4 @@
 /src/ItemEditor.jsx
 /src/Admin/FirebaseConfig.js
 /src/Admin/CreateAdmin.js
+.env

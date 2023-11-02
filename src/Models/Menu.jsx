@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MenuItem from '../Components/MenuItem';
+import MenuItemCard from '../Components/MenuItemCard';
 import '../style/style.css';
 import '../style/AdminMenu.css';
 import { db } from '../firebase.js'
@@ -106,7 +106,7 @@ function Menu() {
 
     <div className="menu-items">
       {menuItems.map((item) => (
-        <MenuItem
+        <MenuItemCard
           key={item.id}
           item={item}
           onAddToCart = {addToCart}

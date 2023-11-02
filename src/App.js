@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthPage from './Pages/AuthPage.jsx'
+import AuthPage from "./Pages/AuthPage.jsx";
 // import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
 import MenuPage from "./Pages/MenuPage";
+import MenuItemPage from "./Pages/MenuItemPage.jsx";
 import OTPSender from "./Models/OTPSender.jsx";
 import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
@@ -37,14 +38,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/menu",
-    element: <MenuPage/>,
+    element: <MenuPage />,
+  },
+  {
+    path: "/menuItemPage",
+    element: <MenuItemPage/>
+  },
+  {
+    path: "/menuItemPage",
+    element: <MenuItemPage/>
   },
   {
     path: "/sendotp",
-    element: <OTPSender/>
-  }, {
+    element: <OTPSender />,
+  },
+  {
     path: "/reviews",
-    element: <Reviews/>,
+    element: <Reviews />,
   },
   {
     path: '/reviews/:category/:id',
@@ -52,7 +62,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <Cart />
+    element: <Cart />,
   },
   {
     path: "/adminmenu",
@@ -72,11 +82,22 @@ const router = createBrowserRouter([
     element: <TestCase />
   }
 ]);
+export const ThemeContext = createContext(null);
 
 const App = () => {
+  const [isDarkMode, toggleDarkMode] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
-  return <RouterProvider router={router} />;
-}
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <div className={isDarkMode? "dark-mode": null}>
+        <RouterProvider router={router} />
+      </div>
+      ;
+    </ThemeContext.Provider>
+  );
+};
 export default App;
 
 // const App = () => {
@@ -149,4 +170,3 @@ export default App;
 // };
 
 // export default App;
-

@@ -17,7 +17,7 @@ try {
     //     password: "test123",
     //     displayName: email
     // })
-    const uid = "enDFtIft8TMp4CkZ9hhWHrO9Ut03"
+    const uid = "u3r3WrWIMbR0ndMMqLKBq4DZ5di2"
     
     // const additionalClaims = {
     //     admin: true,

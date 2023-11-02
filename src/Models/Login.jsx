@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import "../style/style.css";
 import "../style/Auth.css"
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-import AuthPage from "../Pages/AuthPage";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,7 +95,7 @@ function Login() {
         </form>
         <div className="flex-row jc-center te-size-14 te-color-gray-2">
           Don't have an account?
-          <Link to="/signup" className="te-size-14 te-color-primary-green-md">
+          <Link to="/auth/signup" className="te-size-14 te-color-primary-green-md">
             Sign Up
           </Link>
         </div>

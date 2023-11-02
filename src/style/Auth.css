@@ -1,11 +1,11 @@
-@import "style.css";
+
 
 .auth-page {
   width: 100vw;
   width: 100svw;
   height: 100vh;
   height: 100svh;
-  background-color: var(--off-white);
+  background-color: var(--background);
 }
 .auth-form {
   display: flex;

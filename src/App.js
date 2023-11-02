@@ -15,6 +15,8 @@ import { auth } from './firebase.js'
 import AdminNotification from "./Admin/AdminNotification.jsx";
 import Notification from "./Models/Notification.jsx";
 import TestCase from "./TestCase.js";
+import Review from "./Pages/Review.jsx"; 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/reviews",
     element: <Reviews />,
+  },
+  {
+    path: '/reviews/:category/:id',
+    element: <Review /> 
   },
   {
     path: "/cart",

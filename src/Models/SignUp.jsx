@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../style/style.css";
 import "../style/Auth.css";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,11 +25,14 @@ function SignUp() {
     const lastName = event.target[1].value;
     const email = event.target[2].value;
     const password = event.target[4].value;
+    const displayName = [firstName, lastName].join(' '); 
     try {
       createUserWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           // Signed in
           const user = userCredential.user;
+          await updateProfile(auth.currentUser, {displayName}); 
+          
           await setDoc(doc(db, "Users", user.uid), {
             FirstName: firstName,
             LastName: lastName,

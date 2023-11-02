@@ -1,0 +1,36 @@
+.img-cart {
+    width: 75px;
+    height: 75px;
+    border-radius: 8px;
+  }
+.plus-btn {
+    margin-left: 1100px;
+}
+.minus-btn {
+    margin-left: 5px;
+}
+.itemName-div {
+    flex: 1;
+    font-weight: bold;
+}
+.cart-item {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+}
+.food-total {
+    text-align: right;
+    margin-right: 50px;
+    font-weight: bold;
+}
+.pay-btn {
+    display:flex;
+    align-items: right;
+    text-align: right;
+    font-weight: bold;
+}
+
+  

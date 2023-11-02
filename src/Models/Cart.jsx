@@ -1,85 +1,110 @@
-import React from 'react'; 
-import "../style/style.css"; 
-import chickenPizza from "../Assets/chicken-pizza.png"; 
-import GarlicButter from "../Assets/garlic-butter-chicken-wings.png"; 
-import Kebab from "../Assets/kebab.png"; 
-import Salmon from "../Assets/salmon.png"; 
-import SaladBowl from "../Assets/vegan-salad-bowl.png"; 
-import ChickenWings from "../Assets/chicken-wings.png"; 
-import Header from "../Components/Header"; 
-import Footer from "../Components/Footer"; 
-import CartContainer from "../Components/CartContainer"; 
-import {cartData} from "../Models/cartData"; 
 
-function Cart() {
-    var totalCalories = 0; 
-    var totalPrice = 0; 
+import React, { useState, useEffect } from 'react'
+import { useCart } from './CartContext'
+import "../style/Cart.css";
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import { Link } from 'react-router-dom';
+import { Notifier } from '../Components/Notifier.jsx';
 
-    for (let items in cartData) {
-        totalCalories = totalCalories + cartData[items].quantity * cartData[items].calorie; 
-        totalPrice = totalPrice + cartData[items].price; 
+export default function Cart() {
+  const { cartItems, removeFromCart, addToCart } = useCart();
+  const [total, setTotal] = useState(0);
+  const [message, setMessage] = useState("");
+  const [isCode, setIsCode] = useState(false);
+  const [discount, setDiscount] = useState(0);
+  const [discountTotal, setDiscountTotal] = useState(0);
+  const [value, setValue] = useState("");
+
+  const val = (e) => {
+    const data = e.target.value;
+    console.log(data);
+    setValue(data);
+  }
+  const handleDiscount = (e) => {
+    
+    if (value === "free") {
+      setDiscount(2);
+      setIsCode(true);
+      setMessage("Discount Code Applied");
     }
+    else {
+      setIsCode(false);
+      setMessage("Invalid Discount Code");
+      setDiscount(0)
+    }
+  }
 
-    return (
+
+
+  useEffect(() => {
+    const newTotal = cartItems.reduce((acc, item) => {
+      return acc + (item.price * item.quantity);
+    }, 0)
+
+    setTotal(newTotal);
+    setDiscountTotal(newTotal - discount);
+  }, [cartItems, discount])
+
+  return (
+    <div>
+      <Header />
+      <h2>Cart</h2>
+      {cartItems.length === 0 ? (
         <div>
-            <Header />
-            <div className= "cart-container">
-                <div className='review-row'>
-                    <CartContainer
-                        foodImage= {chickenPizza} 
-                        foodName = {"Chicken Pizza"}
-                        foodAmount = {cartData["chicken pizza"].quantity}
-                        foodCalorie={cartData["chicken pizza"].calorie}
-                        foodPrice = {cartData["chicken pizza"].price}
-                    />
-                    <CartContainer
-                        foodImage= {GarlicButter} 
-                        foodName = {"Garlic Butter Chicken"}
-                        foodAmount = {cartData["garlic butter chicken"].quantity}
-                        foodCalorie={cartData["garlic butter chicken"].calorie}
-                        foodPrice = {cartData["garlic butter chicken"].price}
-                    />
-                    <CartContainer
-                        foodImage= {Kebab} 
-                        foodName = {"Chicken Kebab"}
-                        foodAmount = {cartData["kebab"].quantity}
-                        foodCalorie={cartData["kebab"].calorie}
-                        foodPrice = {cartData["kebab"].price}
-                    />
-                </div>
-                <div className='review-row'>
-                    <CartContainer
-                        foodImage= {SaladBowl} 
-                        foodName = {"Salad Bowl"}
-                        foodAmount = {cartData["salad bowl"].quantity}
-                        foodCalorie={cartData["salad bowl"].calorie}
-                        foodPrice = {cartData["salad bowl"].price}
-                    />
-                    <CartContainer
-                        foodImage= {Salmon} 
-                        foodName = {"Salmon"}
-                        foodAmount = {cartData["salmon"].quantity}
-                        foodCalorie={cartData["salmon"].calorie}
-                        foodPrice = {cartData["salmon"].price}
-                    />
-                    <CartContainer
-                        foodImage= {ChickenWings} 
-                        foodName = {"Chicken Wings"}
-                        foodAmount = {cartData["chicken wings"].quantity}
-                        foodCalorie={cartData["chicken wings"].calorie}
-                        foodPrice = {cartData["chicken wings"].price}
-                    />
-                </div>
-                <div className='total-calories'>
-                    <div className='food-name'>Your Order Details</div>
-                    <div>Total Calories: {totalCalories} cal</div>
-                    <div>Total Price: $ {totalPrice} </div>
-
-                </div>
-            </div>
-            <Footer />
+          <p>Your cart is empty! Add some items to get started.</p>
+          <Link to="/menu">
+            <button>Add Item</button>
+          </Link>
         </div>
-    );
-}
+      ) : (
+        <div>
+          <ul>
+            {cartItems.map((item) => (
+              <li key={item.id} index={item.name} className="cart-item">
+                <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
+                <button onClick={() => addToCart(item)} className="plus-btn">+</button>
+                <div className="itemName-div">{item.quantity}</div>
+                <button onClick={() => removeFromCart(item.name)} className="minus-btn">-</button>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <hr></hr>
+            <div className="food-total">
+              <div>Total Price: ${total.toFixed(2)}</div>
+            </div>
+            
+            <div>Discout Code</div>
+            <input type="text" className="promo" onChange={val} />
+            <button onClick={() => handleDiscount()}>Apply Code</button>
+            <div>
+              {
+                isCode ? (
+                  <>
+                    <div>
+                      <b>
+                      <p>{message}</p>
+                      <p>Discount Price: ${discount}</p>
+                      <p>New Total: {discountTotal}</p>
+                      </b>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p><b>{message}</b></p>
+                  </>
 
-export default Cart; 
+                )
+              }
+              <hr></hr>
+              <button className="pay-btn">Pay {total.toFixed(2)-discount}</button>
+            </div>
+          </div>
+
+          {/* <Footer /> */}
+        </div>
+      )}
+    </div>
+  );
+}

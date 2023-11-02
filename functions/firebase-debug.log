@@ -1,0 +1,67 @@
+[debug] [2023-09-28T17:20:53.546Z] ----------------------------------------------------------------------
+[debug] [2023-09-28T17:20:53.548Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\budha\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2023-09-28T17:20:53.549Z] CLI Version:   12.5.2
+[debug] [2023-09-28T17:20:53.549Z] Platform:      win32
+[debug] [2023-09-28T17:20:53.549Z] Node Version:  v16.15.1
+[debug] [2023-09-28T17:20:53.550Z] Time:          Thu Sep 28 2023 12:20:53 GMT-0500 (Central Daylight Time)
+[debug] [2023-09-28T17:20:53.551Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-09-28T17:20:53.638Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-28T17:20:53.639Z] > authorizing via signed-in user (7teamseven2023@gmail.com)
+[debug] [2023-09-28T17:20:53.639Z] [iam] checking project unt-canteen for permissions ["firebase.projects.get"]
+[debug] [2023-09-28T17:20:53.641Z] > refreshing access token with scopes: []
+[debug] [2023-09-28T17:20:53.642Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-09-28T17:20:53.643Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-28T17:20:53.784Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-09-28T17:20:53.784Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-28T17:20:53.806Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/unt-canteen:testIamPermissions [none]
+[debug] [2023-09-28T17:20:53.806Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/unt-canteen:testIamPermissions x-goog-quota-user=projects/unt-canteen
+[debug] [2023-09-28T17:20:53.807Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/unt-canteen:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-09-28T17:20:55.139Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/unt-canteen:testIamPermissions 200
+[debug] [2023-09-28T17:20:55.139Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/unt-canteen:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-09-28T17:20:55.151Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-09-28T17:20:55.160Z] defaultcredentials: writing to file C:\Users\budha\AppData\Roaming\firebase\7teamseven2023_gmail_com_application_default_credentials.json
+[debug] [2023-09-28T17:20:55.165Z] DEBUG: Setting GAC to C:\Users\budha\AppData\Roaming\firebase\7teamseven2023_gmail_com_application_default_credentials.json
+[debug] [2023-09-28T17:20:55.166Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/unt-canteen/adminSdkConfig [none]
+[debug] [2023-09-28T17:20:55.552Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/unt-canteen/adminSdkConfig 200
+[debug] [2023-09-28T17:20:55.553Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/unt-canteen/adminSdkConfig {"projectId":"unt-canteen","storageBucket":"buckets/unt-canteen.appspot.com","locationId":"us-central"}
+[debug] [2023-09-28T17:20:55.575Z] [functions] Watching "D:\Capstone 2 Updated\functions" for Cloud Functions...
+[debug] [2023-09-28T17:20:55.585Z] Validating nodejs source
+[debug] [2023-09-28T17:20:57.524Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^11.8.0",
+    "firebase-functions": "^4.3.1",
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2023-09-28T17:20:57.524Z] Building nodejs source
+[debug] [2023-09-28T17:20:57.525Z] Failed to find version of module node: reached end of search path D:\Capstone 2 Updated\functions\node_modules
+[warn] !  functions: Your requested "node" version "18" doesn't match your global version "16". Using node@16 from host. 
+[debug] [2023-09-28T17:20:57.528Z] Could not find functions.yaml. Must use http discovery
+[debug] [2023-09-28T17:20:57.544Z] Found firebase-functions binary at 'D:\Capstone 2 Updated\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8507
+
+[debug] [2023-09-28T17:20:58.783Z] Got response from /__/functions.yaml {"endpoints":{"setAdminClaim":{"platform":"gcfv1","labels":{},"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"callableTrigger":{},"entryPoint":"setAdminClaim"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] shutdown requested via /__/quitquitquit
+
+[debug] [2023-09-28T17:20:58.817Z] [functions] Loaded functions definitions from source: setAdminClaim.
+[debug] [2023-09-28T17:20:58.818Z] [functions[us-central1-setAdminClaim]] http function initialized (http://127.0.0.1:5001/unt-canteen/us-central1/setAdminClaim).
+[info] i  functions: Loaded functions: setAdminClaim 
+[warn] !  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub, storage, eventarc 

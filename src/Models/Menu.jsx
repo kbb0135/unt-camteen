@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import MenuItem from '../Components/MenuItem';
+import MenuItemCard from '../Components/MenuItemCard';
 import '../style/style.css';
 import '../style/AdminMenu.css';
 import { db } from '../firebase.js'
 import { getDocs, collection } from 'firebase/firestore'
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
+  const [cart, setCart] = useState([]);
+  
   const getEntrees = async () => {
     try {
       const snapshot = await getDocs(collection(db, "Entrees"));
@@ -72,6 +74,10 @@ function Menu() {
       return [];
     }
   };
+  const addToCart = (item) => {
+    console.log("adding to cart", item)
+    setCart([...cart, item]);
+  };
 
   //use effect feature to update the item as soon
   // as the state changes
@@ -97,16 +103,16 @@ function Menu() {
     setData()
   }, []);
   return (
+
     <div className="menu-items">
       {menuItems.map((item) => (
-        <MenuItem
+        <MenuItemCard
           key={item.id}
           item={item}
+          onAddToCart = {addToCart}
         />
 
       ))}
-
-
     </div>
 
   )

@@ -1,7 +1,7 @@
 console.log("Here")
 const functions = require("firebase-functions")
-const admin = require("firebase-admin")
-const serviceAccount = require('./AdminCredential.json')
+ const admin = require("firebase-admin")
+ const serviceAccount = require('./AdminCredential.json')
 const { getAuth } = require("firebase/auth")
 const FIREBASE_STORAGE_BUCKET = "https://unt-canteen.firebaseio.com"
 admin.initializeApp({
@@ -17,7 +17,8 @@ try {
     //     password: "test123",
     //     displayName: email
     // })
-    const uid = "eM2NfrLpZrhuZJSPdjQFeZT6lLi1"
+    const uid = "u3r3WrWIMbR0ndMMqLKBq4DZ5di2"
+    
     // const additionalClaims = {
     //     admin: true,
     // }
@@ -38,6 +39,14 @@ try {
     .then(()=>{
         console.log("Admin created successfully")
     })
+
+//   admin.firestore().collection('mail').add({
+//     to:'kbb2053@gmail.com',
+//     message: {
+//       subject: 'This is a Test',
+//       html: 'This is an <code>HTML</code> email body.',
+//     },
+//   })
 }
 catch(error) {
     console.log(error.message)

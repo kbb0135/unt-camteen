@@ -21,7 +21,7 @@ export default function Cart() {
     console.log(data);
     setValue(data);
   }
-  const handleDiscount = (e) => {
+  const handleDiscount = () => {
     
     if (value === "free") {
       setDiscount(2);

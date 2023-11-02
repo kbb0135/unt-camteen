@@ -27,7 +27,6 @@ export default function Cart() {
       setDiscount(2);
       setIsCode(true);
       setMessage("Discount Code Applied");
-
     }
     else {
       setIsCode(false);

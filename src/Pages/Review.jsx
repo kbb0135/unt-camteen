@@ -71,8 +71,12 @@ const Review = () => {
 
     // ** Fetch Calorie Info
     const feetchCaloriInfo = async () => {
+        try{ 
         const nutrients = await fetchNutrition(id)
         setNutrients(nutrients)
+        } catch(error) {
+            console.error(error); 
+        }
     }
 
     useEffect(() => {

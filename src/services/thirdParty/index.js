@@ -12,6 +12,8 @@ export const fetchNutrition = async (name) => {
         return response.data.hints.at(0).food.nutrients
     } catch (error) {
         toast.error('Could not connect to server')
+        const message = error.response?.data?.message || 'Server is down. Please try again later!'
+        toast.error(message); 
     }
     
 

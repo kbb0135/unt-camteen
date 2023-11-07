@@ -49,7 +49,6 @@ export default function Cart() {
   return (
     <div>
       <Header />
-      <h2>Cart</h2>
       {cartItems.length === 0 ? (
         <div>
           <p>Your cart is empty! Add some items to get started.</p>
@@ -58,8 +57,8 @@ export default function Cart() {
           </Link>
         </div>
       ) : (
-        <div>
-          <ul>
+        <div className="food-container">
+          <ul className="food-list">
             {cartItems.map((item) => (
               <li key={item.id} index={item.name} className="cart-item">
                 <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
@@ -75,14 +74,16 @@ export default function Cart() {
               <div>Total Price: ${total.toFixed(2)}</div>
             </div>
             
-            <div>Discout Code</div>
-            <input type="text" className="promo" onChange={val} />
-            <button onClick={() => handleDiscount()}>Apply Code</button>
-            <div>
+            <div className="discount">Discout Code</div>
+            <input type="text" className="promo-input" onChange={val} />
+            <br></br>
+            
+            <button onClick={() => handleDiscount()} className = "disc-apply">Apply Code</button>
+            <div class="container">
               {
                 isCode ? (
                   <>
-                    <div>
+                    <div className="msg">
                       <b>
                       <p>{message}</p>
                       <p>Discount Price: ${discount}</p>

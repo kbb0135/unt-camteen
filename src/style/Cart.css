@@ -1,36 +1,141 @@
-.img-cart {
-    width: 75px;
-    height: 75px;
-    border-radius: 8px;
-  }
-.plus-btn {
-    margin-left: 1100px;
-}
-.minus-btn {
-    margin-left: 5px;
-}
-.itemName-div {
-    flex: 1;
-    font-weight: bold;
-}
-.cart-item {
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-}
-.food-total {
-    text-align: right;
-    margin-right: 50px;
-    font-weight: bold;
-}
-.pay-btn {
-    display:flex;
-    align-items: right;
-    text-align: right;
-    font-weight: bold;
-}
 
+.food-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Cart header */
+  h2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 20px 0;
+  }
+ 
+  .food-container > div {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .add-item-btn {
+    background-color: #1e6105;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Cart item list */
+  .food-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .img-cart {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+  }
+  
+  /* Quantity control */
+  .plus-btn,
+  .minus-btn {
+    background-color: rgb(27, 69, 23);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+  }
+  
+  .itemName-div {
+    font-size: 18px;
+  }
+  
+  /* Cart summary */
+  .food-total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .promo {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .apply-code-btn {
+    background-color: rgb(38, 255, 0);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .container {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .msg {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pay-btn {
+    background-color: #ff0019;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .discount {
+    font-size: 18px; /* Make it larger */
+    text-align: right; /* Align to the right */
+    margin-top: 10px;
+  }
+  input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+    width: 150px; 
+    float:right;
+    margin-top: 10px;
+  }
+  .disc-apply {
+    background-color: #007bff; /* Change the background color as needed */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+    margin-right: 10px;
+  }
+
+  
   

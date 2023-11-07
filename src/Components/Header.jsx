@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import "../style/Header.css";
 import "../style/Utility.css";
-import { auth } from "../firebase.js";
-// import { getDoc,doc } from 'firebase/firestore';
+import { auth, db } from "../firebase.js";
+import { getDoc, doc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../Models/CartContext.jsx";
 import {
   FaCartShopping,
   FaUser,
@@ -16,18 +17,22 @@ import {
 import { ThemeContext } from "../App";
 
 const Header = () => {
-  const pathName = window.location.pathname;
+  const { getTotalQuantity } = useCart();
   const [isNavClosed, setNavClosed] = useState(true);
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [user, setUser] = useState("");
+  const [userName, setUserName] = useState('');
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // const getData = async()=> {
-        //     const docRef = doc(db,"Users",user.uid)
-        //     const docSnap = await getDoc(docRef);
-        //     setUser(docSnap.data())
+        try {
+          const docRef = await doc(db, "Users", user.uid)
+          const snapShot = await getDoc(docRef)
+          const userData = snapShot.data();
+          setUserName(userData.FirstName)
+        }
+        catch { }
         user.getIdTokenResult();
         // }
         setUser(user);
@@ -76,7 +81,7 @@ const Header = () => {
             {user ? (
               // If user is logged in, display user's name and logout button
               <>
-                <p>Welcome, {user.email}</p>
+                <p>Welcome, {userName}</p>
                 <button onClick={handleLogOut}>Logout</button>
               </>
             ) : (
@@ -101,7 +106,7 @@ const Header = () => {
         <Link to="/cart" title="Go to cart">
           <FaCartShopping />
         </Link>
-        <span className="cart-quan">4</span>
+        <span className="cart-quan">{getTotalQuantity()}</span>
       </div>
       <button
         type="button"

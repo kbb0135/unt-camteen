@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-credit-cards';
 import "../style/Payment.css";
 import { useCart } from './CartContext';
+import Header from '../Components/Header';
 
 import {
   formatCreditCardNumber,
@@ -62,9 +63,10 @@ export default function Payment() {
 
   return (
     <div key='Payment'>
+      <Header />
       <div className='App-payment'>
         <h1>Enter your payment details</h1>
-        <h4>please input your information below</h4>
+
         <Card
           number={number}
           name={name}
@@ -132,8 +134,8 @@ export default function Payment() {
             />
           </div>
           <div className='form-group-input'>
-            <small>Amount to Pay:</small>
-            <div>{amount}</div>
+            <br></br>
+            <small className = "pay-amt">Amount to Pay:{amount}</small>        
           </div>
           <input type='hidden' name='issuer' value={issuer} />
           <div className='form-actions'>

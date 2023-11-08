@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300&display=swap');
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Montserrat, sans-serif;
+  text-align: center;
+}
+
+input {
+  margin-top: 1%;
+  margin-left: 1%;
+  font-family: Montserrat, sans-serif;
+  padding: 0.5%;
+  border-radius: 7em;
+ 
+
+  /* border: 0; */
+}
+
+button {
+  font-family: Montserrat, sans-serif;
+  transition-duration: 0.7s;
+  margin-top: 2%;
+  height: 3em;
+  width: 7em;
+  color: white;
+  background-color: rgb(42, 110, 10);
+  border-radius: 7em;
+  border: 0;
+}
+
+button:hover {
+  background-color: rgb(209, 96, 62);
+  color: black;
+  border-radius: 7em;
+  font-weight: bold;
+}
+.pay-amt {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}

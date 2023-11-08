@@ -22,11 +22,12 @@ export default function Cart() {
     setValue(data);
   }
   const handleDiscount = () => {
-    
+
     if (value === "free") {
       setDiscount(2);
       setIsCode(true);
       setMessage("Discount Code Applied");
+      localStorage.setItem("discountCode",discount);
     }
     else {
       setIsCode(false);
@@ -71,23 +72,25 @@ export default function Cart() {
           <div>
             <hr></hr>
             <div className="food-total">
+
               <div>Total Price: ${total.toFixed(2)}</div>
+
             </div>
-            
+
             <div className="discount">Discout Code</div>
             <input type="text" className="promo-input" onChange={val} />
             <br></br>
-            
-            <button onClick={() => handleDiscount()} className = "disc-apply">Apply Code</button>
+
+            <button onClick={() => handleDiscount()} className="disc-apply">Apply Code</button>
             <div class="container">
               {
                 isCode ? (
                   <>
                     <div className="msg">
                       <b>
-                      <p>{message}</p>
-                      <p>Discount Price: ${discount}</p>
-                      <p>New Total: {discountTotal}</p>
+                        <p>{message}</p>
+                        <p>Discount Price: ${discount}</p>
+                        <p>New Total: {discountTotal}</p>
                       </b>
                     </div>
                   </>
@@ -99,7 +102,9 @@ export default function Cart() {
                 )
               }
               <hr></hr>
-              <button className="pay-btn">Pay {total.toFixed(2)-discount}</button>
+              <Link to="/payment-processing">
+                <button className="pay-btn">Pay {total.toFixed(2) - discount}</button>
+              </Link>
             </div>
           </div>
 

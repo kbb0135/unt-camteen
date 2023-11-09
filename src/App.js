@@ -16,7 +16,8 @@ import AdminNotification from "./Admin/AdminNotification.jsx";
 import Notification from "./Models/Notification.jsx";
 import TestCase from "./TestCase.js";
 import Review from "./Pages/Review.jsx"; 
-import Payment from "./Models/Payment.jsx";
+import Success from "./Models/Success.js";
+import Cancel from "./Models/Cancel.js"
 
 const router = createBrowserRouter([
   {
@@ -83,8 +84,12 @@ const router = createBrowserRouter([
     element: <TestCase />
   },
   {
-    path: "/payment-processing",
-    element: <Payment />
+    path: "/success",
+    element: <Success />
+  },
+  {
+    path: "/cancel",
+    element: <Cancel />
   }
 ]);
 export const ThemeContext = createContext(null);

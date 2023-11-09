@@ -1,34 +1,30 @@
-import React from 'react'
-import { db } from './firebase'
-import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import React from 'react';
+import "./test.css"
 
-export default function () {
-    const getData = async() => {
-        const docRef = doc(db, "Coupons", "coupon");
-        const docSnap = await getDoc(docRef)
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-          } else {
-            // docSnap.data() will be undefined in this case
-            console.log("No such document!");
-          }
-          const free= "free";
-          if(docSnap.data() === free) {
-            console.log(docSnap.data().value);
-          }
-          else {
-            console.log('no');
-          }
-        const querySnapshot = await getDocs(collection(db, "budhathokikaran135@gmail.com"));
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    }
-    return (
-        <div>
-            <button onClick={()=>getData()}>Click</button>
-            
-        </div>
-    )
-}
+const TestCase = () => {
+  return (
+    <div className="credit-card-page">
+      <div className="items-section">
+        <h2>Items in Your Cart:</h2>
+        <ul>
+          <li>Burger - $5.00</li>
+          <li>Pizza - $7.50</li>
+          <li>Soda - $1.50</li>
+        </ul>
+        <p>Total: $14.00</p>
+      </div>
+      <div className="payment-section">
+        <h2>Payment Information:</h2>
+        <label htmlFor="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" placeholder="Enter your card number" required />
+        <label htmlFor="expiration">Expiration Date:</label>
+        <input type="text" id="expiration" placeholder="MM/YY" required />
+        <label htmlFor="cvv">CVV:</label>
+        <input type="text" id="cvv" placeholder="Enter CVV" required />
+        <button id="payButton">Pay $14.00</button>
+      </div>
+    </div>
+  );
+};
+
+export default TestCase;

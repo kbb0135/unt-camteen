@@ -19,7 +19,9 @@ input {
   /* border: 0; */
 }
 
-button {
+
+
+.btn-pay {
   font-family: Montserrat, sans-serif;
   transition-duration: 0.7s;
   margin-top: 2%;
@@ -31,7 +33,7 @@ button {
   border: 0;
 }
 
-button:hover {
+.btn-pay:hover {
   background-color: rgb(209, 96, 62);
   color: black;
   border-radius: 7em;

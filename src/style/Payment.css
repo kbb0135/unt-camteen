@@ -64,7 +64,7 @@
 }
 
 #payButton {
-  background-color: #007bff;
+  background-color: #103817;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -74,5 +74,20 @@
 }
 
 #payButton:hover {
-  background-color: #0056b3;
+  background-color: #b30000;
+}
+.total-pay {
+ text-align: right;
+ font-weight: bold;
+ font-size: 18px;
+ margin-left: 150px; 
+}
+.total-pay-dicount {
+  color:red;
+}
+.my-btn {
+    position: relative;
+    top: 20px;
+    left: 90px;
+  
 }

@@ -110,7 +110,7 @@ return (
             {
               localStorage.getItem("discountCode") > 0 ? (
                 <>
-                  <div className="msg">
+                  <div className="my-btn">
                     <b>
                       <p>{message}</p>
                       <p>Discount Code {localStorage.getItem("value")} applied: ${localStorage.getItem("discountCode")}</p>
@@ -129,9 +129,10 @@ return (
 
               )
             }
-            <hr></hr>
+            
 
           </div>
+          <hr></hr>
 
 
           <div class="container">
@@ -153,8 +154,10 @@ return (
 
               )
             }
-            <hr></hr>
+          
+            <div className="my-btn">
               <button onClick={makePayment} className="pay-btn">Pay {total.toFixed(2) - localStorage.getItem("discountCode")}</button>
+            </div>
           </div>
           <div>
             <Link to ="/payment">

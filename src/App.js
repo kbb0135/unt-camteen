@@ -18,6 +18,7 @@ import TestCase from "./TestCase.js";
 import Review from "./Pages/Review.jsx"; 
 import Success from "./Models/Success.js";
 import Cancel from "./Models/Cancel.js"
+import Payment from "./Models/Payment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: "/cancel",
     element: <Cancel />
+  },
+  {
+    path: "/payment",
+    element: <Payment />
   }
 ]);
 export const ThemeContext = createContext(null);

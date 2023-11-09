@@ -156,6 +156,12 @@ return (
             <hr></hr>
               <button onClick={makePayment} className="pay-btn">Pay {total.toFixed(2) - localStorage.getItem("discountCode")}</button>
           </div>
+          <div>
+            <Link to ="/payment">
+            <button>Manual Pay</button>
+            </Link> 
+           
+          </div>
         </div>
 
         {/* <Footer /> */}

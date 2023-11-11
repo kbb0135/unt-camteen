@@ -24,6 +24,7 @@ export default function ChangeUserDetails() {
 
         }
     })
+    
     const handleChange=(e)=> {
         setFirstName(e.target.value[0]);
         setLastName(e.target.value[1]);

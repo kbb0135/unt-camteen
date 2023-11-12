@@ -20,7 +20,7 @@ import { get2digitDeci } from '../utils'
 const avatars = [man, girl, hacker, cat]
 
 // ** Calorie table
-const Nutrient = ({ nutrients }) => {
+const Nutrient = ({ nutrients}) => {
     return (
         <table className="cal-table">
             <thead className="cal-table-head">
@@ -35,19 +35,19 @@ const Nutrient = ({ nutrients }) => {
             <tbody>
                 <tr>
                     <td className="cal-cell">
-                        {get2digitDeci(nutrients.FAT)} g
+                        {get2digitDeci(nutrients?.FAT || 0)} g
                     </td>
                     <td className="cal-cell">
-                        {get2digitDeci(nutrients.PROCNT)} g
+                        {get2digitDeci(nutrients?.PROCNT || 0)} g
                     </td>
                     <td className="cal-cell">
-                        {get2digitDeci(nutrients.CHOCDF)} g
+                        {get2digitDeci(nutrients?.CHOCDF || 0)} g
                     </td>
                     <td className="cal-cell">
-                        {get2digitDeci(nutrients.FIBTG)} g
+                        {get2digitDeci(nutrients?.FIBTG || 0)} g
                     </td>
                     <td className="cal-cell">
-                        {get2digitDeci(nutrients.ENERC_KCAL)} kcal
+                        {get2digitDeci(nutrients?.ENERC_KCAL || 0)} kcal
                     </td>
                 </tr>
             </tbody>
@@ -71,8 +71,12 @@ const Review = () => {
 
     // ** Fetch Calorie Info
     const feetchCaloriInfo = async () => {
+        try{ 
         const nutrients = await fetchNutrition(id)
         setNutrients(nutrients)
+        } catch(error) {
+            console.error(error); 
+        }
     }
 
     useEffect(() => {

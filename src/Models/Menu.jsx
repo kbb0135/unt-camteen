@@ -27,7 +27,8 @@ function Menu() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return entrees;
     }
@@ -45,7 +46,8 @@ function Menu() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return sides;
     } catch (error) {
@@ -61,7 +63,8 @@ function Menu() {
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
-        image: doc.data().ImageURL
+        image: doc.data().ImageURL,
+        category: doc.data().category
       }));
       return drink;
     } catch (error) {
@@ -78,7 +81,8 @@ function Menu() {
         name: doc.data().Name,
         price: doc.data().Price,
         image: doc.data().ImageURL,
-        quantity: doc.data().quantity
+        quantity: doc.data().quantity,
+        category: doc.data().category
       }));
       return desert;
     } catch (error) {

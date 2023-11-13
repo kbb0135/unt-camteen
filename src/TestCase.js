@@ -4,7 +4,6 @@ import {
   formatCVC,
   formatExpirationDate
 } from "../src/Models/utils";
-import './test.css';
 import { useCart } from './Models/CartContext.jsx';
 import Card from 'react-credit-cards';
 

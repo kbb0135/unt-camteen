@@ -51,10 +51,6 @@ const router = createBrowserRouter([
     element: <MenuItemPage/>
   },
   {
-    path: "/menuItemPage",
-    element: <MenuItemPage/>
-  },
-  {
     path: "/sendotp",
     element: <OTPSender />,
   },

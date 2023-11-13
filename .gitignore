@@ -26,3 +26,8 @@
 /src/Admin/FirebaseConfig.js
 /src/Admin/CreateAdmin.js
 .env
+/server/node_modules
+/src/test.css
+/backend/node_modules
+/backend/package-lock.json
+/backend/package.json

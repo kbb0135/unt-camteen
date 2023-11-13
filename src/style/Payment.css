@@ -1,0 +1,93 @@
+/* CreditCardPage.css */
+
+.credit-card-page {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.items-section {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.items-section h2 {
+  margin-top: 0;
+}
+
+.items-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.items-section ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.payment-section {
+  flex: 1;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.payment-section h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.payment-section label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+#payButton {
+  background-color: #103817;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#payButton:hover {
+  background-color: #b30000;
+}
+.total-pay {
+ text-align: right;
+ font-weight: bold;
+ font-size: 18px;
+ margin-left: 150px; 
+}
+.total-pay-dicount {
+  color:red;
+}
+.my-btn {
+    position: relative;
+    top: 20px;
+    left: 90px;
+  
+}

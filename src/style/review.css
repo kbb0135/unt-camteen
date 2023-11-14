@@ -29,10 +29,14 @@
 /* FOOD SECTION */
 /* -------------- */
 .food-section {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 1.5rem;
   margin-top: 3rem;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .food {
@@ -40,6 +44,7 @@ box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
 border-radius: 11px;
 overflow: hidden;
 transition: all 0.4s;
+width: 299px;
 }
 
 

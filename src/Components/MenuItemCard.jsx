@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { useCart } from '../Models/CartContext';
 import {Notifier} from './Notifier';
 import { useNavigate, useLocation } from 'react-router-dom';
+import '../style/style.css';
 
 const MenuItemCard = ({ item }) => {
     const { addToCart } = useCart();
@@ -15,22 +16,23 @@ const MenuItemCard = ({ item }) => {
 
     
     return (
-        <div className="menu-item">
-            <div>
-                <img className="card-img" src={item.image} alt={item.name} onClick={() => navigate(`/reviews/${item.category}/${item.id}`)}/>
-                <div className="card-container">
-                    <div className="card-info">
-                        <h3 className="card-text">{item.name}</h3>
-                        <h4 className="card-text">${item.price}</h4>
-                        <span>{item.quantity}</span>
+        <div className='food'>
+                    <div className='img-container' onClick={() => navigate(`/reviews/${item.category}/${item.id}`)}>
+                        <img src={item.image} alt={item.name} className='food-img'/>
                     </div>
-                    <div>
-                        <button onClick={handleAddToCart}>Add to Cart</button>
-                        <Notifier message={message} setMessage={setMessage}/>
+                    <div className='food-content'>
+                        <p className='food-header'>{item.name}</p>
+                        <p className='food-category'>{item.category}</p>
+                        <div>
+                            <p className='food-price'>&#x24;{item.price}</p>
+                        </div>
+                        <span>{item.quantity}</span>
+                        <div>
+                            <button onClick={handleAddToCart}>Add to Cart</button>
+                            <Notifier message={message} setMessage={setMessage}/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
     )
 }
 export default MenuItemCard;

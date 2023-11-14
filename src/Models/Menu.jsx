@@ -107,18 +107,19 @@ function Menu() {
     setData()
   }, []);
   return (
-
-    <div className="menu-items">
-      {menuItems.map((item) => (
-        <MenuItemCard
-          key={item.id}
-          item={item}
-          onAddToCart = {addToCart}
-        />
-
-      ))}
+    <div className='menu-items'>
+      <div className='review-container'>
+        <div className='food-section'>     
+        {menuItems.map((item) => (
+          <MenuItemCard
+            key={item.id}
+            item={item}
+            onAddToCart = {addToCart}
+          />
+        ))}
+      </div>
+     </div>
     </div>
-
   )
 
 }

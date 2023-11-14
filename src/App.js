@@ -19,6 +19,9 @@ import Review from "./Pages/Review.jsx";
 import Success from "./Models/Success.js";
 import Cancel from "./Models/Cancel.js"
 import Payment from "./Models/Payment.jsx";
+import ChangePassword from "./Components/ChangePassword.jsx";
+import ForgetPassword from "./Models/ForgetPassword.jsx";
+import ChangeUserDetails from "./Components/ChangeUserDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,10 +51,6 @@ const router = createBrowserRouter([
     element: <MenuItemPage/>
   },
   {
-    path: "/menuItemPage",
-    element: <MenuItemPage/>
-  },
-  {
     path: "/sendotp",
     element: <OTPSender />,
   },
@@ -75,7 +74,6 @@ const router = createBrowserRouter([
     path: "/adminnotification",
     element: <AdminNotification/>
   },
-  
   {
     path: "/notification",
     element: <Notification />
@@ -95,6 +93,18 @@ const router = createBrowserRouter([
   {
     path: "/payment",
     element: <Payment />
+  },
+  {
+    path: "/changepassword",
+    element: <ChangePassword />
+  },
+  {
+    path: "/forgetpassword",
+    element: <ForgetPassword />
+  },
+  {
+    path: "/changeUserDetails",
+    element: <ChangeUserDetails />
   }
 ]);
 export const ThemeContext = createContext(null);

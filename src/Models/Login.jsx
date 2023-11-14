@@ -93,6 +93,13 @@ function Login() {
             Log in
           </button>
         </form>
+
+        <div className="flex-row jc-center te-size-14 te-color-gray-2">
+          <Link to="/forgetpassword" className="te-size-14 te-color-primary-green-md">
+            Forget Password?
+          </Link>
+        </div>
+
         <div className="flex-row jc-center te-size-14 te-color-gray-2">
           Don't have an account?
           <Link to="/auth/signup" className="te-size-14 te-color-primary-green-md">

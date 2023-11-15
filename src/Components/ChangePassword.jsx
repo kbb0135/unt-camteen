@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { auth } from "../firebase.js"
 import { onAuthStateChanged, updatePassword } from 'firebase/auth';
 import Header from './Header.jsx';
+import '../style/change.css';
 
 export default function () {
     const [password, setPassword] = useState("");
@@ -34,7 +35,7 @@ export default function () {
         <div>
             <Header />
             <h1 className="text-center">Change Password</h1>
-            <div>
+            <div className='change-user'>
                 <label htmlFor="password">Password</label>
                 <input type="password" className="password" onChange={getPassword} placeholder="Enter your new password" />
                 <button onClick={() => handlePassword()}>Change Password</button>

@@ -152,10 +152,10 @@ function Menu() {
             <>
               <h1>Enter you budget:{budget.toFixed(2)}</h1>
               <input
-                type="range"
-                min="5"
-                max="100"
-                step="1"
+                type="text"
+                placeholder = "Enter your budget"
+                
+                
                 value={budget}
                 onChange={handleBudget}
               />

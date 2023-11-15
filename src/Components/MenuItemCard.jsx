@@ -1,20 +1,22 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../Models/CartContext';
 import {Notifier} from './Notifier';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../style/style.css';
 
-const MenuItemCard = ({ item }) => {
+const MenuItemCard = ({ item, setBudget }) => {
     const { addToCart } = useCart();
     const [message, setMessage] = useState('');
     const handleAddToCart = () => {
         addToCart(item);
         setMessage('Added to cart!!');
+        setBudget(item)
+        console.log("Here")
     }
     const navigate = useNavigate();
 
 
-    
+
     return (
         <div className='food'>
                     <div className='img-container' onClick={() => navigate(`/reviews/${item.category}/${item.id}`)}>

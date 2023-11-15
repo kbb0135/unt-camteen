@@ -7,7 +7,19 @@ import { getDocs, collection } from 'firebase/firestore'
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
   const [cart, setCart] = useState([]);
-  
+  const [budget, setBudget] = useState(0);
+  const [isClick, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(true);
+  }
+
+  const handleBudget = (e) => {
+    setBudget(parseInt(e.target.value, 10));
+  }
+
+
+
   const getEntrees = async () => {
     try {
       const snapshot = await getDocs(collection(db, "Entrees"));
@@ -24,7 +36,7 @@ function Menu() {
       alert(error);
       return [];
     }
-        
+
   };
   //getting side dishes from the collection
   const getSide = async () => {
@@ -79,9 +91,34 @@ function Menu() {
     }
   };
   const addToCart = (item) => {
-    console.log("adding to cart", item)
-    setCart([...cart, item]);
+    console.log("here")
+    if (budget >= item.price) {
+      setCart([...cart, item]);
+      setBudget(budget - item.price);
+    } else {
+      alert('You have exceeded your budget');
+    }
   };
+  const handleMenuItemClick = (item) => {
+    addToCart(item);
+  };
+
+  const handleBudgetChange = (item) => {
+    if (budget > 0) {
+      setBudget(budget - item.price)
+      console.log(budget)
+    }
+    else {
+
+      console.log("You don't have enough budget!")
+    }
+    
+
+  }
+  if(budget <0) {
+    alert("no enough dibero")
+  }
+
 
   //use effect feature to update the item as soon
   // as the state changes
@@ -107,7 +144,28 @@ function Menu() {
     setData()
   }, []);
   return (
-    <div className='menu-items'>
+
+    <div>
+      <h1 onClick={() => handleClick()}>Click here to get Started for budget Planner</h1>
+      <div>
+        {isClick ? (
+          <>
+            <h1>Enter you budget:{budget.toFixed(2)}</h1>
+            <input
+              type="range"
+              min="5"
+              max="100"
+              step="1"
+              value={budget}
+              onChange={handleBudget}
+            />
+          </>
+        ) : (
+          <></>
+        )
+        }
+      </div>
+      <div className='menu-items'>
       <div className='review-container'>
         <div className='food-section'>     
         {menuItems.map((item) => (
@@ -120,8 +178,8 @@ function Menu() {
       </div>
      </div>
     </div>
+    </div>
   )
-
 }
 
 export default Menu;

@@ -74,7 +74,6 @@ const router = createBrowserRouter([
     path: "/adminnotification",
     element: <AdminNotification/>
   },
-  
   {
     path: "/notification",
     element: <Notification />

@@ -28,7 +28,6 @@ const MenuItemCard = ({ item, setBudget }) => {
                         <div>
                             <p className='food-price'>&#x24;{item.price}</p>
                         </div>
-                        <span>{item.quantity}</span>
                         <div>
                             <button onClick={handleAddToCart}>Add to Cart</button>
                             <Notifier message={message} setMessage={setMessage}/>

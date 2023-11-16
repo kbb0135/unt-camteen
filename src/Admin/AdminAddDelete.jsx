@@ -214,15 +214,19 @@ export default function AdminAddDelete() {
         <button onClick={async () => setIsFormOpen(true)}>Add New Item</button>
         {isFormOpen && <ItemForm onAdd={handleAdd} />}
         <div className="menu-items">
-          {menuItems.map((item) => (
+          <div className='review-container'>
+            <div className='food-section'>
+              {menuItems.map((item) => (
             <MenuItem
               key={item.id}
               item={item}
               onDelete={handleDelete}
               onEdit={handleEdit}
-
             />
           ))}
+            </div>
+          </div>
+          
         </div>
       </div>
       <Footer/>

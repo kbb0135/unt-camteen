@@ -26,6 +26,25 @@
   .menu-item-details {
     margin-top: 10px;
   }
+
+  .food-btn {
+    margin: 10px;
+  }
   
+  .edit-div {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .edit-input {
+    align-self: center;
+    margin-right: 15px;
+  }
+
+  .edit-label {
+    align-self: center;
+    margin-left: 20px;
+  }
 
   

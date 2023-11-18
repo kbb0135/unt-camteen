@@ -71,7 +71,7 @@ const Payment = () => {
     }, [cartItems])
 
     const handleForm = (e) => {
-      
+
         if (!number || !name || !expiry || !cvc) {
             alert('Please fill in all fields');
             e.preventDefault();
@@ -79,6 +79,12 @@ const Payment = () => {
 
 
         }
+        const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+        if (!expiryRegex.test(expiry)) {
+            alert('Please enter a valid expiration date in MM/YY format');
+            return;
+        }
+
         const [month, year] = expiry.split('/');
         const currentDate = new Date();
         const enteredDate = new Date(`20${year}`, month - 1);
@@ -88,7 +94,7 @@ const Payment = () => {
             e.preventDefault();
             return;
         }
-        
+
 
 
 
@@ -201,7 +207,7 @@ const Payment = () => {
                             onFocus={handleInputFocus}
                         />
                         <Link to="/success">
-                            <button id="payButton" onClick={(e)=>handleForm(e)}>Pay {discountTotal}</button>
+                            <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
                         </Link>
                     </div>
                 </div>

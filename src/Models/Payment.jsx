@@ -58,9 +58,16 @@ const Payment = () => {
         } else if (target.name === 'expiry') {
             target.value = formatExpirationDate(target.value);
             setExpiry(target.value);
-            if (todayDate >= expiry) {
+             const [enteredMonth, enteredYear] = target.value.split('/');
+            const enteredDate = new Date(`20${enteredYear}`, enteredMonth - 1);
+            const currentDate = new Date();
+            console.log("enteredDate=", enteredDate);
+            
+
+            if (enteredDate < currentDate) {
                 setIsExpired(true);
                 setExpiration("Credit Card Date is expired")
+                console.log("enteredDate=", enteredDate);
             }
             else {
                 setExpiration("Valid Date")

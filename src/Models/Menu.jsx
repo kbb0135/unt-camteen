@@ -144,44 +144,42 @@ function Menu() {
     setData()
   }, []);
   return (
+
     <div>
+      <h1 onClick={() => handleClick()}>Click here to get Started for budget Planner</h1>
       <div>
-        <h1 onClick={() => handleClick()}>Click here to get Started for budget Planner</h1>
-        <div>
-          {isClick ? (
-            <>
-              <h1>Enter you budget:{budget.toFixed(2)}</h1>
-              <input
-                type="range"
-                min="5"
-                max="100"
-                step="1"
-                value={budget}
-                onChange={handleBudget}
-              />
-            </>
-          ) : (
-            <></>
-          )
-          }
-        </div>
-        <div className="menu-items">
-
-
-          {menuItems.map((item) => (
-            <MenuItemCard
-              key={item.id}
-              item={item}
-              setBudget={handleBudgetChange}
+        {isClick ? (
+          <>
+            <h1>Enter you budget:{budget.toFixed(2)}</h1>
+            <input
+              type="range"
+              min="5"
+              max="100"
+              step="1"
+              value={budget}
+              onChange={handleBudget}
             />
-
-          ))}
-        </div>
+          </>
+        ) : (
+          <></>
+        )
+        }
       </div>
+      <div className='menu-items'>
+      <div className='review-container'>
+        <div className='food-section'>     
+        {menuItems.map((item) => (
+          <MenuItemCard
+            key={item.id}
+            item={item}
+            onAddToCart = {addToCart}
+          />
+        ))}
+      </div>
+     </div>
     </div>
-
+    </div>
   )
-
 }
 
 export default Menu;

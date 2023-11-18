@@ -3,6 +3,7 @@ import { auth, db } from "../firebase.js"
 import Header from './Header'
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import '../style/change.css';
 
 export default function ChangeUserDetails() {
     const [firstName, setFirstName] = useState("");
@@ -50,8 +51,8 @@ export default function ChangeUserDetails() {
 
     return (
         <div>
-            <Header />
-            <div>
+            <Header/>
+            <div className='change-user'>
                 <h1 className="text-center">Change User Details</h1>
                 <label htmlFor="First Name">Change First Name</label>
                 <input type="tel" value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />

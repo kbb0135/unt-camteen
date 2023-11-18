@@ -75,9 +75,9 @@ const Header = () => {
             <Link to="/changeUserDetails">Change User Details</Link>
           </li>
           <li>
-          <li>
             <Link to="/changepassword">Change password</Link>
           </li>
+          <li>
             <Link to="/menu">Menu</Link>
           </li>
           <li>

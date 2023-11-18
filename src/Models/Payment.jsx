@@ -4,7 +4,7 @@ import "../style/Payment.css";
 import { useCart } from './CartContext';
 import Header from '../Components/Header';
 import { Link } from 'react-router-dom';
-import {Notifier} from '../Components/Notifier';
+import { Notifier } from '../Components/Notifier';
 
 import {
     formatCreditCardNumber,
@@ -24,6 +24,7 @@ const Payment = () => {
     const [amount, setAmount] = useState(0);
     const [total, setTotal] = useState(0);
     const [discountTotal, setDiscountTotal] = useState(0);
+    const [success, setSuccess] = useState(false);
 
 
     const { getTotalQuantity, cartItems } = useCart();
@@ -69,8 +70,28 @@ const Payment = () => {
         setDiscountTotal(newTotal - localStorage.getItem("discountCode"));
     }, [cartItems])
 
-    const handleForm = () => {
+    const handleForm = (e) => {
+      
+        if (!number || !name || !expiry || !cvc) {
+            alert('Please fill in all fields');
+            e.preventDefault();
+            return;
+
+
+        }
+        const [month, year] = expiry.split('/');
+        const currentDate = new Date();
+        const enteredDate = new Date(`20${year}`, month - 1);
+
+        if (enteredDate < currentDate) {
+            alert('Please enter a valid expiration date');
+            e.preventDefault();
+            return;
+        }
         
+
+
+
     }
     const handleDate = () => {
         const todayDate = new Date()
@@ -81,7 +102,7 @@ const Payment = () => {
     return (
         <div key='Payment'>
             <Header />
-            <form onSubmit={""}>
+            <form >
                 <div className="credit-card-page">
                     <div className="items-section">
                         <h2>Items in Your Cart:</h2>
@@ -180,7 +201,7 @@ const Payment = () => {
                             onFocus={handleInputFocus}
                         />
                         <Link to="/success">
-                            <button id="payButton">Pay {discountTotal}</button>
+                            <button id="payButton" onClick={(e)=>handleForm(e)}>Pay {discountTotal}</button>
                         </Link>
                     </div>
                 </div>

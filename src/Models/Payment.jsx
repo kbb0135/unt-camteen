@@ -12,6 +12,7 @@ import {
 } from './utils';
 
 import 'react-credit-cards/es/styles-compiled.css';
+import { Notifier } from '../Components/Notifier';
 
 const Payment = () => {
     const [number, setNumber] = useState('');
@@ -23,9 +24,17 @@ const Payment = () => {
     const [amount, setAmount] = useState(0);
     const [total, setTotal] = useState(0);
     const [discountTotal, setDiscountTotal] = useState(0);
+    const [isExpired, setIsExpired] = useState(false);
+    const [expiration, setExpiration] = useState("")
 
 
     const { getTotalQuantity, cartItems } = useCart();
+
+    const todayDate = new Date();
+    console.log("todayDate=", todayDate)
+    let month = (todayDate.getMonth() + 1) * 100
+    let year = todayDate.getFullYear()
+    const totalDate = month + year;
 
     useEffect(() => {
         setAmount(getTotalQuantity());
@@ -45,9 +54,17 @@ const Payment = () => {
         if (target.name === 'number') {
             target.value = formatCreditCardNumber(target.value);
             setNumber(target.value);
+
         } else if (target.name === 'expiry') {
             target.value = formatExpirationDate(target.value);
             setExpiry(target.value);
+            if (todayDate >= expiry) {
+                setIsExpired(true);
+                setExpiration("Credit Card Date is expired")
+            }
+            else {
+                setExpiration("Valid Date")
+            }
         } else if (target.name === 'cvc') {
             target.value = formatCVC(target.value);
             setCVC(target.value);
@@ -67,6 +84,24 @@ const Payment = () => {
 
         setDiscountTotal(newTotal - localStorage.getItem("discountCode"));
     }, [cartItems])
+    const handleDate = () => {
+        const todayDate = new Date();
+        console.log("todayDate=", todayDate)
+        let month = (todayDate.getMonth() + 1) * 100
+        let year = todayDate.getFullYear()
+        const totalDate = month + year;
+        console.log(month, year)
+
+        if (expiry >= totalDate) {
+
+        }
+
+    }
+    const handleExpirationDate = () => {
+
+    }
+    console.log(expiry)
+
 
     return (
         <div key='Payment'>
@@ -156,6 +191,16 @@ const Payment = () => {
                         onChange={handleInputChange}
                         onFocus={handleInputFocus}
                     />
+                    {
+                        isExpired ? (
+                            <>
+                                <Notifier message={expiration} setMessage={setExpiration} />
+                            </>
+                        ) : (
+                            <>
+                             <Notifier message={expiration} setMessage={setExpiration} /></>
+                        )
+                    }
                     <label htmlFor="cvv">CVV:</label>
                     <input
                         type='tel'
@@ -169,7 +214,7 @@ const Payment = () => {
                         onFocus={handleInputFocus}
                     />
                     <Link to="/success">
-                        <button id="payButton">Pay {discountTotal}</button>
+                        <button id="payButton" onCLick="">Pay {discountTotal}</button>
                     </Link>
                 </div>
             </div>

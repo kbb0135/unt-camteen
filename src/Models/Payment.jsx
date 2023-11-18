@@ -3,7 +3,7 @@ import Card from 'react-credit-cards';
 import "../style/Payment.css";
 import { useCart } from './CartContext';
 import Header from '../Components/Header';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Notifier } from '../Components/Notifier';
 
 import {
@@ -26,22 +26,15 @@ const Payment = () => {
     const [discountTotal, setDiscountTotal] = useState(0);
     const [isExpired, setIsExpired] = useState(false);
     const [expiration, setExpiration] = useState("")
-    const [isNumber, setIsNumber]= useState(false);
+    const [isNumber, setIsNumber] = useState(false);
     const [isName, setIsName] = useState(false);
-    const [isValid, setIsValid] = useState(false);
-    const [isCVC ,setIsCVC] = useState(false);
-    const [mName, isMName]= useState("")
-    const [mNum, setMNum]= useState("")
+    const [isCVC, setIsCVC] = useState(false);
+    const [mName, setMName] = useState("")
+    const [mNum, setMNum] = useState("")
     const [mCVC, setMCVC] = useState("")
-
+    const navigate =useNavigate()
 
     const { getTotalQuantity, cartItems } = useCart();
-
-    const todayDate = new Date();
-    console.log("todayDate=", todayDate)
-    let month = (todayDate.getMonth() + 1) * 100
-    let year = todayDate.getFullYear()
-    const totalDate = month + year;
 
     useEffect(() => {
         setAmount(getTotalQuantity());
@@ -61,24 +54,9 @@ const Payment = () => {
         if (target.name === 'number') {
             target.value = formatCreditCardNumber(target.value);
             setNumber(target.value);
-
         } else if (target.name === 'expiry') {
             target.value = formatExpirationDate(target.value);
             setExpiry(target.value);
-             const [enteredMonth, enteredYear] = target.value.split('/');
-            const enteredDate = new Date(`20${enteredYear}`, enteredMonth - 1);
-            const currentDate = new Date();
-            console.log("enteredDate=", enteredDate);
-            
-
-            if (enteredDate < currentDate) {
-                setIsExpired(true);
-                setExpiration("Credit Card Date is expired")
-                console.log("enteredDate=", enteredDate);
-            }
-            else {
-                setExpiration("Valid Date")
-            }
         } else if (target.name === 'cvc') {
             target.value = formatCVC(target.value);
             setCVC(target.value);
@@ -98,59 +76,59 @@ const Payment = () => {
 
         setDiscountTotal(newTotal - localStorage.getItem("discountCode"));
     }, [cartItems])
-    const handleDate = () => {
-        const todayDate = new Date();
-        console.log("todayDate=", todayDate)
-        let month = (todayDate.getMonth() + 1) * 100
-        let year = todayDate.getFullYear()
-        const totalDate = month + year;
-        console.log(month, year)
-
-        if (expiry >= totalDate) {
-
-        }
-
-    }
-    const handleExpirationDate = () => {
-
-    }
-    console.log(expiry)
 
 
     const handleForm = (e) => {
 
-        // if (!number || !name || !expiry || !cvc) {
-        //     alert('Please fill in all fields');
-        //     e.preventDefault();
-        //     return;
-        // }
-        if(!number) {
+        if (!number && !name && !expiry && !cvc) {
+            setIsName(true)
+            setIsCVC(true)
+            setIsExpired(true)
+            setIsNumber(true)
+            setMNum('Please enter valid number');
+            setMName('Please enter valid name');
+            setExpiration('Please enter valid date');
+            setMCVC('Please enter valid cvc');
+            e.preventDefault();
+            return;
+        }
+        if (!number) {
             setIsNumber(true)
             setMNum('Please enter number');
             e.preventDefault();
             return;
         }
-        if(!name) {
-            alert('Please enter field');
+        if (!name) {
+            setIsName(true)
+            setMNum('Please enter number');
             e.preventDefault();
             return;
         }
-        if(!expiry) {
-            alert('Please enter expiration');
+        if (!expiry) {
+            setIsExpired(true)
+            setExpiration('Please enter valid date');
             e.preventDefault();
             return;
         }
-        if(!cvc) {
-            alert('Please enter cvc');
+        if (!cvc) {
+            setIsCVC(true)
+            setMCVC('Please enter valid cvc');
             e.preventDefault();
             return;
+        }
+        if(number.length <15) {
+            setIsNumber(true)
+            setMNum("Please enter valid 15 digits num")
+            e.preventDefault();
         }
 
 
-        
+
         const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
         if (!expiryRegex.test(expiry)) {
-            alert('Please enter a valid expiration date in MM/YY format');
+            setIsExpired(true)
+            setExpiration('Please enter a valid expiration date in MM/YY format');
+            e.preventDefault();
             return;
         }
 
@@ -159,15 +137,21 @@ const Payment = () => {
         const enteredDate = new Date(`20${year}`, month - 1);
 
         if (enteredDate < currentDate) {
-            alert('Please enter a valid expiration date');
+            setIsExpired(true)
+            setExpiration('Please enter a valid expiration date');
             e.preventDefault();
             return;
         }
 
-
-
-
+        if(number === '1111 1111 1111 1111') {
+            navigate("/fail")
+            e.preventDefault();
+            console.log("test")
+        }
+        console.log("here")
+        console.log(number);
     }
+
 
     return (
         <div key='Payment'>
@@ -233,6 +217,18 @@ const Payment = () => {
                             onChange={handleNameChange}
                             onFocus={handleInputFocus}
                         />
+                        {
+                            isName ? (
+                                <>
+                                    <div className="card-Notifier">
+                                        <Notifier message={mName} setMessage={setMName} />
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )
+                        }
                         <label htmlFor="cardNumber">Card Number:</label>
                         <input
                             type='tel'
@@ -246,6 +242,20 @@ const Payment = () => {
                             onChange={handleInputChange}
                             onFocus={handleInputFocus}
                         />
+                        {
+                            isNumber ? (
+                                <>
+                                    <div className="card-Notifier">
+                                        <Notifier message={mNum} setMessage={setMNum} />
+                                    </div>
+
+
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )
+                        }
                         <label htmlFor="expiration">Expiration Date:</label>
                         <input
                             type='tel'
@@ -258,6 +268,19 @@ const Payment = () => {
                             onChange={handleInputChange}
                             onFocus={handleInputFocus}
                         />
+                        {
+                            isExpired ? (
+                                <>
+                                    <div className="card-Notifier">
+                                        <Notifier message={expiration} setMessage={setExpiration} />
+                                    </div>
+
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )
+                        }
                         <label htmlFor="cvv">CVV:</label>
                         <input
                             type='tel'
@@ -270,6 +293,19 @@ const Payment = () => {
                             onChange={handleInputChange}
                             onFocus={handleInputFocus}
                         />
+                        {
+                            isCVC ? (
+                                <>
+                                    <div className="card-Notifier">
+                                        <Notifier message={mCVC} setMessage={setMCVC} />
+                                    </div>
+
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )
+                        }
                         <Link to="/success">
                             <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
                         </Link>

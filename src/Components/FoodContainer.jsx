@@ -1,94 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../style/style.css'
-import { ReviewRating } from "./ReviewRating";
-import { auth, db } from '../firebase.js'
-import { onAuthStateChanged } from 'firebase/auth';
-import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
-
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import Rating from './Rating';
 
 const FoodContainer = ({ item }) => {
-    const [rate, setRate] = useState(0)
-    useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-    
-            if (user) {
-    
-                try {
-                    const docRef = await doc(db, "Rating"+user.email, item.name+"Rating")
-                    const snapShot = await getDoc(docRef)
-                    if(snapShot.exists()) {
-                        const userData = snapShot.data()
-                        setRate(userData.rating)
-                    }
-                }
-                catch(error) {
-                    console.log(error)
-                }
-            }
 
-
-        })
-    },[item])
-        const handleRating = async (newRating) => {
-            console.log(2)
-            try {
-                onAuthStateChanged(auth, async (user) => {
-                    console.log("here")
-                    if (user) {
-                        const uid = user.uid
-                        console.log(uid)
-                        const docRef = await doc(db, "Rating"+user.email, item.name+"Rating")
-                        const snapShot = await getDoc(docRef)
-                        if(snapShot.exists()) {
-                          await updateDoc(docRef, {
-                            rating: newRating
-                          })
-
-                        }
-                        else {
-                          await setDoc(doc(db, "Rating"+user.email, item.name+"Rating"), {
-                          rating: newRating
-                        })
-                        }
-                        
-                        setRate(newRating)
-                        
-                    }
-                    else {
-                        alert("User must be logged in to provide ratings")
-                    }
-                })
-            }
-            catch (error) {
-                console.log(error);
-                console.log("here")
-            }
-
-        }
-
-
+    // ** State
+    const navigate = useNavigate()
+    const location = useLocation()
+ 
         return (
-            <div className='food-container'>
-                <div>
-                    <div className="food-image-container">
-                        <img src={item.image} alt={item.name} />
+                <div className='food'>
+                    <div className='img-container'>
+                    <img src={item.url} alt={item.name} className='food-img'/>
                     </div>
-                    <div className='food-info'>
-                        <span>{item.name}</span><br></br>
-                        <span>${item.price}</span><br></br>
-                        <span>{item.quantity}</span>
-                        <ReviewRating
-                            rating={rate}
-                            onChange={handleRating}
-
-                        />
-                        {/* <div className='leave-review'>Leave a review.</div> */}
+                    <div className='food-content'>
+                        <p className='food-header'>{item.name}</p>
+                        <p className='food-category'>{item.category}</p>
+                        <Rating reviews={item.reviews}/>
+                        <div><p className='food-price'>&#x24;{item.price}</p></div>
+                        <button className='review-btn' onClick={() => navigate(`${location.pathname}/${item.category}/${item.id}`)}>Leave Review</button>
+                        
                     </div>
-
-
                 </div>
-            </div >
         ); 
     }; 
 

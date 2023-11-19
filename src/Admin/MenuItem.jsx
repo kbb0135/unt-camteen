@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../style/AdminMenu.css';
 
 const MenuItem = ({ item, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -27,49 +28,68 @@ const MenuItem = ({ item, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="menu-item">
+    <div className="food">
       {isEditing ? (
         <div>
-          <input
-            type="text"
-            name="name"
-            value={editedItem.name}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="price"
-            value={editedItem.price}
-            onChange={handleInputChange}
-          />
-          <input
-            type="file"
-            accept=".png,.jpg,.jpeg"
-            onChange={(e) => {
-              const selectedImage = e.target.files[0];
-              setEditedItem({
-                ...editedItem,
-                image: URL.createObjectURL(selectedImage),
-              });
-            }}
-          />
+          <div className='edit-div'>
+            <label className='edit-label'>Item Name</label>
+            <input
+              className='edit-input'
+              type="text"
+              name="name"
+              value={editedItem.name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className='edit-div'>
+            <label className='edit-label'>Price</label>
+            <input
+              className='edit-input'
+              type="text"
+              name="price"
+              value={editedItem.price}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className='edit-div'>
+            <label className='edit-label'>Image</label>
+            <input
+              className='edit-input'
+              type="file"
+              accept=".png,.jpg,.jpeg"
+              onChange={(e) => {
+                const selectedImage = e.target.files[0];
+                setEditedItem({
+                  ...editedItem,
+                  image: URL.createObjectURL(selectedImage),
+                });
+              }}
+            />
+          </div>
         </div>
       ) : (
         <div>
-          <img src={item.image} alt={item.name} />
-          <span>{item.name}</span>
-          <span>${item.price}</span>
+          <div className='img-container'>
+            <img src={item.image} alt={item.name} className='food-img'/>
+          </div>
+          <div className='food-content'>
+            <span className='food-header'>{item.name}</span>
+            <span className='food-price'>${item.price}</span>
+          </div>
         </div>
       )}
+      <div className='food-btns'>
       {isEditing ? (
         <div>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <button className='food-btn' onClick={handleSave}>Save</button>
+          <button className='food-btn' onClick={handleCancel}>Cancel</button>
         </div>
       ) : (
-        <button onClick={handleEdit}>Edit</button>
+        <button className='food-btn' onClick={handleEdit}>Edit</button>
       )}
-      <button onClick={() => onDelete(editedItem.id)}>Delete</button>
+       
+      <button className='food-btn' onClick={() => onDelete(editedItem.id)}>Delete</button>
+      </div>
     </div>
   );
 };

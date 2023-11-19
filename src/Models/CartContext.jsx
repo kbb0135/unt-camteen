@@ -205,9 +205,16 @@ export function CartProvider({ children }) {
     
     // localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
+  const getTotalQuantity =()=> {
+    let totalQuantity=0;
+    cartItems.forEach((item)=> {
+      totalQuantity += item.quantity;
+    })
+    return totalQuantity;
+  }
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, getTotalQuantity }}>
       {children}
     </CartContext.Provider>
   );

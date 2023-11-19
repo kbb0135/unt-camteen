@@ -6,7 +6,6 @@ import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
 import MenuPage from "./Pages/MenuPage";
-import MenuItemPage from "./Pages/MenuItemPage.jsx";
 import OTPSender from "./Models/OTPSender.jsx";
 import Reviews from "./Models/Reviews.jsx";
 import Cart from "./Models/Cart";
@@ -15,6 +14,14 @@ import { auth } from './firebase.js'
 import AdminNotification from "./Admin/AdminNotification.jsx";
 import Notification from "./Models/Notification.jsx";
 import TestCase from "./TestCase.js";
+import Review from "./Pages/Review.jsx"; 
+import Success from "./Models/Success.js";
+import Cancel from "./Models/Cancel.js"
+import Payment from "./Models/Payment.jsx";
+import ChangePassword from "./Components/ChangePassword.jsx";
+import ForgetPassword from "./Models/ForgetPassword.jsx";
+import ChangeUserDetails from "./Components/ChangeUserDetails.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,20 +46,16 @@ const router = createBrowserRouter([
     element: <MenuPage />,
   },
   {
-    path: "/menuItemPage",
-    element: <MenuItemPage/>
-  },
-  {
-    path: "/menuItemPage",
-    element: <MenuItemPage/>
-  },
-  {
     path: "/sendotp",
     element: <OTPSender />,
   },
   {
     path: "/reviews",
     element: <Reviews />,
+  },
+  {
+    path: '/reviews/:category/:id',
+    element: <Review /> 
   },
   {
     path: "/cart",
@@ -66,7 +69,6 @@ const router = createBrowserRouter([
     path: "/adminnotification",
     element: <AdminNotification/>
   },
-  
   {
     path: "/notification",
     element: <Notification />
@@ -74,6 +76,30 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <TestCase />
+  },
+  {
+    path: "/success",
+    element: <Success />
+  },
+  {
+    path: "/cancel",
+    element: <Cancel />
+  },
+  {
+    path: "/payment",
+    element: <Payment />
+  },
+  {
+    path: "/changepassword",
+    element: <ChangePassword />
+  },
+  {
+    path: "/forgetpassword",
+    element: <ForgetPassword />
+  },
+  {
+    path: "/changeUserDetails",
+    element: <ChangeUserDetails />
   }
 ]);
 export const ThemeContext = createContext(null);
@@ -90,6 +116,7 @@ const App = () => {
       </div>
     </ThemeContext.Provider>
   );
+  
 };
 export default App;
 

@@ -3,12 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "./Models/CartContext";
+import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <CartProvider>
       <App />
+      <Toaster position='top-right' toastOptions={{ className: 'react-hot-toast' }} />
     </CartProvider>
   </React.StrictMode>
 );

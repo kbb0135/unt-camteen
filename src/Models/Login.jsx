@@ -101,6 +101,12 @@ function Login() {
         </form>
 
         <div>
+          <Link to="/forgetpassword">
+            Forget Password?
+          </Link>
+        </div>
+
+        <div>
           Don't have an account?
           <Link to="/auth/signup">Sign Up</Link>
         </div>

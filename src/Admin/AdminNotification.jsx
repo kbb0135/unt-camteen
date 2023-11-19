@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 import { db, storage } from '../firebase.js';
 import { getDocs, collection, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import NavBar from './NavBar.jsx';
 
 
 const AdminNotification = (e) => {
@@ -181,7 +182,7 @@ const AdminNotification = (e) => {
 
     return (
         <div>
-            <Header />
+            <NavBar />
             <h1>Admin Notifications</h1>
             <div>
                 <h3>Enter Title</h3>

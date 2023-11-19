@@ -111,7 +111,7 @@ function Menu() {
     else {
 
       alert("You don't have enough budget!")
-      e.preventDefault();
+      
     }
     
 

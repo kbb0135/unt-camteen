@@ -110,7 +110,8 @@ function Menu() {
     }
     else {
 
-      console.log("You don't have enough budget!")
+      alert("You don't have enough budget!")
+      e.preventDefault();
     }
     
 

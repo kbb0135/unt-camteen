@@ -4,13 +4,12 @@ import {Notifier} from './Notifier';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../style/style.css';
 
-const MenuItemCard = ({ item, setBudget }) => {
+const MenuItemCard = ({ item }) => {
     const { addToCart } = useCart();
     const [message, setMessage] = useState('');
     const handleAddToCart = () => {
         addToCart(item);
         setMessage('Added to cart!!');
-        setBudget(item)
         console.log("Here")
     }
     const navigate = useNavigate();

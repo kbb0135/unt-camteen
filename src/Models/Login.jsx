@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../style/Auth.css"
+import "../style/Auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { FaExclamationTriangle } from "react-icons/fa";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,10 @@ function Login() {
     try {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(
-        auth, email, password)
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
@@ -24,13 +28,11 @@ function Login() {
         if (isAdmin) {
           navigate("/adminmenu");
           console.log("User is an admin");
-        }
-        else {
+        } else {
           navigate("/");
           console.log("User is not an admin");
         }
-      }
-      else {
+      } else {
         console.log("User is not authenticated");
       }
 
@@ -49,55 +51,58 @@ function Login() {
       //   navigate("/");
       // })
       // .catch((error) => {
-      //   const errorMessage = error.message;
-      //   setLoginError(errorMessage);
+
       // });
-    }
-    catch (error) {
-      console.log(error)
+    } catch (error) {
+      const errorMessage = error.message;
+      setLoginError(errorMessage);
+      console.log(error);
     }
   };
 
   return (
-    <div className="auth-page flex-row jc-center ali-center">
-      <div className="auth-form">
+    <div className="auth-page">
+      <div className={`auth-form  ${loginError && "box-invalid"}`}>
         <span className="form-name">Log in to your account</span>
-        {loginError !== "" && <span className="te-invalid"> {loginError}</span>}
-        <form onSubmit={handleSubmit} className="flex-col">
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              className="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              className="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              autoComplete="on"
-              required
-            />
-          </div>
+        {loginError !== "" && (
+          <span className="te-invalid">
+            {" "}
+            <FaExclamationTriangle />
+            {loginError}
+          </span>
+        )}
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            className="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            className="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            autoComplete="on"
+            required
+          />
+
           <button className="primary-button" type="submit">
             Log in
           </button>
         </form>
-        <div className="flex-row jc-center te-size-14 te-color-gray-2">
+
+        <div>
           Don't have an account?
-          <Link to="/auth/signup" className="te-size-14 te-color-primary-green-md">
-            Sign Up
-          </Link>
+          <Link to="/auth/signup">Sign Up</Link>
         </div>
       </div>
     </div>

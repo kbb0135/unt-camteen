@@ -88,7 +88,6 @@ const App = () => {
       <div className={isDarkMode? "dark-mode": null}>
         <RouterProvider router={router} />
       </div>
-      ;
     </ThemeContext.Provider>
   );
 };

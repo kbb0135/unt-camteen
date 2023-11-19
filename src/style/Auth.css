@@ -1,28 +1,42 @@
-
-
 .auth-page {
   width: 100vw;
   width: 100svw;
   height: 100vh;
   height: 100svh;
-  background-color: var(--background);
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-background-color);
 }
 .auth-form {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  background-color: var(--white);
-  padding: 48px 48px;
-  gap: 32px;
-  box-shadow: 4px 4px 8px var(--gray-8);
+  width: 30rem;
+  padding: 3rem;
+  gap: 2rem;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--off-background-color);
+  position: relative;
 }
+
 .auth-form form {
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+a {
+  color: var(--primary-color);
+}
+a:active {
+  color: var(--primary-color);
 }
 .form-name {
-  font-size: 32px;
-  color: var(--gray-3);
+  font-size: 2rem;
+  color: var(--on-background-color);
   font-weight: var(--font-weight-bold);
   text-align: center;
 }

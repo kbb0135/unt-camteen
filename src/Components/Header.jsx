@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { ReactComponent as Logo } from "../Assets/Logo.svg";
 import "../style/Header.css";
-import "../style/Utility.css";
 import { auth, db } from "../firebase.js";
 import { getDoc, doc } from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -36,6 +36,7 @@ const Header = () => {
         user.getIdTokenResult();
         // }
         setUser(user);
+        console.log(user);
 
         console.log((await user.getIdTokenResult()).claims.admin);
       } else {
@@ -56,15 +57,14 @@ const Header = () => {
   };
 
   return (
-    <header className="flex-row jc-sb ali-end">
-      <div
-        className="Logo"
+    <header>
+      <Logo
+        className="logo"
         onClick={() => {
           navigate("/");
         }}
-      >
-        <span>UNT Canteen</span>
-      </div>
+        style={{ fill: "var(--primary-color)" }}
+      />
 
       <nav>
         <ul navclosed={isNavClosed.toString()}>
@@ -83,31 +83,50 @@ const Header = () => {
           <li>
             <Link to="/reviews"> Reviews</Link>
           </li>
-          <li>
+          <>
             {user ? (
               // If user is logged in, display user's name and logout button
               <>
-                <p>Welcome, {userName}</p>
-                <button onClick={handleLogOut}>Logout</button>
+                <li>
+                  <Link to="/account">Hi, {user.email}</Link>
+                </li>
+                <li>
+                  <button
+                    className="ghost-button red-button"
+                    onClick={handleLogOut}
+                  >
+                    Logout
+                  </button>
+                </li>
               </>
             ) : (
               // If user is not logged in, display login button and signup link
-              <>
-                <Link to="/auth/login">Login</Link>
-              </>
+
+              <li>
+                {" "}
+                <Link to="/auth/login">Login</Link>{" "}
+              </li>
             )}
-          </li>
-          <li onClick={() => toggleDarkMode(!isDarkMode)}>
-            <span className="dark-mode-toggle">
+          </>
+          <li
+            onClick={() => toggleDarkMode(!isDarkMode)}
+            className="dark-mode-toggle"
+          >
+            <button type="button" className="nav-icon">
               {isDarkMode ? (
                 <FaMoon title="Change to lightmode" />
               ) : (
                 <FaSun title="Change to darkmode" />
               )}
-            </span>
+            </button>
           </li>
         </ul>
       </nav>
+      <Link to="/cart" className="cart nav-icon" title="Go to cart">
+        <FaCartShopping />
+        <span className="cart-quan">4</span>
+      </Link>
+
       <div className="flex-row cart nav-icon">
         <Link to="/cart" title="Go to cart">
           <FaCartShopping />

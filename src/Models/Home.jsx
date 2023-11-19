@@ -1,9 +1,19 @@
 import React from "react";
 import "../style/Home.css";
 import { useNavigate } from "react-router-dom";
-import { FaClock, FaCalendar, FaCalculator } from "react-icons/fa6";
-import Entree from "../Assets/entree.png";
+import { FaShield, FaMoneyCheckDollar, FaFire, FaUser, FaArrowRight } from "react-icons/fa6";
+import Burger from "../Assets/burger.png";
 import DPMarket from "../Assets/DPMarket.jpg";
+import DPGrill from "../Assets/DPGrill.jpg";
+import Coffee from "../Assets/choco.jpg";
+import QualityStar from "../Assets/quali.png";
+import AwardMedal from "../Assets/medal.png";
+import Dessert from "../Assets/dessert.jpg";
+import Beverage from "../Assets/beverage.jpg";
+import Side from "../Assets/side.jpg"
+import Entree from "../Assets/entree.jpg"
+import Pasta from "../Assets/pasta.jpg"
+import { Link } from "react-router-dom";
 // import {db} from '../firebase.js'
 // import {
 //      getDoc, doc
@@ -36,120 +46,174 @@ function Home() {
 
   return (
     <>
-      <div className="landing">
-        <div>
-          <div className="slogan">
-            <span>It's about the food</span>
-            <p>
-              {" "}
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et
-              justo ac libero interdum aliquet. Fusce varius mauris a metus
-              consequat, quis rhoncus risus elementum
-            </p>
-          </div>
-          <div className="landing-button">
-            <div>
-              {" "}
-              <img src={Entree} alt="An Entree" />
-            </div>
-            <div>
-              <button
-                type="button"
-                className="primary-button large-button sharp-button"
-                onClick={() => {
-                  navigate("/menu");
-                }}
-              >
-                Order Online
-              </button>
-              <button
-                type="button"
-                className="ghost-button large-button sharp-button"
-                onClick={() => {
-                  navigate("/auth/signup");
-                }}
-              >
-                Sign Up
-              </button>
-            </div>{" "}
-          </div>
+      <div className="hero">
+        <div className="slogan">
+          <span>It's about the food</span>
+          <p>
+            {" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et
+            justo ac libero interdum aliquet. Fusce varius mauris a metus
+            consequat, quis rhoncus risus elementum
+          </p>
         </div>
         <div>
-          <img src={Entree} alt="An Entree" />
+          {" "}
+          <img src={Burger} alt="A Burger" />
         </div>
-      </div>
-      <div className="open-hours">
         <div>
-          <span className="hour-des">
-            <h3> Discovery Park Market</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi
-            </p>
+          {" "}
+          <img src={Coffee} alt="Coffee cup" />
+        </div>
+        <div>
+          <button
+            type="button"
+            className="primary-button large-button sharp-button"
+            onClick={() => {
+              navigate("/menu");
+            }}
+          >
+            Order Online
+          </button>
+          <button
+            type="button"
+            className="ghost-button large-button sharp-button"
+            onClick={() => {
+              navigate("/auth/signup");
+            }}
+          >
+            Sign Up
+          </button>
+        </div>{" "}
+        <div>
+          <img src={Pasta} alt="Pasta dish" />
+        </div>
+        <div>
+          <img className="icon" src={AwardMedal} alt="Award Medal Icon"></img>
+          <h4>Awards-winning Food</h4>
+          <p>
+            The UNT Canteen is a part of UNT Dining Services, a
+            multi-award-winning college dining service in the U.S.
+            <br/>
+            <Link to="https://dining.unt.edu/our-story/">Discover more <FaArrowRight/></Link>
+          </p>
+        </div>
+        <div>
+          <img className="icon" src={QualityStar} alt="Quality Icon"></img>
+          <h4>Quality Ingredients</h4>
+          <p>
+            Prepared with top-quality ingredients, we offer flavorful and
+            nutritious dishes that promote your overall well-being
+          </p>
+        </div>
+        <div>
+          <h2>Discover our special features </h2>
+          <div className="feature">
             <span>
-              {" "}
-              <h4>Open hours:</h4>
+              <FaShield />
+              <h4>Online Ordering</h4>
+              <p>Order online and pickup later with our secured checkout</p>
+            </span>
+            <span>
+              <FaMoneyCheckDollar />
+              <h4>Budget Planner</h4>
               <p>
-                {" "}
-                Mon-Thu: 7:30 a.m. - 7:00 p.m. <br /> Fri: 7:30 a.m. - 2:00 p.m.{" "}
-                <br /> Weekend: Closed.
+                Simply enter a budget, and our tool will let you know when the
+                total cost exceed your budget{" "}
               </p>
             </span>
-          </span>
-          <img src={DPMarket} alt="discovery grill" />
-        </div>
-        <div>
-          <img src={DPMarket} alt="discovery grill" />
-          <span className="hour-des">
-            <h3> Discovery Park Market</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi
-            </p>
             <span>
-              {" "}
-              <h4>Open hours:</h4>
+              <FaFire />
+              <h4>Nutrition Tracker</h4>
               <p>
-                {" "}
-                Mon-Thu: 7:30 a.m. - 7:00 p.m. <br /> Fri: 7:30 a.m. - 2:00 p.m.{" "}
-                <br /> Weekend: Closed.
+                Explore our meal-specific nutrition details that will help you
+                easily keep track of your dietary goal
               </p>
             </span>
+          </div>
+        </div>
+        <div className="hours">
+          <span className="hours-closed">
+            <img
+              src={DPMarket}
+              alt="Discovery Perks Market Coffee and Snack Shop"
+            />
           </span>
+          <div>
+            <h2>Discovery Perks Market</h2>
+            <p>
+              Discover the perfect blend at Discovery Perk Market, your spot for
+              coffee, beverages, snacks, and refreshing cold bites
+            </p>
+            <h3>Open Hours </h3>
+            <p>Mondays - Thursday: 7:30 a.m. - 7:00 p.m.</p>
+            <p>Fridays: 7:30 a.m. - 2:00 p.m.</p>
+            <p>Weekends: Closed</p>
+            {/* <button
+              type="button"
+              className="primary-button large-button"
+              onClick={() => navigate("/menu")}
+            >
+              Shop Discovery Perks Market
+            </button> */}
+          </div>
+        </div>
+        <div className="hours">
+          <div>
+            <h2>Discovery Perks Grill</h2>
+            <p>
+              Explore flavor-packed goodness at Discovery Perks Grill, your
+              hotspot for hot and fresh food that fuel your energy
+            </p>
+            <h3>Open Hours </h3>
+            <p>Mondays - Thursday: 7:30 a.m. - 5:00 p.m.</p>
+            <p>Fridays: 7:30 a.m. - 2:00 p.m.</p>
+            <p>Weekends: Closed</p>
+            {/* <button
+              type="button"
+              className="primary-button large-button"
+              onClick={() => navigate("/menu")}
+            >
+              Shop Discovery Perks Grill
+            </button> */}
+          </div>
+          <span className="hours-open">
+            <img
+              src={DPGrill}
+              alt="Discovery Perks Market Coffee and Snack Shop"
+            />
+          </span>
+        </div>
+        <div className="shop">
+          <h2>Order by category</h2>
+          <div>
+            <img src={Entree} />
+            <span>
+              Order Entree <FaArrowRight />
+            </span>
+          </div>
+          <div>
+            <img src={Side} />
+            <span>
+              Order Side
+              <FaArrowRight />
+            </span>
+          </div>
+          <div>
+            <img src={Beverage} />
+            <span>
+              Order Beverage
+              <FaArrowRight />
+            </span>
+          </div>
+          <div>
+            <img src={Dessert} />
+            <span>
+              Order Dessert
+              <FaArrowRight />
+            </span>
+          </div>
         </div>
       </div>
-
-      {/* <div className="feature">
-          <FaClock />
-          <span>
-            <span>Online Order</span>
-            <p>Order online and pickup after classes</p>
-          </span>
-        </div>
-        <div className="feature">
-          <FaCalculator />
-          <span>
-            <span>Calories Tracker</span>
-            <p>
-              Track your calories intake using our nutrition table that come
-              with every meal
-            </p>
-          </span>
-        </div>
-        <div className="feature">
-          <FaCalendar />
-          <span>
-            <span>Meal Planner</span>
-            <p>
-              Our meal planner will help you plan your favorite meals with a
-              budget{" "}
-            </p>
-          </span>
-        </div> */}
     </>
   );
 }

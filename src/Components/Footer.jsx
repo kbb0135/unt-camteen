@@ -1,47 +1,39 @@
-import React from 'react';
-import Email from '../Assets/email.png';
-import Phone from '../Assets/phone.png';
-import Location from '../Assets/location-pin.png';
-import "../style/style.css"; // Import CSS file for Navbar component
-
+import React from "react";
+import "../style/Footer.css";
+import { ReactComponent as Logo } from "../Assets/Logo.svg";
+import { FaPhone, FaEnvelope, FaMapLocationDot } from "react-icons/fa6";
 const Footer = () => {
-    return (
-        
-
-
-
-        <footer className="footerDiv">
-            <div className="footerUNTCol">
-            </div>
-
-
-
-
-
-            <div className="footerUNTCol">
-                <div className="footerUNTColSection">
-                    <h4 className="footerTitle">University Of North Texas</h4>
-                    <p className="footerPara">UNT Dining Services | Univserity Of North Texas</p>
-                </div>
-                <div className="footerUNTColSection">
-                    <h4 className="footerTitle">Contact</h4>
-                <p className="footerPara"><img src={Email} alt="Email"/>email@email.com | <img src={Phone} alt="Phone"/>555-555-555</p>
-                </div>
-                
-            </div>
-
-
-
-
-
-            <div className="footerUNTCol">
-                <div className="footerUNTColSection footerUNTColEnd">
-                    <h4 className="footerUNTColTitle">Discovery Park Cafeteria</h4>
-                    <h5 className="footerUNTColLocation"><img src={Location} alt="Location"/>Discovery Park</h5>
-                    <p className="footerUNTColAddress">3940 N Elm St, Denton, Tx 76207</p>
-                </div>
-            </div>
-        </footer>
-    )
-}
+  return (
+    <footer>
+      <Logo style={{ fill: "var(--primary-color)" }} />
+      <div>
+        <span>
+          <h3>University of North Texas</h3>
+          <a>UNT dining services</a> <br />
+          <br />
+          <a>University of North Texas</a>/
+        </span>
+        <span>
+          <h3>Contact us</h3>
+          <p>
+            <FaPhone />
+            123-123-1234
+          </p>
+          <p>
+            {" "}
+            <FaEnvelope />
+            untcanteen@gmail.edu
+          </p>
+        </span>
+      </div>
+      <div>
+        <h3>UNT Canteen </h3>
+        <a href="https://www.google.com/maps/place/Discovery+Park/@33.2544317,-97.1511113,15.7z/data=!4m6!3m5!1s0x864db595faebd6e7:0x522282b77f411583!8m2!3d33.2537918!4d-97.1526031!16s%2Fg%2F11f2wdnwgl?entry=ttu">
+          <FaMapLocationDot /> Unt Canteen
+        </a>
+        <p>3940 N Elm St, Denton, Tx 76207</p>
+      </div>
+    </footer>
+  );
+};
 export default Footer;

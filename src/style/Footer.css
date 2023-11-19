@@ -1,0 +1,40 @@
+footer {
+  padding: 2rem 6rem;
+  background-color: var(--background-color);
+  display: flex;
+  border-top: 0.25rem solid var(--on-background-color);
+}
+.custom-fill {
+  fill: var(--white);
+}
+footer > :nth-child(n){
+  flex:1;
+}
+footer h3 {
+  color: var(--primary-color);
+}
+footer p {
+  color: var(--on-background-color);
+}
+footer a {
+  color: var(--on-background-color);
+  cursor: pointer;
+}
+footer a:hover {
+  color: var(--primary-color);
+}
+footer p:nth-child(3) svg{
+  margin-bottom: -0.15rem;
+}
+footer svg{
+  margin-right: 0.5rem;
+}
+@media (width < 1080px) {
+    footer{
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+    }
+}

@@ -39,16 +39,7 @@
   font-size: 4.75rem;
   line-height: calc(1.2 * 4.75rem);
 }
-/* Font Weight */
-.te-we-li {
-  font-weight: var(--font-weight-light);
-}
-.te-we-md {
-  font-weight: var(--font-weight-medium);
-}
-.te-we-bo {
-  font-weight: var(--font-weight-bold);
-}
+
 /*Text color*/
 .te-color-primary-green-li {
   color: var(--primary-green-8);

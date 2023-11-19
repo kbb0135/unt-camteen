@@ -8,6 +8,7 @@ import { getDocs, collection, doc, deleteDoc, updateDoc } from 'firebase/firesto
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import NavBar from './NavBar.jsx';
 
 
 
@@ -208,7 +209,7 @@ export default function AdminAddDelete() {
 
   return (
     <div>
-      <Header/>
+      <NavBar />
       <div className="menu">
         <h1>UNT-Canteen</h1>
         <button onClick={async () => setIsFormOpen(true)}>Add New Item</button>

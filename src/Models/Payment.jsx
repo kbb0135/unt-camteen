@@ -5,13 +5,11 @@ import { useCart } from './CartContext';
 import Header from '../Components/Header';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Notifier } from '../Components/Notifier';
-
 import {
     formatCreditCardNumber,
     formatCVC,
     formatExpirationDate
 } from './utils';
-
 import 'react-credit-cards/es/styles-compiled.css';
 
 const Payment = () => {
@@ -32,6 +30,7 @@ const Payment = () => {
     const [mName, setMName] = useState("")
     const [mNum, setMNum] = useState("")
     const [mCVC, setMCVC] = useState("")
+    const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const navigate =useNavigate()
 
     const { getTotalQuantity, cartItems } = useCart();
@@ -150,6 +149,7 @@ const Payment = () => {
         }
         console.log("here")
         console.log(number);
+        setIsPaymentSuccess(true);
     }
 
 

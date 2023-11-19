@@ -82,7 +82,7 @@ const router = createBrowserRouter([
     element: <Success />
   },
   {
-    path: "/fail",
+    path: "/cancel",
     element: <Cancel />
   },
   {

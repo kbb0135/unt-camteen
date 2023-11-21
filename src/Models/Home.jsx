@@ -93,8 +93,8 @@ function Home() {
           <p>
             The UNT Canteen is a part of UNT Dining Services, a
             multi-award-winning college dining service in the U.S.
-            <br/>
-            <Link to="https://dining.unt.edu/our-story/">Discover more <FaArrowRight/></Link>
+            <br />
+            <Link to="https://dining.unt.edu/our-story/">Discover more <FaArrowRight /></Link>
           </p>
         </div>
         <div>
@@ -186,31 +186,43 @@ function Home() {
         <div className="shop">
           <h2>Order by category</h2>
           <div>
-            <img src={Entree} />
-            <span>
-              Order Entree <FaArrowRight />
-            </span>
+            <Link to="/orderbycategory">
+              <img src={Entree} alt="img" />
+              <span>
+
+                Order Entree <FaArrowRight />
+              </span>
+            </Link>
           </div>
           <div>
-            <img src={Side} />
-            <span>
-              Order Side
-              <FaArrowRight />
-            </span>
+            <Link to="/orderbycategory">
+
+              <img src={Side} alt="img" />
+              <span>
+                Order Side
+                <FaArrowRight />
+              </span>
+            </Link>
           </div>
           <div>
-            <img src={Beverage} />
-            <span>
-              Order Beverage
-              <FaArrowRight />
-            </span>
+            <Link to="/orderbycategory">
+
+              <img src={Beverage} alt="img" />
+              <span>
+                Order Beverage
+                <FaArrowRight />
+              </span>
+            </Link>
           </div>
           <div>
-            <img src={Dessert} />
-            <span>
-              Order Dessert
-              <FaArrowRight />
-            </span>
+            <Link to="/orderbycategory">
+
+              <img src={Dessert} alt="img" />
+              <span>
+                Order Dessert
+                <FaArrowRight />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

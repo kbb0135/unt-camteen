@@ -21,6 +21,7 @@ import Payment from "./Models/Payment.jsx";
 import ChangePassword from "./Components/ChangePassword.jsx";
 import ForgetPassword from "./Models/ForgetPassword.jsx";
 import ChangeUserDetails from "./Components/ChangeUserDetails.jsx";
+import OrderCategory from "./Models/OrderCategory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
   {
     path: "/changeUserDetails",
     element: <ChangeUserDetails />
+  },
+  {
+    path:"/orderbycategory",
+    element:<OrderCategory />
   }
 ]);
 export const ThemeContext = createContext(null);

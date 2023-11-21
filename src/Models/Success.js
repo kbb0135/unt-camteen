@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'
 import { Notifier } from '../Components/Notifier';
 
+
 export default function Success() {
   const { cartItems } = useCart();
   const [discountTotal, setDiscountTotal] = useState(0)
@@ -17,6 +18,12 @@ export default function Success() {
   const [isSent, setIsSent] = useState(false);
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
+  const [items, setItems] = useState([])
+
+  useEffect(()=> {  
+    setItems(cartItems)
+    localStorage.clear();
+  }, [cartItems])
 
   const getCurrentTimeAsNumber = () => {
     const currentTime = new Date();
@@ -42,7 +49,7 @@ export default function Success() {
 
 
 
-  }, [cartItems, auth])
+  }, [cartItems, auth, localStorage])
   console.log(email)
   const handleSubmit = (e) => {
     onAuthStateChanged(auth, async (user) => {
@@ -111,7 +118,7 @@ export default function Success() {
         <h2>Your Order number is {confirmationNumber}</h2>
         <h2>Items Brought</h2>
         <ul>
-          {cartItems.map((item) => (
+          {items.map((item) => (
             <li key={item.id} index={item.name} className="cart-item">
               <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
               <div className="itemName-div">{item.quantity}</div>

@@ -75,6 +75,9 @@ export default function Cart() {
     //   console.log(error)
     // }
   }
+  useEffect(()=> {
+    
+  },[cartItems])
 console.log(cartItems)
 
 return (

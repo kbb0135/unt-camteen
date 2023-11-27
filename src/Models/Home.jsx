@@ -1,7 +1,13 @@
 import React from "react";
 import "../style/Home.css";
 import { useNavigate } from "react-router-dom";
-import { FaShield, FaMoneyCheckDollar, FaFire, FaUser, FaArrowRight } from "react-icons/fa6";
+import {
+  FaShield,
+  FaMoneyCheckDollar,
+  FaFire,
+  FaUser,
+  FaArrowRight,
+} from "react-icons/fa6";
 import Burger from "../Assets/burger.png";
 import DPMarket from "../Assets/DPMarket.jpg";
 import DPGrill from "../Assets/DPGrill.jpg";
@@ -10,9 +16,9 @@ import QualityStar from "../Assets/quali.png";
 import AwardMedal from "../Assets/medal.png";
 import Dessert from "../Assets/dessert.jpg";
 import Beverage from "../Assets/beverage.jpg";
-import Side from "../Assets/side.jpg"
-import Entree from "../Assets/entree.jpg"
-import Pasta from "../Assets/pasta.jpg"
+import Side from "../Assets/side.jpg";
+import Entree from "../Assets/entree.jpg";
+import Pasta from "../Assets/pasta.jpg";
 import { Link } from "react-router-dom";
 // import {db} from '../firebase.js'
 // import {
@@ -187,41 +193,33 @@ function Home() {
         </div>
         <div className="shop">
           <h2>Order by category</h2>
-          <div>
-            <Link to="/orderbycategory" tabIndex="0">
-              <img src={Entree} alt="img" />
-              <span>
-                Order Entree <FaArrowRight />
-              </span>
-            </Link>
-          </div>
-          <div>
-            <Link to="/orderbycategory" tabIndex="0">
-              <img src={Side} alt="img" />
-              <span>
-                Order Side
-                <FaArrowRight />
-              </span>
-            </Link>
-          </div>
-          <div>
-            <Link to="/orderbycategory" tabIndex="0">
-              <img src={Beverage} alt="img" />
-              <span>
-                Order Beverage
-                <FaArrowRight />
-              </span>
-            </Link>
-          </div>
-          <div>
-            <Link to="/orderbycategory" tabIndex="0">
-              <img src={Dessert} alt="img" />
-              <span>
-                Order Dessert
-                <FaArrowRight />
-              </span>
-            </Link>
-          </div>
+          <Link to="/orderbycategory" title="Order Entree">
+            <img src={Entree} alt="img" />
+            <span>
+              Order Entree <FaArrowRight />
+            </span>
+          </Link>
+          <Link to="/orderbycategory" title="Order Side">
+            <img src={Side} alt="img" />
+            <span>
+              Order Side
+              <FaArrowRight />
+            </span>
+          </Link>
+          <Link to="/orderbycategory" title="Order Beverage">
+            <img src={Beverage} alt="img" />
+            <span>
+              Order Beverage
+              <FaArrowRight />
+            </span>
+          </Link>
+          <Link to="/orderbycategory" title="Order Dessert">
+            <img src={Dessert} alt="img" />
+            <span>
+              Order Dessert
+              <FaArrowRight />
+            </span>
+          </Link>
         </div>
       </div>
     </>

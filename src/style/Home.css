@@ -147,9 +147,10 @@
   position: relative;
   overflow-y: hidden;
 }
-.hours h2 {
+.hours *{
   margin-bottom: 0;
 }
+
 .hours div {
   flex: 4 1;
   display: flex;
@@ -158,8 +159,8 @@
   justify-content: flex-start;
   padding-left: 4rem;
 }
-.hours div:nth-child(1) {
-  padding: 0;
+.hours div > :nth-child(2) {
+  margin-bottom: 2rem;
 }
 .hours-closed::after {
   content: "";
@@ -208,8 +209,7 @@
   justify-content: center;
   gap: 1rem;
 }
-.shop div {
-  
+.shop a {
   flex: 1;
   position: relative;
   cursor: pointer;
@@ -235,10 +235,10 @@
   transition: 0.2s ease-in;
   gap: 1rem;
 }
-.shop div:hover span {
+.shop a:hover span {
   background-color: rgb(51, 51, 51, 0.6);
 }
-.shop div:hover svg {
+.shop a:hover svg {
   translate: 0.5rem;
 }
 @media (width < 768px) {

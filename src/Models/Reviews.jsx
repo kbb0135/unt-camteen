@@ -14,6 +14,7 @@ const categories = ['Side', 'Entrees', 'Desert', 'Drink']
 export default function Reviews() {
   const [menuItems, setMenuItems] = useState([]);
   const [showMore, setShowMore]= useState(false); 
+ 
 
   // ** Fetch data from db parallely
   const makeApiReq = async() => {

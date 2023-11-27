@@ -17,7 +17,6 @@ const Payment = () => {
   const [amount, setAmount] = useState(0);
 
   const { getTotalQuantity } = useCart();
-
   useEffect(() => {
     setAmount(getTotalQuantity());
   }, [getTotalQuantity]);

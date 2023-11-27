@@ -39,6 +39,7 @@ export const fetchData = async ({collectionName}) => {
 
     // ** Fetch
     const reviews = await fetchReviews(id)
+    console.log("test", reviews)
     const ref = doc(db, collectionName, id)
     const foodInfo = await getDoc(ref)
     

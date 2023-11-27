@@ -94,7 +94,9 @@ function Home() {
             The UNT Canteen is a part of UNT Dining Services, a
             multi-award-winning college dining service in the U.S.
             <br />
-            <Link to="https://dining.unt.edu/our-story/">Discover more <FaArrowRight /></Link>
+            <Link to="https://dining.unt.edu/our-story/">
+              Discover more <FaArrowRight />
+            </Link>
           </p>
         </div>
         <div>
@@ -186,17 +188,15 @@ function Home() {
         <div className="shop">
           <h2>Order by category</h2>
           <div>
-            <Link to="/orderbycategory">
+            <Link to="/orderbycategory" tabIndex="0">
               <img src={Entree} alt="img" />
               <span>
-
                 Order Entree <FaArrowRight />
               </span>
             </Link>
           </div>
           <div>
-            <Link to="/orderbycategory">
-
+            <Link to="/orderbycategory" tabIndex="0">
               <img src={Side} alt="img" />
               <span>
                 Order Side
@@ -205,8 +205,7 @@ function Home() {
             </Link>
           </div>
           <div>
-            <Link to="/orderbycategory">
-
+            <Link to="/orderbycategory" tabIndex="0">
               <img src={Beverage} alt="img" />
               <span>
                 Order Beverage
@@ -215,8 +214,7 @@ function Home() {
             </Link>
           </div>
           <div>
-            <Link to="/orderbycategory">
-
+            <Link to="/orderbycategory" tabIndex="0">
               <img src={Dessert} alt="img" />
               <span>
                 Order Dessert

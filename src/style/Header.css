@@ -3,7 +3,7 @@ header {
   width: 100%;
   padding: 2rem 6rem;
   box-sizing: border-box;
-  background-color: var(--off-background-color);
+  background-color: var(--background-color);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

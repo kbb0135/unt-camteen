@@ -1,18 +1,35 @@
 import React, { useState } from 'react';
 import { useCart } from '../Models/CartContext';
 import {Notifier} from './Notifier';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../style/style.css';
 
-const MenuItemCard = ({ item }) => {
+const MenuItemCard = ({ item, setBudget, budget, isBudgetSet, addToCartWithoutBudget }) => {
     const { addToCart } = useCart();
     const [message, setMessage] = useState('');
-    const handleAddToCart = () => {
-        addToCart(item);
-        setMessage('Added to cart!!');
-        console.log("Here")
-    }
     const navigate = useNavigate();
+
+    const handleAddToCart = () => {
+        if (isBudgetSet) {
+            if (item.price <= 0) {
+                alert('Item price should be greater than 0 to add to cart.');
+            } else {
+                if (budget - item.price >= 0) {
+                    addToCart(item);
+                    setMessage('Added to cart!!');
+                    setBudget(item);
+                    console.log("Here");
+                } else {
+                    // setMessage("You don't have enough budget!");
+                    alert("You do not have enough budget!");
+                }
+            }
+        } else {
+            //if budget is not set, call this function directly
+            addToCartWithoutBudget(item);
+            setMessage('Item Added to Cart');
+        }
+    };
 
 
 

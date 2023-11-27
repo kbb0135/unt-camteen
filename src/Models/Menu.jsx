@@ -9,16 +9,49 @@ function Menu() {
   const [cart, setCart] = useState([]);
   const [budget, setBudget] = useState(0);
   const [isClick, setIsClicked] = useState(false);
+  const [isBudgetSet, setIsBudgetSet] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsClicked(true);
+    setIsBudgetSet(true)
+    setIsOpen(prevOpen => !prevOpen);
+
+    if (!isOpen) {
+
+    }
+    else {
+      const confirmClose = window.confirm('Are you sure you want to close the budget planner? Progress will be lost!');
+      if (confirmClose) {
+        setIsOpen(false);
+        setBudget(0);
+      }
+
+    }
+
   }
 
   const handleBudget = (e) => {
-    setBudget(parseInt(e.target.value, 10));
+    setBudget(parseInt(e.target.value));
   }
 
+  const addToCartWithoutBudget = (item) => {
+    setCart([...cart, item]);
+  }
 
+  const handleBudgetChange = (item, e) => {
+    setBudget(prevBudget => {
+      const updatedBudget = prevBudget - item.price;
+      if (updatedBudget >= 0) {
+        // Update budget only if it's not negative
+        return updatedBudget;
+      } else {
+        alert("You don't have enough budget!");
+        // Revert to the previous budget value if it would become negative
+        return prevBudget;
+      }
+    });
+  };
 
   const getEntrees = async () => {
     try {
@@ -90,35 +123,6 @@ function Menu() {
       return [];
     }
   };
-  const addToCart = (item) => {
-    console.log("here")
-    if (budget >= item.price) {
-      setCart([...cart, item]);
-      setBudget(budget - item.price);
-    } else {
-      alert('You have exceeded your budget');
-    }
-  };
-  const handleMenuItemClick = (item) => {
-    addToCart(item);
-  };
-
-  const handleBudgetChange = (item) => {
-    if (budget > 0) {
-      setBudget(budget - item.price)
-      console.log(budget)
-    }
-    else {
-
-      alert("You don't have enough budget!")
-      
-    }
-    
-
-  }
-  if(budget <0) {
-    alert("no enough dibero")
-  }
 
 
   //use effect feature to update the item as soon
@@ -144,12 +148,17 @@ function Menu() {
 
     setData()
   }, []);
+
+
+
   return (
 
     <div>
-      <h1 onClick={() => handleClick()}>Click here to get Started for budget Planner</h1>
+      <h1 className="click-Handle" onClick={handleClick}>
+        {isOpen ? "Click Here to Close the Budget Planner" : "Click here to get Started for budget Planner"}
+      </h1>
       <div>
-        {isClick ? (
+        {isOpen && isClick ? (
           <>
             <h1>Enter you budget:{budget.toFixed(2)}</h1>
             <input
@@ -167,18 +176,27 @@ function Menu() {
         }
       </div>
       <div className='menu-items'>
-      <div className='review-container'>
-        <div className='food-section'>     
-        {menuItems.map((item) => (
-          <MenuItemCard
-            key={item.id}
-            item={item}
-            onAddToCart = {addToCart}
-          />
-        ))}
+        <div className='review-container'>
+          <div className='food-section'>
+            {menuItems.map((item) => (
+              <div>
+                <MenuItemCard
+                  key={item.id}
+                  item={item}
+                  setBudget={handleBudgetChange}
+                  budget={budget}
+                  isBudgetSet={isBudgetSet}
+                  addToCartWithoutBudget={addToCartWithoutBudget}
+
+
+                />
+              </div>
+            ))
+            }
+
+          </div>
+        </div>
       </div>
-     </div>
-    </div>
     </div>
   )
 }

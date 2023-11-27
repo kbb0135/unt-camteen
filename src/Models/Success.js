@@ -6,6 +6,7 @@ import { auth, db } from '../firebase'
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'
 import { Notifier } from '../Components/Notifier';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Success() {
@@ -19,8 +20,9 @@ export default function Success() {
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [items, setItems] = useState([])
+  const navigate = useNavigate();
 
-  useEffect(()=> {  
+  useEffect(() => {
     setItems(cartItems)
     localStorage.clear();
   }, [cartItems])
@@ -113,7 +115,15 @@ export default function Success() {
   return (
     <div>
       <Header />
-      <div>Your transaction ID is : {transactionID}</div>
+      {
+        cartItems.length === 0 ?  (
+          
+          <> 
+          {navigate("/menu")}  
+          </>
+        ) : (
+          <>
+              <div>Your transaction ID is : {transactionID}</div>
       <div className="items-section">
         <h2>Your Order number is {confirmationNumber}</h2>
         <h2>Items Brought</h2>
@@ -177,6 +187,11 @@ export default function Success() {
           )
         }
       </div>
+          </>
+
+        )
+      }
+      
     </div>
   )
 }

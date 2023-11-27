@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import toast from "react-hot-toast";
 import { postReview } from "../services/foods";
 import { useParams } from "react-router-dom";
+import Rating from "./Rating";
 
 const ReviewForm = ({fetchReviews}) => {
 
@@ -43,11 +44,13 @@ const ReviewForm = ({fetchReviews}) => {
 const Star = ({stars, changeHandler}) => {
     const ratingStars = Array.from({length: 5}, (_, index) => {
         let number = index + 0.5
+        console.log("star", Rating)
         return <span key={index} className="rev-form-star" onClick={() => changeHandler(index + 1)}>
             {stars >= index + 1 ? 
             <FaStar className="star-icon" /> : stars >= number ? 
             <FaStarHalfAlt className="star-icon" /> : <FaRegStar className="star-icon" /> }
         </span>
+       
     })
 
     return <div className="rev-form-stars">{ratingStars}</div>

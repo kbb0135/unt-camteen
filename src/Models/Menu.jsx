@@ -18,7 +18,6 @@ function Menu() {
     setIsOpen(prevOpen => !prevOpen);
 
     if (!isOpen) {
-
     }
     else {
       const confirmClose = window.confirm('Are you sure you want to close the budget planner? Progress will be lost!');

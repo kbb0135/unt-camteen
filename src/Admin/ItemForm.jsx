@@ -123,7 +123,7 @@ const ItemForm = ({ onAdd }) => {
           <label>Price:</label>
           <input type="text" value={price} placeholder='Enter Item Price' onChange={(e) => setPrice(e.target.value)} />
         </div>
-        <div className="categories">
+        <div className="categories div-input">
           <select id="category" value={category} onChange={handleCategoryChange} className="select" required>
             <option value="" className="categoryVal">Select a category</option>
             <option value="Entrees" className="option">Entrees</option>

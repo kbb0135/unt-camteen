@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db, storage } from '../firebase.js'
 import { Timestamp, doc, setDoc } from "firebase/firestore"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import '../style/ItemForm.css';
 
 
 const ItemForm = ({ onAdd }) => {
@@ -111,16 +112,16 @@ const ItemForm = ({ onAdd }) => {
   };
 
   return (
-    <div>
+    <div className='add-item-div'>
       <h2>Add New Item</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='div-input'>
           <label>Name:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" value={name} placeholder='Enter Item Name' onChange={(e) => setName(e.target.value)} />
         </div>
-        <div>
+        <div className='div-input'>
           <label>Price:</label>
-          <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+          <input type="text" value={price} placeholder='Enter Item Price' onChange={(e) => setPrice(e.target.value)} />
         </div>
         <div className="categories">
           <select id="category" value={category} onChange={handleCategoryChange} className="select" required>
@@ -132,11 +133,11 @@ const ItemForm = ({ onAdd }) => {
             <option value="Desert" className="option">Desert</option>
           </select>
         </div>
-        <div>
+        <div className='div-input'>
           <label>Image:</label>
           <input type="file" accept=".png,.jpg,.jpeg" onChange={handleImageChange} />
         </div>
-        <div>
+        <div className='div-input'>
         <label>Item Quantity:</label>
         <input type='number' min= '1' max = "50"  value={addValue} onChange = {handleAddEvent}/>
         </div>

@@ -30,7 +30,9 @@ export function CartProvider({ children }) {
           price: doc.data().price,
           image: doc.data().image,
           quantity: doc.data().quantity,
-        }));
+          category: doc.data().category
+        })
+        );
         setCartItems(await userData);
 
         console.log("heeloWorld  ---", userData.name)
@@ -39,6 +41,7 @@ export function CartProvider({ children }) {
   }, []);
 
   const addToCart = (item) => {
+    console.log(item, 'item')
 
     // Check if the item is already in the cart
     const existingItem = cartItems.find((cartItem) => cartItem.name === item.name);
@@ -81,9 +84,12 @@ export function CartProvider({ children }) {
                 name: item.name,
                 price: item.price,
                 quantity: 1,  //for demo purpose
-                image: item.image
-
-
+                image: item.image,
+                category: item.category 
+                /* items are stored by category, 
+                so when cart items are fetched,
+                 we need category to fetch additional info of added item 
+                 */
               })
               console.log("test value")
 
@@ -93,7 +99,12 @@ export function CartProvider({ children }) {
                 name: item.name,
                 price: item.price,
                 quantity: 1,
-                image: item.image
+                image: item.image,
+                category: item.category
+                 /* items are stored by category, 
+                so when cart items are fetched,
+                 we need category to fetch additional info of added item 
+                 */
               })
             }
 
@@ -219,4 +230,3 @@ export function CartProvider({ children }) {
     </CartContext.Provider>
   );
 }
-

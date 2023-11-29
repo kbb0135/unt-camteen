@@ -1,111 +1,279 @@
 :root {
-    --black: #000000;
-    --white: #ffffff;
-    --gray: #dddddd;
-    --untArmygreen: #6a874c;
-    --untBackground: #008c39;
-    --untParakeetGreen: #59a909;
-    --untOliveGreen: #56c031;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #dddddd;
+  --untArmygreen: #6a874c;
+  --untBackground: #008c39;
+  --untParakeetGreen: #59a909;
+  --untOliveGreen: #56c031;
 }
+
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  
-  button {
-    background-color: var(--untParakeetGreen);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  button:hover {
-    background-color: var(--black);
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
-  li button {
-    background-color: var(--untBackground);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  li button.edit-button {
-    background-color: var(--untParakeetGreen);
-  }
-  
-  li button:hover {
-    background-color: var(--black);
-  }
-  
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+button {
+  background-color: var(--untParakeetGreen);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
 
 textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-    resize: vertical; /* Allow vertical resizing */
-  }
-
-  .comment-separator {
-    height: 1px;
-    background-color: #ccc;
-    margin: 10px 0;
-  }
-.notification-item {
-  display: flex;
-  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 10px;
-}
-
-.notification-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.notification-text {
   font-size: 16px;
+  resize: vertical; /* Allow vertical resizing */
 }
 
-.notification-buttons {
-  display: flex;
+input:disabled {
+  cursor: not-allowed
+} 
+
+
+/* ------------------- */
+/* UTILITY */
+/* ------------------- */
+.d-flex {
+display: flex;
 }
-.notification-image {
-  max-width: 200px; 
-  margin-right: 20px; 
+.items-center {
+align-items: center;
+}
+.noti-title {
+display: flex;
+align-items: center;
+flex: 25%;
+}
+.noti-desc {
+display: flex;
+align-items: center;
+flex: 55%;
+}
+.noti-action {
+display: flex;
+align-items: center;
+flex: 20% ;
 }
 
-.notification-content {
-  flex: 1; /* Take up remaining horizontal space */
+/* ------------------- */
+/* OVERALL SECTION */
+/* ------------------- */
+.section-notification-page {
+margin-top: -1.2rem;
+padding-inline: var(--section-inl-pad, 6rem);
+padding-block: 6rem;
+}
+
+.notification-page__header {
+justify-content: space-between;
+align-items: center;
+margin-bottom: 1.25rem;
+}
+
+
+.title-container {
+display: flex;
+gap: 1rem;
+padding-right: var(--gap, 4rem);
+align-items: center;
+}
+.noti-img {
+width: 5rem;
+height: 4rem;
+display: block;
+background-position: center;
+}
+
+/* ------------------- */
+/* BUTTON */
+/* ------------------- */
+.btn-noti {
+outline: none;
+border: none;
+text-transform: uppercase;
+font-weight: 700;
+letter-spacing: 5px;
+padding: 1em 3em;
+transition: all .3s;
+display: inline-block;
+}
+
+.btn-add {
+font-size: .9rem;
+background-color: var(--untBackground);
+}
+
+.btn-act {
+font-size: .75rem;
+}
+
+.btn--outline {
+box-shadow:0px 0px 0px 1px var(--untBackground) inset;
+background-color: #fff;
+color: var(--untBackground);
+font-size: .75rem;
+
+}
+
+.btn--full {
+background-color: var(--untBackground);
+font-size: .75rem;
+color: white;
+}
+
+.btn-noti:hover {
+transform: translateY(-3px);
+box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-noti:active {
+transform: translateY(-1px);
+box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+}
+
+
+/* ------------------- */
+/* TABLE */
+/* ------------------- */
+thead, 
+tbody, 
+table {
+display: block;
+}
+
+.table {
+border: 1px solid #d0d0d0;
+padding-left: 4px;
+}
+
+.table-head {
+padding-block: 1rem;
+text-transform: uppercase;
+color: #444;
+  letter-spacing: 2px;
+font-size: 0.75rem;
+background-color: #f5fbf7;
+}
+
+tbody > tr {
+border-bottom: 1px solid #e5e5e5;
+color: #707070;
+
+}
+
+.noti-title_text {
+font-size: 1rem;
+color: #444;
+font-weight: 600;
+}
+
+.noti-desc > p {
+font-size: .8rem;
+padding-right: 3rem;
+}
+
+/* ------------------- */
+/* NOTIFICATION FORM */
+/* ------------------- */
+
+.notification-form {  
+color: #707070;
+padding: 2rem 4rem;
+outline: none;
+max-width: 50ch;
+border: 0;
+border-radius: 9px;
+box-shadow: 0 0 1rem rgb(0 0 0 / .3);
+}
+
+.notification-form::backdrop {
+background-color: rgb(0 0 0 / .4);
+}
+
+.notification-form-header {
+text-transform: uppercase;
+color: inherit;
+font-weight: 600;
+text-align: center;
+font-size: 1.5rem;
+letter-spacing: 5px;
+margin-bottom: 1.5em;
+}
+
+.notification-form__row {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+}
+
+.input-label {
+color: #707070;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: .5em;
+}
+.btn-upload {
+outline: none;
+border: 1px solid #ccc;
+width: 100%;
+}
+
+.btn-upload:focus {
+outline: none;
+}
+
+.btn-upload::-webkit-file-upload-button {
+background-color: var(--untBackground);
+font-size: .875rem;
+padding: 1em;
+color: white;
+text-transform: uppercase;
+font-weight: 700;
+letter-spacing: 1px;
+border: 1px solid #ccc;
+cursor: pointer;
+
+}
+
+.btn-container {
+display: flex;
+justify-content: center;
+}
+
+
+/* ------------------- */
+/* NOTIFICATION FORM */
+/* ------------------- */
+
+.dialog-delete {
+padding: 1.5rem;
+}
+.header-delete {
+color: #444;
+font-weight: 700;
+}
+
+.btn--cancel,
+.btn--delete {
+font-size: 0.7rem;
+}
+
+.btn--delete {
+background-color: #af1919;
+}
+
+.margin-top--md {
+margin-top: 2rem;
 }

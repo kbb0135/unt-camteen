@@ -1,147 +1,140 @@
-import React, { useContext, useState, useEffect } from "react";
-import { ReactComponent as Logo } from "../Assets/Logo.svg";
-import "../style/Header.css";
-import { auth, db } from "../firebase.js";
-import { getDoc, doc } from 'firebase/firestore';
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../Models/CartContext.jsx";
+import React, { useContext, useState} from 'react';
+import '../style/Header.css';
+import '../style/Utility.css';
+import { auth} from '../firebase.js';
+import profile from '../Assets/users-icon/user-profile.png';
+import { signOut } from 'firebase/auth';
+import { useCart } from '../Models/CartContext.jsx';
+import logo from '../Assets/Logo.png';
 import {
-  FaCartShopping,
-  FaUser,
-  FaSun,
-  FaMoon,
-  FaBars,
-  FaXmark,
-} from "react-icons/fa6";
-import { ThemeContext } from "../App";
+    FaCartShopping,
+    FaLock,
+    FaUser,
+    FaSun,
+    FaMoon,
+    FaChevronRight,
+    FaArrowRightToBracket
+} from 'react-icons/fa6';
+import { ThemeContext } from '../App';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const { getTotalQuantity } = useCart();
-  const [isNavClosed, setNavClosed] = useState(true);
-  const navigate = useNavigate();
-  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
-  const [user, setUser] = useState("");
-  const [userName, setUserName] = useState('');
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        try {
-          const docRef = await doc(db, "Users", user.uid)
-          const snapShot = await getDoc(docRef)
-          const userData = snapShot.data();
-          setUserName(userData.FirstName)
+    const { getTotalQuantity } = useCart()
+    const [isNavOpen, setIsNavOpen] = useState(false)
+    const { isDarkMode, toggleDarkMode } = useContext(ThemeContext)
+    const [showDropdown, setShowDropdown] = useState(false)
+    const navigate = useNavigate()
+
+    window.addEventListener('click', (event) => {
+        const dropdown = document.getElementById('user-drop-down')
+
+        if (!dropdown?.contains(event.target)) {
+            setShowDropdown(false)
         }
-        catch { }
-        user.getIdTokenResult();
-        // }
-        setUser(user);
-        console.log(user);
+    })
+    const handleLogOut = () => {
+        signOut(auth)
+            .then(() => {
+                toast('Logged out successful!')
+                navigate('/')
+            })
+            .catch(() => {
+                toast.error('Failed to logout!')
+            })
+    }
 
-        console.log((await user.getIdTokenResult()).claims.admin);
-      } else {
-        setUser(null);
-      }
-      // firebase.auth().currentUser.getIdTokenResult()
-    });
-    return () => unsubscribe();
-  }, []);
-  const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {
-        alert("User is successfully logged out");
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
-
-  return (
-    <header>
-      <Logo
-        className="logo"
-        onClick={() => {
-          navigate("/");
-        }}
-        style={{ fill: "var(--primary-color)" }}
-      />
-
-      <nav>
-        <ul navclosed={isNavClosed.toString()}>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/changeUserDetails">Change User Details</Link>
-          </li>
-          <li>
-            <Link to="/changepassword">Change password</Link>
-          </li>
-          <li>
-            <Link to="/menu">Menu</Link>
-          </li>
-          <li>
-            <Link to="/reviews"> Reviews</Link>
-          </li>
-          <>
-            {user ? (
-              // If user is logged in, display user's name and logout button
-              <>
-                <li>
-                  <Link to="/account">Hi, {user.email}</Link>
-                </li>
-                <li>
-                  <button
-                    className="ghost-button red-button"
-                    onClick={handleLogOut}
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              // If user is not logged in, display login button and signup link
-
-              <li>
-                {" "}
-                <Link to="/auth/login">Login</Link>{" "}
-              </li>
-            )}
-          </>
-          <li
-            onClick={() => toggleDarkMode(!isDarkMode)}
-            className="dark-mode-toggle"
-          >
-            <button type="button" className="nav-icon">
-              {isDarkMode ? (
-                <FaMoon title="Change to lightmode" />
-              ) : (
-                <FaSun title="Change to darkmode" />
-              )}
+    return (
+        <header className="header-primary">
+            <div>
+                <img src={logo} alt="unt logo" className="header-logo" />
+            </div>
+            <button
+                onClick={() => setIsNavOpen((prev) => !prev)}
+                className="mobile-nav-toggle"
+                aria-controls="navigation-primary"
+                aria-expanded={isNavOpen}
+            >
+                <span className="sr-only">Menu</span>
             </button>
-          </li>
-        </ul>
-      </nav>
-      <Link to="/cart" className="cart nav-icon" title="Go to cart">
-        <FaCartShopping />
-        <span className="cart-quan">4</span>
-      </Link>
+            <nav>
+                <ul
+                    data-visible={isNavOpen}
+                    id="navigation-primary"
+                    className="navigation-primary"
+                >
+                    <li>
+                        <a href="/" className="nav-link">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/menu" className="nav-link">
+                            Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/reviews" className="nav-link">
+                            Review
+                        </a>
+                    </li>
+                    <li className="nav-icons">
+                        <div className="cart-container">
+                            <a href="/cart" className="icon-cart">
+                                <FaCartShopping />
+                                <span className="cart-quan">
+                                    {getTotalQuantity()}
+                                </span>
+                            </a>
+                        </div>
+                        <div className="dark-mode-toggle">
+                            <a
+                                href="javascript:;"
+                                onClick={() => toggleDarkMode(!isDarkMode)}
+                            >
+                                {isDarkMode ? <FaMoon /> : <FaSun />}
+                            </a>
+                        </div>
+                        {auth.currentUser?.uid  ?  <div className='nav-user-profile' id='user-drop-down'>
+                          <img src={profile} alt='boy profile' className='nav-user' onClick={() => setShowDropdown(prev => !prev)} />
 
-      <div className="flex-row cart nav-icon">
-        <Link to="/cart" title="Go to cart">
-          <FaCartShopping />
-        </Link>
-        <span className="cart-quan">{getTotalQuantity()}</span>
-      </div>
-      <button
-        type="button"
-        className="mobile-nav-toggle nav-icon"
-        title="Toggle menu"
-        onClick={() => setNavClosed(!isNavClosed)}
-      >
-        {isNavClosed ? <FaBars /> : <FaXmark />}
-      </button>
-    </header>
-  );
-};
+                          <div data-visible={showDropdown} className="sub-menu-wrap">
+                            <div className="sub-menu">
+                              <div className="user-info">
+                                <img src={profile} alt='user profile logo' />
+                                <p>{auth.currentUser.displayName}</p>
+                              </div>
+                              <hr />
+                              <a href='/changeUserDetails' className='sub-menu-link'>
+                                <FaUser />
+                                <p>Edit Profile</p>
+                                <FaChevronRight />
+                              </a>
+                              <a href='/changepassword' className='sub-menu-link'>
+                                <FaLock />
+                                <p>Change Password</p>
+                                <FaChevronRight />
+                              </a>
+                              <a href='#' className='sub-menu-link' onClick={() => handleLogOut()}>
+                                <FaArrowRightToBracket />
+                                <p>Log out</p>
+                                <FaChevronRight />
+                              </a>
+                            </div>
+                          </div>
+                        </div> :
+                        <div className="nav-btns">
+                            <a href="/auth/login" className="btn btn--login">
+                                Login in
+                            </a>
+                            <a href="/auth/signup" className="btn btn--signup">
+                                Sign up
+                            </a>
+                        </div>}
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    )
+}
 export default Header;

@@ -158,24 +158,40 @@ box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 /* -------------- */
 
 .feedback {
-  display: grid;
-/* 2/3 = 66.6% + 1/3 = 33.3% */
-grid-template-columns: 2fr 1fr;
-box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-border-radius: 11px;
-margin: 0 9rem 3rem 9rem;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  border-radius: 11px;
+  margin: auto;
+  min-width: 150px;
+  max-width: 780px;
+  background-image: linear-gradient(to right bottom, #33a361, #008c39);
+  overflow: hidden;
+  color: #00461d;
+  align-self: center;
+  margin-bottom: 50px;
+}
 
-background-image: linear-gradient(to right bottom, #33a361, #008c39);
-overflow: hidden;
-color: #00461d;
+@media screen and (max-width: 810px){
+  .feedback {
+    margin: 15px;
+    margin-bottom: 50px;
+  }
+}
+
+.feedback-info {
+  margin: auto;
 }
 
 .feedback-form {
-  padding: 1.5rem 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 1.25rem;
-  column-gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: auto;
+}
+
+.feedback-input-div {
+  margin: 15px;
 }
 
 .feedback-form textarea {
@@ -204,6 +220,9 @@ width: 100%;
 height: 2.5rem;
 }
 
+.feedback-textarea {
+  margin-left: 15px;
+}
 .feedback-img-box {
 background-image: linear-gradient(
     to right bottom,
@@ -221,6 +240,7 @@ font-size: 1.125rem;
 letter-spacing: 2px;
 background-color: #00461d;
 transition: all 0.3s;
+margin: auto;
 }
 
 .feedback-submit:hover {
@@ -231,8 +251,9 @@ color: #00461d;
 /* -------------- */
 /* REVIEW SECTION */
 /* -------------- */
-.container {
-padding: 3rem 6rem;
+.review-container {
+margin-top: 20px;
+text-align: left;
 /* background-color: #eee; */
 }
 
@@ -243,14 +264,21 @@ padding-bottom: 4rem;
 }
 
 .rev-img-box {
-height: 350px;
-width: 500px;
+height: 270px;
+width: 320px;
+margin: auto;
 }
+
+.rev-info-box {
+  max-width: 700px;
+  margin: auto;
+}
+
 .rev-img{
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
+  width: 320px;
+  height: 100%;
+  object-fit: cover;
+  }
 
 .rev-name {
 font-size: 1.875rem;
@@ -301,6 +329,19 @@ color: #6a6f73;
 margin-left: 4px;
 }
 
+@media screen and (max-width: 1160px) {
+  .rev {
+    flex-direction: column;
+  }
+
+  .rev-img-box {
+    margin: auto;
+  }
+  .rev-info-box {
+    margin: auto;
+     margin-top: 50px;
+  }
+}
 
 /* -------------- */
 /* NUTRIENT SECTION */
@@ -325,6 +366,24 @@ font-size: 1.25rem;
 font-weight: 500;
 }
 
+@media screen and (max-width: 720px) {
+  .cal-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cal-table-head, .cal-table-body {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cal-cell {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+  }
+}
 /*  */
 
 .feedback-container {
@@ -336,6 +395,9 @@ font-weight: 500;
   gap: 20px;
 }
 
+/**                 **/
+/** COMMENT SECTION **/
+/**                 **/
 .comments-section {
   padding: 3rem 6rem;
   & h2 {
@@ -348,6 +410,7 @@ font-weight: 500;
 .comments-container {
   display: flex;
   flex-direction: column;
+  min-width: 200px;
 }
 .user-comment {
   display: flex;
@@ -386,6 +449,21 @@ font-weight: 500;
   word-wrap: break-word;
 }
 
+@media screen and (max-width: 700px) {
+  .user-comment {
+    flex-direction: column; /* Change to column layout on smaller screens */
+    gap: 10px; /* Add some spacing between username-image and rating-comment */
+  }
+
+  .username-and-image {
+    align-items: center;
+    text-align: center; /* Center text in smaller screens */
+  }
+
+  .rating-and-comment {
+    text-align: center; /* Center text in smaller screens */
+  }
+}
 /* -------------- */
 /* REVIEW FORM SECTION */
 /* -------------- */
@@ -394,6 +472,12 @@ font-weight: 500;
 /* background-color: #fcfcfc ; */
 /* box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075); */
 padding: 2rem 3rem;
+display: flex;
+flex-wrap: wrap;
+}
+
+.rev-form-info {
+  margin: auto;
 }
 
 .rev-form-head {
@@ -427,6 +511,7 @@ padding: 1rem 2rem;
 font-weight: 600;
 letter-spacing: 1px;
 transition: all 0.3;
+margin: auto;
 }
 
 .rev-form-btn:hover {

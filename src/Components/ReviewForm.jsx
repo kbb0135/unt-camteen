@@ -31,8 +31,10 @@ const ReviewForm = ({fetchReviews}) => {
         fetchReviews()
     }
     return <form onSubmit={submitHandler} className="rev-form">
-        <h3 className="rev-form-head">How was your experience?</h3>
-        <Star stars={rating} changeHandler={(val) => setRating(val)}/>
+        <div className="rev-form-info">
+            <h3 className="rev-form-head">How was your experience?</h3>
+            <Star stars={rating} changeHandler={(val) => setRating(val)}/>
+        </div>
         <textarea rows={5} placeholder="Your feedback matters..." value={message} onChange={event => setMessage(event.target.value)} required></textarea>
         <button type="submit" className="rev-form-btn">Submit Review</button>
     </form>

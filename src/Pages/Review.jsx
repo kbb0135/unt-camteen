@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 // ** Component
-import Comment from '../Components/Comments'
-import Header from '../Components/Header'
-import { useParams } from 'react-router-dom'
-import { fetchById } from '../services/foods'
-import Rating from '../Components/Rating'
-import { fetchNutrition } from '../services/thirdParty'
+import Comment from '../Components/Comments';
+import Header from '../Components/Header';
+import { useParams } from 'react-router-dom';
+import { fetchById } from '../services/foods';
+import Rating from '../Components/Rating';
+import { fetchNutrition } from '../services/thirdParty';
 
-// ** Avatar
-import man from '../Assets/users-icon/man.png'
-import girl from '../Assets/users-icon/girl.png'
-import hacker from '../Assets/users-icon/hacker.png'
-import cat from '../Assets/users-icon/cat.png'
-import ReviewForm from '../Components/ReviewForm'
-import { get2digitDeci } from '../utils'
+// ** profile Avatars
+import man from '../Assets/users-icon/man.png';
+import girl from '../Assets/users-icon/girl.png';
+import hacker from '../Assets/users-icon/hacker.png';
+import cat from '../Assets/users-icon/cat.png';
+import ReviewForm from '../Components/ReviewForm';
+import { get2digitDeci } from '../utils';
+import { auth } from '../firebase';
 
 // ** utils
-const avatars = [man, girl, hacker, cat]
+const avatars = [man, girl, hacker, cat];
 
 // ** Calorie table
 const Nutrient = ({ nutrients}) => {
@@ -32,7 +33,7 @@ const Nutrient = ({ nutrients}) => {
                     <th className="cal-cell">Calories</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className='cal-table-body'>
                 <tr>
                     <td className="cal-cell">
                         {get2digitDeci(nutrients?.FAT || 0)} g
@@ -84,16 +85,19 @@ const Review = () => {
         feetchCaloriInfo()
     }, [])
 
+    const loggedInUser = auth.currentUser?.displayName
+    const userHasReviewed = item.reviews?.findIndex(review => review.createdBy === loggedInUser) !== -1
+
+    console.log(loggedInUser)
     let renderableReviews = []
     if (item.reviews) renderableReviews = showAll ? item.reviews : item.reviews.slice(0, 2)
 
-    console.log(renderableReviews)
     return (
         <>
             <Header />
             {Object.values(item).length ? (
                 <>
-                    <main className="container">
+                    <main className="review-container">
                         <div className="rev">
                             <div className="rev-img-box">
                                 <img
@@ -102,7 +106,7 @@ const Review = () => {
                                     className="rev-img"
                                 />
                             </div>
-                            <div>
+                            <div className='rev-info-box'>
                                 <div className="rev-content">
                                     <p className="rev-name">{item.name}</p>
                                     <p className="rev-category">
@@ -120,7 +124,8 @@ const Review = () => {
                             </div>
                         </div>
                         <div>
-                            <ReviewForm fetchReviews={fetchFoodDetails}/>
+                            {userHasReviewed ? null : 
+                            <ReviewForm fetchReviews={fetchFoodDetails}/>}
                         </div>
                     </main>
 

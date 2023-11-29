@@ -1,0 +1,23 @@
+.add-item-div {
+    width: 400px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin: auto;
+}
+
+.div-input {
+    display: flex;
+    margin: 10px 25px;
+    align-items: center;
+}
+
+.div-input label {
+    margin-right: 25px;
+}
+
+.categories {
+
+}

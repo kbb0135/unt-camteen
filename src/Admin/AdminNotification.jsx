@@ -1,240 +1,298 @@
-import React, { useState, useEffect } from 'react';
-import '../style/AdminNotification.css'
-import Header from '../Components/Header';
-import { db, storage } from '../firebase.js';
-import { getDocs, collection, doc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import NavBar from './NavBar.jsx';
+import { useEffect, useState } from 'react'
 
+import {
+    fetchNotifications,
+    deleteNotification,
+    uploadImage,
+    postNotification,
+    updateNotification
+} from '../services/admin'
+import NotificationForm from './NotificationForm'
+import DeleteForm from './DeleteForm'
+import toast from 'react-hot-toast'
 
-const AdminNotification = (e) => {
-    const [notifications, setNotifications] = useState([]);
-    const [newNotification, setNewNotification] = useState('');
-    const [editIndex, setEditIndex] = useState(null);
-    const [newTitle, setNewTitle] = useState('');
-    const [image, setImage] = useState('');
+export const Notifcation = () => {
+    const [notifications, setNotifications] = useState([])
+    const [addIsClicked, setAddIsClicked] = useState(false)
+    const [notification2beUpdate, setNotification2beUpdate] = useState({})
+    const [notification2beDelete, setNotification2beDelete] = useState({})
 
-
-    useEffect(() => {
-        const getNotification = async () => {
-            try {
-                const snapshot = await getDocs(collection(db, "Notification"));
-                const messages = snapshot.docs.map(doc => ({
-                    title: doc.data().title,
-                    text: doc.data().message,
-                    imgURL: doc.data().imageURL
-                }));
-                setNotifications(messages);
-                console.log(messages)
-            } catch (error) {
-                console.error("Error retrieving notifications:", error);
-            }
-        }
-
-        getNotification();
-    }, []);
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    //////////////////////////////////
+    /* Helper */
+    const updateStateAfterUpdation = (updatedNotification) => {
+        console.log('updated', updatedNotification)
+        const updatedList = notifications.map((notifiation) =>
+            notifiation.title === updatedNotification.title
+                ? updatedNotification
+                : notifiation
+        )
+        setNotifications(updatedList)
     }
 
-    const addNotification = async () => {
+    //////////////////////////////////
+    /* Fetch notifications */
+    const doFetchNotifications = async () => {
+        const response = await fetchNotifications()
+        setNotifications(response)
+    }
+    useEffect(() => {
+        doFetchNotifications()
+    }, [])
 
-        if (newTitle.trim() !== '' && newNotification.trim() !== '') {
-            try {
-                const storageRef = ref(storage, newTitle);
-                const uploadTask = uploadBytesResumable(storageRef, image);
-                uploadTask.on('state_changed',
-                    (snapshot) => {
+    //////////////////////////////////
+    /* Button handler */
+    const handleAdd = () => {
+        setNotification2beUpdate({})
+        setAddIsClicked(true)
+        openForm()
+    }
 
-                        // Observe state change events such as progress, pause, and resume
-                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload is ' + progress + '% done');
-                        switch (snapshot.state) {
-                            case 'paused':
-                                console.log('Upload is paused');
-                                break;
-                            case 'running':
-                                console.log('Upload is running');
-                                break;
-                            default:
-                                alert("Something went wrong")
-                        }
-                    },
-                    (error) => {
-                        // Handle unsuccessful uploads
-                        alert(error.message)
-                    },
-                    () => {
-                        // Handle successful uploads on complete
-                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-                        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                            console.log('File available at', downloadURL);
-                            await setDoc(doc(db, "Notification", newTitle), {
-                                title: newTitle,
-                                message: newNotification,
-                                imageURL: downloadURL
-                            });
-                        });
+    const handleEdit = (notification) => {
+        setNotification2beUpdate(notification)
+        setAddIsClicked(false)
+        openForm()
+    }
 
-                    }
-                )
-                const userCollection = collection(db, "Users")
-                const querySnapShot = await getDocs(userCollection);
-                const userEmails = querySnapShot.docs.map((doc) => doc.data().email);
-                
+    const handleDelete = (notification) => {
+        const deleteModal = document.querySelector('#dialog-delete')
+        deleteModal.showModal()
+        setNotification2beDelete(notification)
+    }
 
-                for (const email of userEmails) {
-                    await setDoc(doc(db, "mail", "mails"), {
-                        to: email,
-                        message: {
-                            subject: newTitle,
-                            html: newNotification,
-                        }
+    //////////////////////////////////
+    /* Submit handler */
+    const handleDeleteConfirmation = async () => {
+        try {
+            await deleteNotification(notification2beDelete)
+
+            /* remove delete noti from list */
+            const updatedNotificationList = notifications.filter(
+                (notification) =>
+                    notification.title !== notification2beDelete.title
+            )
+            setNotifications(updatedNotificationList)
+            toast.success('Notfication deleted!')
+            closeDeleteForm()
+        } catch (error) {
+            toast.error('Something went wrong. Please try again later')
+            console.error(error)
+        } finally {
+            closeForm()
+        }
+    }
+
+    const doAddNotification = (notification) => {
+        const fn = uploadImage(notification.file)
+            .then(async (downloadUrl) => {
+                const postData = {
+                    title: notification.title,
+                    message: notification.message,
+                    imageURL: downloadUrl
+                }
+                postNotification(postData)
+                    .then(async () => {
+                        setNotifications((prev) => [postData, ...prev])
+                        closeForm()
+
+                        /* disabled for now, once backend team fixes we are good to enable */
+                        // await add2mailBox(notification)
                     })
-                    await sleep(5000)
-                    console.log("success")
+                    .catch((error) => {
+                        console.log(error)
+                        toast.error('Notification post failed')
+                    })
+            })
+            .catch(() => {
+                toast.error('File upload failed. Try again later')
+            })
 
-
+        toast.promise(
+            fn,
+            {
+                loading: 'Loading...',
+                success: 'Everything went smoothly.',
+                error: 'Uh oh, there was an error!'
+            },
+            {
+                style: {
+                    minWidth: '150px',
+                    padding: '1em 2em',
+                    fontSize: '1rem'
                 }
             }
-            catch { }
+        )
+    }
 
-            // State will be updated everytime with the notification
-            setNotifications([...notifications, { title: newTitle, text: newNotification, imageURL: image }]);
-            setNewTitle('');
-            setNewNotification('');
-            console.log(image)
-        }
-    };
-    var temp = " "
-    const editNotification = (index) => {
-
-
-        setEditIndex(index);
-        setNewTitle(notifications[index].title);
-        setNewNotification(notifications[index].text);
-        temp = notifications[index].title;
-        setImage(notifications[index].imageUrl)
-    };
-    const handleImageChange = (e) => {
-        const selectedImage = e.target.files[0];
-        setImage(selectedImage);
-    };
-
-    const updateNotification = async () => {
-        if (newTitle.trim() !== '' && newNotification.trim() !== '') {
-            const updatedNotifications = [...notifications];
-            updatedNotifications[editIndex] = { title: newTitle, text: newNotification };
-            try {
-                const editData = doc(db, "Notification", notifications[editIndex].title);
-                await updateDoc(editData, {
-                    title: newTitle,
-                    message: newNotification
+    const doUpdateNotification = async (updatedNotification) => {
+        console.log(
+            'updated daa',
+            updatedNotification,
+            !!updatedNotification.file
+        )
+        // ** When Image is not selected
+        const updateWithoutImage = () =>
+            updateNotification(
+                { message: updatedNotification.message },
+                updatedNotification.title
+            )
+                .then(() => {
+                    updateStateAfterUpdation(updatedNotification)
                 })
-                await setDoc(doc(db, "Notification", notifications[editIndex].title), {
-                    title: newTitle,
-                    message: newNotification
-                });
-                console.log("here")
+                .catch(() => {})
+                .finally(() => {
+                    closeForm()
+                })
 
-                const userCollection = collection(db, "Users")
-                const querySnapShot = await getDocs(userCollection);
-                const userEmails = querySnapShot.docs.map((doc) => doc.data().email);
-                
-
-                for (const email of userEmails) {
-                    await setDoc(doc(db, "mail", "mails"), {
-                        to: email,
-                        message: {
-                            subject: newTitle,
-                            html: newNotification,
-                        }
+        // ** with image
+        const updateWithImage = () =>
+            uploadImage(updatedNotification.file)
+                .then(async (downloadUrl) => {
+                    console.log('I am called image')
+                    await updateNotification(
+                        {
+                            message: updatedNotification.message,
+                            imageURL: downloadUrl
+                        },
+                        updatedNotification.title
+                    )
+                    console.log('download url', downloadUrl)
+                    updateStateAfterUpdation({
+                        ...updatedNotification,
+                        imageURL: downloadUrl
                     })
-                    await sleep(5000)
-                    console.log("success")
+                    /* disabled for now, once backend team fixes we are good to enable */
+                    // await add2mailBox(notification)
+                    closeForm()
+                })
+                .catch(() => {
+                    toast.error('File upload failed. Try again later ****')
+                })
 
-
+        // ** calling func
+        toast.promise(
+            updatedNotification.file ? updateWithImage() : updateWithoutImage(),
+            {
+                loading: 'Loading...',
+                success: 'Everything went smoothly.',
+                error: 'Uh oh, there was an error!'
+            },
+            {
+                style: {
+                    minWidth: '150px',
+                    padding: '1em 2em',
+                    fontSize: '1rem'
                 }
-
-
             }
-            catch (error) {
-                console.log(error)
-            }
-            await setNotifications(updatedNotifications);
-            setEditIndex(null);
-            setNewTitle('');
-            setNewNotification('');
-            setImage(null)
+        )
+    }
 
-        }
-    };
-
-    const deleteNotification = async (index) => {
-        const updatedNotifications = [...notifications];
-        await deleteDoc(doc(db, "Notification", updatedNotifications[index].title));
-        updatedNotifications.splice(index, 1);
-        console.log(updatedNotifications.splice(index, 1));
-        setNotifications(updatedNotifications);
-    };
+    const handleSubmit = async (notification) => {
+        addIsClicked
+            ? doAddNotification(notification)
+            : doUpdateNotification(notification)
+    }
 
     return (
-        <div>
-            <NavBar />
-            <h1>Admin Notifications</h1>
-            <div>
-                <h3>Enter Title</h3>
-                <input
-                    type="text"
-                    placeholder="Enter notification title"
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                />
-                <div>
-                    <label>Image:</label>
-                    <input type="file" accept=".png,.jpg,.jpeg" onChange={handleImageChange} />
-                </div>
-                {image && <img src={image} alt="Notification" className="notification-image" />}
-                <h3>Enter Notification Text</h3>
-                <textarea
-                    placeholder="Enter notification"
-                    value={newNotification}
-                    onChange={(e) => setNewNotification(e.target.value)}
-                    rows="4"
-                />
-                {editIndex !== null ? (
-                    <>
-                        <button onClick={updateNotification}>Update</button>
-                        <button onClick={() => setEditIndex(null)}>Cancel</button>
-                    </>
-                ) : (
-                    <button onClick={addNotification}>Add</button>
-                )}
+        <section className="section-notification-page">
+            <div className="notification-page__header d-flex">
+                <h2>All Notifications</h2>
+                <button className="btn-noti btn-add" onClick={handleAdd}>
+                    Add New
+                </button>
             </div>
-            <ul>
-                {notifications.map((notification, index) => (
-                    <li key={index} className="notification-item">
-                        {notification.imgURL && (
-                            <img src={notification.imgURL} alt="Notification" className="notification-image" />
-                        )}
-                        <div>
-                            <h3 className="notification-title">{notification.title}</h3>
-                            <p className="notification-text">{notification.text}</p>
+            <table className="table">
+                <thead className="table-head">
+                    <tr className="d-flex">
+                        <th className="noti-title">Title</th>
+                        <th className="noti-desc">Description</th>
+                        <th className="noti-action">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {notifications.length ? (
+                        notifications.map((notification) => (
+                            <tr className="d-flex" r>
+                                <td className="noti-title">
+                                    <div className="title-container">
+                                        <img
+                                            className="noti-img"
+                                            src={notification.imageURL}
+                                            alt="uploaded item visual look"
+                                        />
+                                        <h4 className="noti-title_text">
+                                            {notification.title}
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td className="noti-desc">
+                                    <p>{notification.message}</p>
+                                </td>
+                                <td className=" noti-action">
+                                    <div className="d-flex">
+                                        <button
+                                            className=" btn-act btn-noti btn--outline"
+                                            onClick={() =>
+                                                handleEdit(notification)
+                                            }
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className=" btn-act btn-noti btn--full"
+                                            onClick={() =>
+                                                handleDelete(notification)
+                                            }
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <div
+                            style={{
+                                textAlign: 'center',
+                                paddingBlock: '1em',
+                                fontWeight: 600,
+                                color: '#707070'
+                            }}
+                        >
+                            No records found
                         </div>
-                        <div className="comment-separator"></div>
-                        <div className="notification-buttons">
-                            <button className="edit-button" onClick={() => editNotification(index)}>
-                                Edit
-                            </button>
-                            <button onClick={() => deleteNotification(index)}>Delete</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+                    )}
+                </tbody>
+            </table>
+            <NotificationForm
+                handleSubmit={handleSubmit}
+                data={notification2beUpdate}
+                addIsClicked={addIsClicked}
+                setAddIsClicked={setAddIsClicked}
+                handleCancel={closeForm}
+            />
+            <DeleteForm
+                handleCancel={closeDeleteForm}
+                handleConfirmation={handleDeleteConfirmation}
+            />
+        </section>
+    )
 }
 
-export default AdminNotification;
+//////////////////////////////////
+/* Additional Helpers */
+const openForm = () => {
+    const modal = document.querySelector('#notification-form')
+    modal.showModal()
+}
+
+const closeForm = () => {
+    const modal = document.querySelector('#notification-form')
+    modal.close()
+}
+
+const closeDeleteForm = () => {
+    const modal = document.querySelector('#dialog-delete')
+    modal.close()
+}
+
+export default Notifcation;

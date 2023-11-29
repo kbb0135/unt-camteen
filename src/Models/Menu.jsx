@@ -25,6 +25,7 @@ function Menu() {
       if (confirmClose) {
         setIsOpen(false);
         setBudget(0);
+        setIsBudgetSet(false);
       }
 
     }

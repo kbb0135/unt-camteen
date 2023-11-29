@@ -26,7 +26,7 @@ const MenuItemCard = ({ item, setBudget, budget, isBudgetSet, addToCartWithoutBu
             }
         } else {
             //if budget is not set, call this function directly
-            addToCartWithoutBudget(item);
+            addToCartWithoutBudget(addToCart(item));
             setMessage('Item Added to Cart');
         }
     };

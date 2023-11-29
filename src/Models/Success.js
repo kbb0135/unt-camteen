@@ -6,7 +6,7 @@ import { auth, db } from '../firebase'
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'
 import { Notifier } from '../Components/Notifier';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function Success() {
@@ -22,6 +22,15 @@ export default function Success() {
   const [items, setItems] = useState([])
   const navigate = useNavigate();
 
+  const location = useLocation();
+    const isSuccess = location.state?.isSuccess || false;
+    console.log("isSuccess=", isSuccess);
+
+    useEffect(() => {
+      if (!isSuccess) {
+        navigate('/cart');
+      }
+    }, [isSuccess, navigate]);
   useEffect(() => {
     setItems(cartItems)
     localStorage.clear();

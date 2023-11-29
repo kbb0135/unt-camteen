@@ -1,132 +1,178 @@
-import React, { useState, useEffect } from 'react';
-import {
-  formatCreditCardNumber,
-  formatCVC,
-  formatExpirationDate
-} from "../src/Models/utils";
-import { useCart } from './Models/CartContext.jsx';
-import Card from 'react-credit-cards';
 
-const Payment = () => {
-  const [number, setNumber] = useState('');
-  const [name, setName] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvc, setCVC] = useState('');
-  const [issuer, setIssuer] = useState('');
-  const [focused, setFocused] = useState('');
-  const [amount, setAmount] = useState(0);
+import React, { useState, useEffect } from 'react'
+import { useCart } from './Models/CartContext'
+import "./style/Cart.css";
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import { Link } from 'react-router-dom';
+import { Notifier } from './Components/Notifier.jsx';
+import { loadStripe } from '@stripe/stripe-js';
 
-  const { getTotalQuantity } = useCart();
+export default function Cart() {
+  const { cartItems, removeFromCart, addToCart } = useCart();
+  const [total, setTotal] = useState(0);
+  const [message, setMessage] = useState("");
+  const [isCode, setIsCode] = useState(false);
+  const [discount, setDiscount] = useState(0);
+  const [discountTotal, setDiscountTotal] = useState(0);
+  const [value, setValue] = useState("");
+
+  const val = (e) => {
+    const data = e.target.value;
+    console.log(data);
+    setValue(data);
+  }
+  const handleDiscount = () => {
+
+    if (value === "free") {
+      setDiscount(2);
+      setIsCode(true);
+      setMessage("Discount Code Applied");
+      console.log("discount=", discount);
+
+
+      localStorage.setItem("value", value)
+      localStorage.setItem("discountCode", discount);
+    }
+    else {
+      setIsCode(false);
+      setMessage("Invalid Discount Code");
+      setDiscount(0)
+    }
+
+  }
+
+
+
   useEffect(() => {
-    setAmount(getTotalQuantity());
-  }, [getTotalQuantity]);
+    const newTotal = cartItems.reduce((acc, item) => {
+      return acc + (item.price * item.quantity);
+    }, 0)
 
-  const handleCallback = ({ issuer }, isValid) => {
-    if (isValid) {
-      setIssuer(issuer);
+    setTotal(newTotal);
+
+    setDiscountTotal(newTotal - discount);
+  }, [cartItems, discount])
+
+  const makePayment = async () => {
+    const stripe = await loadStripe("pk_test_51OA0QdECOmJ4IJcKXYeYf5uMFPBsSUfKqcem25byFChYezFxxwSBp5gowGGZzd93FQ0HghGjFmn8x7UT6t9oVlg800lP2W6xoB");
+    const body = {
+      products: cartItems
     }
-  }
-
-  const handleInputFocus = ({ target }) => {
-    setFocused(target.name);
-  }
-
-  const handleInputChange = ({ target }) => {
-    if (target.name === 'number') {
-      target.value = formatCreditCardNumber(target.value);
-      setNumber(target.value);
-    } else if (target.name === 'expiry') {
-      target.value = formatExpirationDate(target.value);
-      setExpiry(target.value);
-    } else if (target.name === 'cvc') {
-      target.value = formatCVC(target.value);
-      setCVC(target.value);
+    const headers = {
+      "Content-Type": "application/json"
     }
+    const response = await fetch("http://localhost:7000/api/create-checkout-session", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+    const session = await response.json();
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id
+    })
+    // if (result.error) {
+    //   console.log(error)
+    // }
   }
+  useEffect(()=> {
+    
+  },[cartItems])
+console.log(cartItems)
 
-  const handleNameChange = (e) => {
-    const value = e.target.value;
-    setName(value); // Update the name state with the new value
-  }
-
-  return (
-    <div key='Payment'>
-      <div className="credit-card-page">
-        <div className="items-section">
-          <h2>Items in Your Cart:</h2>
-          <ul>
-            <li>Burger - $5.00</li>
-            <li>Pizza - $7.50</li>
-            <li>Soda - $1.50</li>
-          </ul>
-          <p>Total: $14.00</p>
-        </div>
-        <div className="payment-section">
-
-          <h2>Payment Information:</h2>
-          <Card
-            number={number}
-            name={name}
-            expiry={expiry}
-            cvc={cvc}
-            focused={focused}
-            callback={handleCallback}
-          />
-
-          <label htmlFor="name">CardName</label>
-          <input
-            type='tel'
-            name='name'
-            className='input-field'
-            placeholder='Name'
-            pattern='[a-zA-Z-]+'
-            required
-            value={name}
-            onChange={handleNameChange}
-            onFocus={handleInputFocus}
-          />
-          <label htmlFor="cardNumber">Card Number:</label>
-          <input
-            type='tel'
-            name='number'
-            className='input-field'
-            placeholder='Card Number'
-            pattern='[\d ]{16,22}'
-            maxLength='19'
-            required
-            value={number}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <label htmlFor="expiration">Expiration Date:</label>
-          <input
-            type='tel'
-            name='expiry'
-            className='input-field'
-            placeholder='Valid Thru'
-            pattern='\d\d/\d\d'
-            required
-            value={expiry}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <label htmlFor="cvv">CVV:</label>
-          <input
-            type='tel'
-            name='cvc'
-            className='input-field'
-            placeholder='CVC'
-            pattern='\d{3}'
-            required
-            value={cvc}
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <button id="payButton">Pay $14.00</button>
-        </div>
+return (
+  <div >
+    <Header />
+    {cartItems.length === 0 ? (
+      <div>
+        <p>Your cart is empty! Add some items to get started.</p>
+        <Link to="/menu">
+          <button>Add Item</button>
+        </Link>
       </div>
-    </div>
-  );
-};
+    ) : (
+      <div className="food-container">
+        <ul className="food-list">
+          {cartItems.map((item) => (
+            <li key={item.id} index={item.name} className="cart-item">
+              <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
+              <button onClick={() => addToCart(item)} className="plus-btn">+</button>
+              <div className="itemName-div">{item.quantity}</div>
+              <button onClick={() => removeFromCart(item.name)} className="minus-btn">-</button>
+            </li>
+          ))}
+        </ul>
+        <div>
+          <hr></hr>
+          <div className="food-total">
 
-export default Payment;
+            <div>Total Price: ${total.toFixed(2)}</div>
+
+          </div>
+          <div class="container">
+            {
+              localStorage.getItem("discountCode") > 0 ? (
+                <>
+                  <div className="my-btn">
+                    <b>
+                      <p>{message}</p>
+                      <p>Discount Code {localStorage.getItem("value")} applied: ${localStorage.getItem("discountCode")}</p>
+                      <p>New Total: {discountTotal - localStorage.getItem("discountCode")}</p>
+                    </b>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="discount">Discout Code</div>
+                  <input type="text" className="promo-input" onChange={val} />
+                  <br></br>
+
+                  <button onClick={() => handleDiscount()} className="disc-apply">Apply Code</button>
+                </>
+
+              )
+            }
+            
+
+          </div>
+          <hr></hr>
+
+
+          <div class="container">
+            {
+              isCode ? (
+                <>
+                  {/* <div className="msg">
+                      <b>
+                        <p>{message}</p>
+                        <p>Discount Price: ${discount}</p>
+                        <p>New Total: {discountTotal}</p>
+                      </b>
+                    </div> */}
+                </>
+              ) : (
+                <>
+                  <p><b>{message}</b></p>
+                </>
+
+              )
+            }
+          
+            <div className="my-btn">
+              <button onClick={makePayment} className="pay-btn">Pay {total.toFixed(2) - localStorage.getItem("discountCode")}</button>
+            </div>
+          </div>
+          <div>
+            <Link to ="/payment">
+            <button>Manual Pay</button>
+            </Link> 
+           
+          </div>
+        </div>
+
+        {/* <Footer /> */}
+      </div>
+    )}
+  </div>
+);
+}

@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Rating from './Rating';
 import { fetchById } from '../services/foods';
 import toast from 'react-hot-toast';
+import { useCart } from '../Models/CartContext'
 
 const CartItems = (props) => {
-    const [cartItems, setCartItems] = useState([])
+    const { cartItems, removeFromCart, addToCart } = useCart();
+    // const [cartItems, setCartItems] = useState([])
     const fetchReviews = items => {
         console.log("items", items)
         Promise.all(items.map(item => fetchById({collectionName: item.category, id: item.name}))).then(responses => {
-            setCartItems(responses)
-            //console.log("Items", items)
+            // setCartItems(responses)
+            console.log("Items", items)
         })
     }
     useEffect(() => {
@@ -37,14 +39,14 @@ const CartItem = ({item, quantity, id, add2cart, removeFromCart}) => {
         <div className="cart-item" key={id}>
             <div className="cart-item__details">
                 <div>
-                <img src={item.url} alt={item.name} className="cart-item-img" />
+                <img src={item.image} alt={item.name} className="cart-item-img" />
                 </div>
                 <div className="cart-item-info">
                     <p className="cart-item__name">{item.name}</p>
                     <p className="cart-item__desc">
                         {item.description}
                     </p>
-                    <Rating reviews={item.reviews || []} />
+                    {/* <Rating reviews={item.reviews || []} /> */}
                     <div className="cart-action">
                         <p className="rev-category">{item.category}</p>
                         <div>
@@ -53,7 +55,7 @@ const CartItem = ({item, quantity, id, add2cart, removeFromCart}) => {
                             </a>
                         </div>
                         <div className="cart-action__add">
-                            <button disabled={quantity === 1} className="cart-action__add-btn" onClick={() => removeFromCart(item.name)}>-</button>
+                            <button  className="cart-action__add-btn" onClick={() => removeFromCart(item.name)}>-</button>
                             <p style={{padding: 0, margin: 0}}>{quantity}</p>
                             <button className="cart-action__add-btn" onClick={() => add2cart({...item, quantity})}>+</button>
                         </div>

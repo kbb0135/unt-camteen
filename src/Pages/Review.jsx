@@ -32,7 +32,7 @@ const Nutrient = ({ nutrients}) => {
                     <th className="cal-cell">Calories</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className='cal-table-body'>
                 <tr>
                     <td className="cal-cell">
                         {get2digitDeci(nutrients?.FAT || 0)} g
@@ -93,7 +93,7 @@ const Review = () => {
             <Header />
             {Object.values(item).length ? (
                 <>
-                    <main className="container">
+                    <main className="review-container">
                         <div className="rev">
                             <div className="rev-img-box">
                                 <img
@@ -102,7 +102,7 @@ const Review = () => {
                                     className="rev-img"
                                 />
                             </div>
-                            <div>
+                            <div className='rev-info-box'>
                                 <div className="rev-content">
                                     <p className="rev-name">{item.name}</p>
                                     <p className="rev-category">

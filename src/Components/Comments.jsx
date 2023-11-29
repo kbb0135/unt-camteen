@@ -7,14 +7,14 @@ const Comment = ({id, username, comment, date, imageSrc, rating}) => {
             <div className="user-comment">
                 <div className="username-and-image">
                     <img className="userImage card__image" src={imageSrc} alt="user profile" />
-                    <p className="usename">{username}</p>
+                    <p className="username">{username}</p>
                 </div>
                 <div className="rating-and-comment">
                     <Star stars={rating} />
                     <p>{comment}</p>
                 </div>
             </div>
-            <p className="date"> {date} </p>
+                <p className="date"> {date} </p>
         </div>
 
     ); 

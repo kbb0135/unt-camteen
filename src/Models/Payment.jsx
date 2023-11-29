@@ -32,6 +32,12 @@ const Payment = () => {
     const [mCVC, setMCVC] = useState("")
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const navigate =useNavigate()
+    const[isSuccess, setIsSuccess] = useState(false);
+    const [isC, setIsC] = useState(false);
+    const [isN,setIsN] = useState(false);
+    const [isV, setIsV] = useState(false)
+    const [isE,setIsE] = useState(false);
+    const [isNa, setIsNa] = useState(false)
 
     const { getTotalQuantity, cartItems } = useCart();
 
@@ -76,8 +82,11 @@ const Payment = () => {
         setDiscountTotal(newTotal - localStorage.getItem("discountCode"));
     }, [cartItems])
 
+    
+
 
     const handleForm = (e) => {
+
 
         if (!number && !name && !expiry && !cvc) {
             setIsName(true)
@@ -97,11 +106,17 @@ const Payment = () => {
             e.preventDefault();
             return;
         }
+        else {
+            setIsN(true)
+        }
         if (!name) {
             setIsName(true)
             setMNum('Please enter number');
             e.preventDefault();
             return;
+        }
+        else {
+            setIsNa(true)
         }
         if (!expiry) {
             setIsExpired(true)
@@ -109,11 +124,17 @@ const Payment = () => {
             e.preventDefault();
             return;
         }
+        else {
+            setIsE(true)
+        }
         if (!cvc) {
             setIsCVC(true)
             setMCVC('Please enter valid cvc');
             e.preventDefault();
             return;
+        }
+        else {
+            setIsV(true)
         }
         if(number.length <15) {
             setIsNumber(true)
@@ -149,7 +170,16 @@ const Payment = () => {
         }
         console.log("here")
         console.log(number);
-        setIsPaymentSuccess(true);
+        setIsSuccess(true);
+        console.log(isPaymentSuccess)
+        console.log(isN, isNa, isE,isV)
+
+        if(isNa && isN && isE && isV) {
+            setIsSuccess(true)
+            console.log("success=", isSuccess)
+            navigate('/success', {state: {isSuccess}})
+        }
+        e.preventDefault();
     }
 
 
@@ -306,9 +336,9 @@ const Payment = () => {
                                 </>
                             )
                         }
-                        <Link to="/success">
+                        {/* <Link to="/success"> */}
                             <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
-                        </Link>
+                        {/* </Link> */}
                     </div>
                 </div>
 

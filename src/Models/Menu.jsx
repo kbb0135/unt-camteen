@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MenuItemCard from '../Components/MenuItemCard';
 import '../style/style.css';
-import '../style/AdminMenu.css';
+import '../style/Menu.css';
 import { db } from '../firebase.js'
 import { getDocs, collection } from 'firebase/firestore'
 function Menu() {
@@ -52,87 +52,32 @@ function Menu() {
     });
   };
 
-  const getEntrees = async () => {
+  const getMenuItems = async (category) => {
     try {
-      const snapshot = await getDocs(collection(db, "Entrees"));
-      const entrees = snapshot.docs.map(doc => ({
+      const snapshot = await getDocs(collection(db, category));
+      const result = snapshot.docs.map(doc => ({
         id: doc.id,
         name: doc.data().Name,
         price: doc.data().Price,
         image: doc.data().ImageURL,
         category: doc.data().category
       }));
-      return entrees;
+      return result;
     }
     catch (error) {
       alert(error);
       return [];
     }
-
-  };
-  //getting side dishes from the collection
-  const getSide = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "Side"));
-      const sides = snapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().Name,
-        price: doc.data().Price,
-        image: doc.data().ImageURL,
-        category: doc.data().category
-      }));
-      return sides;
-    } catch (error) {
-      alert(error);
-      return [];
-    }
-  };
-  //getting drinks from the collection
-  const getDrink = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "Drink"));
-      const drink = snapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().Name,
-        price: doc.data().Price,
-        image: doc.data().ImageURL,
-        category: doc.data().category
-      }));
-      return drink;
-    } catch (error) {
-      alert(error);
-      return [];
-    }
-  };
-  //geting the desert from the collection
-  const getDesert = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, "Desert"));
-      const desert = snapshot.docs.map(doc => ({
-        id: doc.id,
-        name: doc.data().Name,
-        price: doc.data().Price,
-        image: doc.data().ImageURL,
-        quantity: doc.data().quantity,
-        category: doc.data().category
-      }));
-      return desert;
-    } catch (error) {
-      alert(error);
-      return [];
-    }
-  };
-
-
+  }
   //use effect feature to update the item as soon
   // as the state changes
   useEffect(() => {
     //getting all menu items and setting them to state
     const setData = async () => {
-      const desertData = await getDesert();
-      const entreesData = await getEntrees();
-      const sideData = await getSide();
-      const drinkData = await getDrink();
+      const desertData = await getMenuItems("Desert");
+      const entreesData = await getMenuItems("Entrees");
+      const sideData = await getMenuItems("Side");
+      const drinkData = await getMenuItems("Drink");
       const mergeData =
         [...entreesData,
         ...desertData,
@@ -152,33 +97,10 @@ function Menu() {
 
   return (
 
-    <div>
-      <h1 className="click-Handle" onClick={handleClick}>
-        {isOpen ? "Click Here to Close the Budget Planner" : "Click here to get Started for budget Planner"}
-      </h1>
-      <div>
-        {isOpen && isClick ? (
-          <>
-            <h1>Enter you budget:{budget.toFixed(2)}</h1>
-            <input
-              type="range"
-              min="5"
-              max="100"
-              step="1"
-              value={budget}
-              onChange={handleBudget}
-            />
-          </>
-        ) : (
-          <></>
-        )
-        }
-      </div>
+    <div className='menu'>
+      <h2>Menu</h2>
       <div className='menu-items'>
-        <div className='review-container'>
-          <div className='food-section'>
             {menuItems.map((item) => (
-              <div>
                 <MenuItemCard
                   key={item.id}
                   item={item}
@@ -186,16 +108,10 @@ function Menu() {
                   budget={budget}
                   isBudgetSet={isBudgetSet}
                   addToCartWithoutBudget={addToCartWithoutBudget}
-
-
                 />
-              </div>
             ))
-            }
-
-          </div>
+        }
         </div>
-      </div>
     </div>
   )
 }

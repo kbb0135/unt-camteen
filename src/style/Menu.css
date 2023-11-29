@@ -1,0 +1,68 @@
+/* App.css */
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 6rem;
+  box-sizing: border-box;
+  align-items: flex-start;
+  gap: 1rem;
+  background-color: var(--background-color);
+}
+
+.menu-items {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 1rem;
+  justify-content: space-between;
+}
+.menu-card {
+  box-shadow: 0 2.4rem 4.8rem var(--off-background-color);
+  transition: all 0.4s;
+  width: 300px;
+  cursor: pointer;
+}
+.menu h2,
+h3 {
+  color: var(--on-background-color);
+}
+.menu-card img {
+  border-radius: 0.75rem 0.75rem 0 0;
+  width: 100%;
+  height: 250px;
+}
+.menu-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--on-background-color);
+  padding: 0.5rem 0;
+  gap: 1rem;
+}
+.menu-item-price {
+  font-weight: var(--font-weight-medium);
+}
+.menu svg {
+  margin-bottom: -0.1rem;
+}
+.notification {
+  border: 0.1rem solid var(--primary-color);
+  position: fixed;
+  top: 20vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  background-color: var(--off-background-color);
+  padding: 1rem 2rem;
+  display: none;
+  z-index: 9999;
+  transition: 0.5s;
+}
+.enable{
+  display: block;
+}
+@media (width < 768px) {
+  .menu {
+    padding: 2rem;
+  }
+}

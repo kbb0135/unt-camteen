@@ -39,22 +39,12 @@
   max-width: 1200px;
 }
 
-.food {
-box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
-border-radius: 11px;
-overflow: hidden;
-transition: all 0.4s;
-width: 299px;
-}
+
 
 
 .food:hover {
 transform: translateY(-1.2rem);
 box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
-}
-
-.img-container {
-  height: 250px;
 }
 
 .food-img {
@@ -88,12 +78,6 @@ box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
   margin: 0;
   padding-top: 0.5rem;
 }
-
-.food-content {
-  padding: 1.5rem 0 1.5rem 2rem;
-  margin: 0;
-}
-
 .rating-value {
   color: #4d3105;
   font-weight: 700; 

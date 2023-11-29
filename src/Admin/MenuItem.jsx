@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../style/AdminMenu.css';
+import '../style/Menu.css';
 
 const MenuItem = ({ item, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -31,30 +31,27 @@ const MenuItem = ({ item, onEdit, onDelete }) => {
     <div className="food">
       {isEditing ? (
         <div>
-          <div className='edit-div'>
-            <label className='edit-label'>Item Name</label>
+          <div>
+            <label>Item Name</label>
             <input
-              className='edit-input'
               type="text"
               name="name"
               value={editedItem.name}
               onChange={handleInputChange}
             />
           </div>
-          <div className='edit-div'>
-            <label className='edit-label'>Price</label>
+          <div >
+            <label >Price</label>
             <input
-              className='edit-input'
               type="text"
               name="price"
               value={editedItem.price}
               onChange={handleInputChange}
             />
           </div>
-          <div className='edit-div'>
-            <label className='edit-label'>Image</label>
+          <div >
+            <label>Image</label>
             <input
-              className='edit-input'
               type="file"
               accept=".png,.jpg,.jpeg"
               onChange={(e) => {

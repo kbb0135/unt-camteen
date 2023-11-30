@@ -86,6 +86,21 @@
   margin-bottom: .5rem;
 }
 
+.discount-p {
+  margin: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  color: '#444'
+}
+
+.promotion-p {
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
 .section-promotion input {
   outline-offset: -4px;
   padding: 0 1rem;
@@ -175,6 +190,11 @@
 
 }
 
+.cart-quantity {
+  padding: 0;
+  margin: 0;
+}
+
 .cart-action {
   display: flex;
   gap: 3rem;
@@ -198,6 +218,16 @@
   color: var(--primary-color);
   border: 2px solid #008c39;
   outline: none;
+}
+
+@media screen and (max-width: 600px) {
+  .cart-action {
+    flex-direction: column;
+  }
+
+  .cart-item-price-div {
+    margin: auto;
+  }
 }
 
 /* remove btn */

@@ -166,16 +166,7 @@ export default function Cart() {
                             <p className="checkout__price-original">
                                 ${originalPrice.toFixed(2)}
                             </p>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    marginBottom: '1.5rem',
-                                    fontSize: '1.125rem',
-                                    color: '#444'
-                                }}
-                            >
-                                {discountPer.toFixed(2)}% off
-                            </p>
+                            <p className='discount-p'>{discountPer.toFixed(2)}% off</p>
                             <a
                                 href="javascript:;"
                                 className="checkout-btn"
@@ -185,17 +176,7 @@ export default function Cart() {
                             </a>
                             <hr />
                             <div className="section-promotion">
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        letterSpacing: '1px',
-                                        marginTop: '2rem',
-                                        marginBottom: '1rem',
-                                        fontSize: '1.125rem'
-                                    }}
-                                >
-                                    Promotions
-                                </p>
+                                <p className='promotion-p'>Promotions</p>
                                 <p style={messageStyle}>{message}</p>
                                 <div className="section-coupon">
                                     <input

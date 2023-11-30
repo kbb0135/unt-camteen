@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 //import { createBrowserRouter, RouterProvider,Navigate } from "react-router-dom";
 // import AuthPage from "./Pages/AuthPage.jsx";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import SignUp from "./Models/SignUp";
 import Login from "./Models/Login";
@@ -35,26 +35,39 @@ const App = () => {
     const [isDarkMode, toggleDarkMode] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches
   );
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
+  const [user, setUser] = useState([]);
   var admin;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
+        setUser(user);
         user.getIdTokenResult();
         setIsAdmin((await user.getIdTokenResult()).claims.admin);
         console.log(isAdmin)
       } else {
+        setIsAdmin(false);
       }
       // firebase.auth().currentUser.getIdTokenResult()
     });
     return () => unsubscribe();
   }, [isAdmin]);
 
+  
+
   useEffect(() => {
     console.log('isAdmin:', isAdmin);
   }, [isAdmin]);
   console.log("testVaaal=",isAdmin);
+
+  if (isAdmin === null) {
+    // If isAdmin is null (still loading),return a loading indicator or null
+    return <div>Loading...</div>;
+
+  }
+ 
+  
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>

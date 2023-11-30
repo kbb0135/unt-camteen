@@ -124,25 +124,25 @@ export default function Cart() {
         }
 
     }
-    const getCoupon = async () => {
-        console.log("here")
-        console.log(test)
-        const snapshot = await getDocs(collection(db, "Coupons"));
-        const coupons = snapshot.docs.map(doc => ({
-            name: doc.data().coupon,
-            price: doc.data().price,
-        }));
-        await setStuff(coupons);
-        console.log(stuff)
-        const matchedCoupon = coupons.find(coupon => coupon.name === test)
-        console.log("matched coupon=",matchedCoupon)
-        if (matchedCoupon) {
-            const discountPrice = matchedCoupon.price;
-            console.log(discountPrice)
-        }
+    // const getCoupon = async () => {
+    //     console.log("here")
+    //     console.log(test)
+    //     const snapshot = await getDocs(collection(db, "Coupons"));
+    //     const coupons = snapshot.docs.map(doc => ({
+    //         name: doc.data().coupon,
+    //         price: doc.data().price,
+    //     }));
+    //     await setStuff(coupons);
+    //     console.log(stuff)
+    //     const matchedCoupon = coupons.find(coupon => coupon.name === test)
+    //     console.log("matched coupon=",matchedCoupon)
+    //     if (matchedCoupon) {
+    //         const discountPrice = matchedCoupon.price;
+    //         console.log(discountPrice)
+    //     }
 
 
-    }
+    // }
 
     return (
         <>

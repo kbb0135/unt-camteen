@@ -83,7 +83,6 @@ export default function Cart() {
     }
 
     const makePayment = async () => {
-
         /*
         1. We want to make sure that registered user
            only gets to check out items

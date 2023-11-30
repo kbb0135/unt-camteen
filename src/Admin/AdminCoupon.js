@@ -11,6 +11,7 @@ export default function AdminCoupon() {
     const [user, setUser] = useState(null)
     const [isSet, setIsSet] = useState(false)
     const [message, setMessage] = useState("")
+    const [val, setVal] = useState(0)
 
     useEffect(() => {
         onAuthStateChanged(auth, async (user) => {
@@ -26,11 +27,14 @@ export default function AdminCoupon() {
 
         if (user) {
             await setDoc(doc(db, "Coupons", title), {
-                coupon: input
+                coupon: input,
+                price:val
             }).then(() => {
-                alert('Successfully added!')
                 setIsSet(true);
                 setMessage("Added to database Successfully")
+                setTitle("")
+                setInput("")
+                setVal(0)
             })
 
         }
@@ -58,6 +62,13 @@ export default function AdminCoupon() {
                     placeholder="Enter the Coupon"
                     type="tel" value={input}
                     onChange={(e) => setInput(e.target.value)
+                    }
+                />
+                <h3>Enter Coupon Price</h3>
+                <input
+                    placeholder="Enter the Coupon Price"
+                    type="number" value={val} 
+                    onChange={(e) => setVal(e.target.value)
                     }
                 />
             </div>

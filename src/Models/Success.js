@@ -4,7 +4,7 @@ import { useCart } from './CartContext'
 import { v4 as uuidv4 } from 'uuid';
 import { auth, db } from '../firebase'
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'
 import { Notifier } from '../Components/Notifier';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -20,6 +20,7 @@ export default function Success() {
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [items, setItems] = useState([])
+  const [user,setUser] = useState([])
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -35,6 +36,19 @@ export default function Success() {
     setItems(cartItems)
     localStorage.clear();
   }, [cartItems])
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUser(user);
+        setEmail(user.email);
+      } else {
+        setUser(null)
+      }
+    });
+    return () => unsubscribe();
+  },[email]);
+
+  
 
   const getCurrentTimeAsNumber = () => {
     const currentTime = new Date();
@@ -49,18 +63,41 @@ export default function Success() {
     const newTotal = cartItems.reduce((acc, item) => {
       return acc + (item.price * item.quantity);
     }, 0)
+    if(user) {
+      const fetchUser = async () => {
+        if (user) {
+            const couponData = auth.currentUser.email + "Coupons"
+            const docRef = await doc(db, couponData, "coupons")
+            const docSnapshot = await getDoc(docRef)
+            if (docSnapshot.exists()) {
+                setDiscount(docSnapshot.data().price)
+                alert(discount)
+            }
+            setTotal(newTotal);
+            setDiscountTotal(newTotal - discount);
+            alert(discountTotal)
+            setTransactionID(uuidv4())
+            setConfirmationNumber(getCurrentTimeAsNumber())
+            setMessage("Order Confirmation sent to your Email if correct Email Address is used")
+        }
+      }
+      fetchUser()
+    }
+    else {
+      setTotal(newTotal);
+      setDiscount(localStorage.getItem("discountCode"))
+      setDiscountTotal(newTotal - discount);
+      setTransactionID(uuidv4())
+      setConfirmationNumber(getCurrentTimeAsNumber())
+      setMessage("Order Confirmation sent to your Email if correct Email Address is used")
+    }
 
-    setTotal(newTotal);
-    setDiscount(localStorage.getItem("discountCode"))
-    setDiscountTotal(newTotal - discount);
-    setTransactionID(uuidv4())
-    setConfirmationNumber(getCurrentTimeAsNumber())
-    setMessage("Order Confirmation sent to your Email if correct Email Address is used")
 
 
 
 
-  }, [cartItems, auth, localStorage])
+
+  }, [cartItems, auth, localStorage, discountTotal])
   console.log(email)
   const handleSubmit = (e) => {
     onAuthStateChanged(auth, async (user) => {
@@ -110,16 +147,35 @@ export default function Success() {
     })
 
   }
+  const deleteEntireCollection = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, email));
+      querySnapshot.forEach(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+      console.log(`Collection ${email} successfully deleted.`);
+    } catch (error) {
+      console.error('Error deleting collection: ', error);
+    }
+  };
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       localStorage.clear();
+      if(user) {
+        deleteEntireCollection()
+      }
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  },);
+  useEffect(()=> {
+    if(user) {
+      deleteEntireCollection()
+    }
+  })
 
   return (
     <div>
@@ -145,7 +201,7 @@ export default function Success() {
 
           ))}
         </ul>
-        <p className="total-pay">Total: {total}</p>
+        <p className="total-pay">Total: {discountTotal}</p>
 
         <div class="container">
           {

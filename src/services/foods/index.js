@@ -49,7 +49,7 @@ export const fetchData = async ({collectionName}) => {
 
     } catch (error) {
       console.error(error)
-      toast.error('No response from server')
+      // toast.error('No response from server')
       return {}
     }
   }

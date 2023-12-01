@@ -35,7 +35,7 @@ const Payment = () => {
     const [mCVC, setMCVC] = useState("")
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const navigate = useNavigate()
-    const [isSuccess, setIsSuccess] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(null);
     const [isC, setIsC] = useState(false);
     const [isN, setIsN] = useState(false);
     const [isV, setIsV] = useState(false)
@@ -201,19 +201,21 @@ const Payment = () => {
         setIsSuccess(true);
         console.log(isPaymentSuccess)
         console.log(isN, isNa, isE, isV)
+        
 
   
         e.preventDefault();
     }
+  
 
     useEffect(()=> {
+        
         if (isNa && isN && isE && isV) {
             setIsSuccess(true)
-            console.log("success=", isSuccess)
             navigate('/success', { state: { isSuccess } })
         }
         
-    })
+    },[isNa, isN, isE, isV,isSuccess, navigate])
     useEffect(() => {
         const fetchPay = async () => {
             const currentUser = auth.currentUser;
@@ -240,7 +242,7 @@ const Payment = () => {
         }
     
         fetchPay();
-    }, [total, user]);
+    }, [total, user,price]);
     
 
 

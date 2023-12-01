@@ -2,7 +2,7 @@ footer {
   padding: 2rem 6rem;
   background-color: var(--background-color);
   display: flex;
-  border-top: 0.25rem solid var(--on-background-color);
+  border-top: 0.1rem solid var(--on-background-color);
 }
 .custom-fill {
   fill: var(--white);

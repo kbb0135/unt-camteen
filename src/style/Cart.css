@@ -4,6 +4,7 @@
 
 .section-cart {
   padding: 2rem 6rem 5rem 6rem;
+  background-color: var(--background-color);
 }
 
 .section-cart__heading {
@@ -40,7 +41,7 @@
   display: block;
   text-align: center;
   font-size: 1.125rem;
-  color: white;
+  color: var(--on-primary-color);
   background-color: var(--primary-color);
   transition: all .3s;
   margin-bottom: 1rem;
@@ -48,21 +49,20 @@
 }
 
 .checkout-btn:hover {
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  background-color: #008c39;
+  box-shadow: 0 1rem 2rem var(--off-background-color);
+  background-color: var(--off-primary-color);
   transform: translateY(-3px);
   
 }
 
 .checkout-btn:active {
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.3);
   transform: translateY(-1px);
 }
 
 /* Text */
 .checkout__text {
   font-size: 1rem;
-  color: #707070;
+  color: var(--off-onbackground-color);
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -80,7 +80,7 @@
 .checkout__price-original {
   font-size: 1.25rem;
   font-weight: 600;
-  color:  #707070;
+  color: var(--off-onbackground-color);
   text-decoration: line-through;
   margin: 0;
   margin-bottom: .5rem;
@@ -101,26 +101,23 @@
   font-size: 1.125rem;
 }
 
-.section-promotion input {
-  outline-offset: -4px;
-  padding: 0 1rem;
-  color: #707070;
-  text-transform: uppercase;
-  font-weight: 600;
-}
+
 
 .section-coupon {
   display: flex;
-  column-gap: 2px;
+  align-items: flex-start;
 }
+.section-coupon input{
 
+  background-color: var(--off-background-color);
+}
 .section-coupon__btn:link,
 .section-coupon__btn:visited {
   text-decoration: none;
   font-size: 1rem;
   background-color: var(--primary-color);
   padding: .75rem 2rem;
-  color: white;
+  color: var(--on-primary-color);
   transition: all .3s;
   display: inline-block;
   outline: none;
@@ -139,7 +136,7 @@
   display: flex;
   justify-content: space-between;
   column-gap: 2rem;
-  border-top: 2px solid #d1d7dc;
+  border-top: 2px solid var(--off-onbackground-color);
   padding: 1rem 0;
   flex-wrap: wrap;
 }
@@ -179,7 +176,7 @@
 }
 
 .cart-item__desc {
-  color: #707070;
+  color: var(--off-onbackground-color);
   font-size: 0.875rem;
 }
 
@@ -193,6 +190,7 @@
 .cart-quantity {
   padding: 0;
   margin: 0;
+  color: var(--primary-color);
 }
 
 .cart-action {
@@ -208,16 +206,20 @@
   gap: 1rem;
 }
 
-.cart-action__add button,
-.cart-action__add button:hover {
+.cart-action__add button
+{
   margin: 0;
   padding: 0 1rem;
   height: 2rem;
-  background-color: white;
+  background-color: var(--background-color);
   font-size: 1.25rem;
   color: var(--primary-color);
-  border: 2px solid #008c39;
+  border: 2px solid var(--primary-color);
   outline: none;
+}
+.cart-action__add button:hover{
+  color: var(--off-primary-color);
+  border-color: var(--off-primary-color);
 }
 
 @media screen and (max-width: 600px) {
@@ -243,13 +245,12 @@
 }
 
 .cart-action__remove:hover {
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1rem 2rem var(--off-background-color);
   transform: translateY(-3px);
-  color: white;
   background-color: var(--primary-color);
 }
 .cart-action__remove:active {
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 .5rem 1rem var(--off-background-color);
   transform: translateY(-1px);
 }
 
@@ -264,7 +265,7 @@
   font-weight: 600;
 }
 .section-no-item__main {
-  border: 1px solid #d1d7dc;
+  border: 1px solid var(--off-onbackground-color);
   padding: 4rem;
   text-align: center;
 }
@@ -276,18 +277,18 @@
   padding: 1rem 2.5rem;
   font-size: 1.125rem;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--on-background-color);
   outline: none;
   transition: all .3s;
 }
 
 .section-no-item__main a:hover {
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1rem 2rem var(--off-background-color);
   transform: translateY(-3px);
-  background-color: #008c39;
+  background-color: var(--primary-color);
 } 
 
 .section-no-item__main a:active {
-  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 .5rem 1rem var(--off-background-color);
   transform: translateY(-1px);
 }

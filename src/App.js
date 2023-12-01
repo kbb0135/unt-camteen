@@ -25,7 +25,7 @@ import Header from "./Components/Header.jsx";
 import PageNotFound from "./Models/PageNotFound.js";
 import Unauthorized from "./Models/Unauthorized.js";
 import { onAuthStateChanged } from "firebase/auth";
-import AdminCoupon from "./Admin/AdminCoupon.js";
+import AdminCoupon from "./Admin/AdminCoupon.jsx";
 
 
  export const ThemeContext = createContext(null);

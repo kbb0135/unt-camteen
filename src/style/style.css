@@ -126,7 +126,8 @@ input[type="email"],
 input[type="password"],
 input[type="file"],
 input[type="select"],
-select {
+select,
+textarea {
   width: 100%;
   padding: 0.5rem;
   border: none;
@@ -148,6 +149,10 @@ input::placeholder {
 }
 p{
   line-height: 1.5rem;
+  color: var(--on-background-color);
+}
+h1, h2, h3, h4, h5, h6{
+  color: var(--on-background-color);
 }
 *:focus {
   outline: 3px solid var(--primary-green-5);

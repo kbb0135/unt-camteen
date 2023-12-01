@@ -8,12 +8,13 @@
   --untOliveGreen: #56c031;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
+.notification-page{
+  background-color: var(--background-color);
+  width: 100vw;
+  height: 100vh;
+  width: 100svw;
+  height: 100svh;
 }
-
 
 /* button {
   background-color: var(--untParakeetGreen);
@@ -63,7 +64,9 @@ flex: 55%;
 .noti-action {
 display: flex;
 align-items: center;
+justify-content: flex-end;
 flex: 20% ;
+padding-right: 2rem;
 }
 
 /* ------------------- */
@@ -73,6 +76,7 @@ flex: 20% ;
 margin-top: -1.2rem;
 padding-inline: var(--section-inl-pad, 6rem);
 padding-block: 6rem;
+background-color: var(--background-color);
 }
 
 .notification-page__header {
@@ -107,11 +111,6 @@ letter-spacing: 5px;
 padding: 1em 3em;
 transition: all .3s;
 display: inline-block;
-}
-
-.btn-add {
-font-size: .9rem;
-background-color: var(--untBackground);
 }
 
 .btn-act {
@@ -160,10 +159,10 @@ padding-left: 4px;
 .table-head {
 padding-block: 1rem;
 text-transform: uppercase;
-color: #444;
+color: var(--on-background-color);
   letter-spacing: 2px;
 font-size: 0.75rem;
-background-color: #f5fbf7;
+background-color: var(--background-color);
 }
 
 tbody > tr {
@@ -174,7 +173,7 @@ color: #707070;
 
 .noti-title_text {
 font-size: 1rem;
-color: #444;
+color: var(--on-background-color);
 font-weight: 600;
 }
 

@@ -316,11 +316,11 @@ gap: 4px;
 font-size: 1.125rem;
 }
 .star-icon {
-color: #b4690e
+color: var(--yellow-4);
 }
 .star-count {
 margin: 0;
-color: #b4690e;
+color: var(--yellow-4);
 font-weight: 600;
 }
 .rev-count {

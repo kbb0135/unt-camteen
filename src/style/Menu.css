@@ -20,10 +20,7 @@
   box-shadow: 0 2.4rem 4.8rem var(--off-background-color);
   cursor: pointer;
 }
-.menu h2,
-h3 {
-  color: var(--on-background-color);
-}
+
 .menu-card img {
   border-radius: 0.75rem 0.75rem 0 0;
   width: 100%;

@@ -326,13 +326,13 @@ export default function Cart() {
                                         value={test}
                                         onChange={(e) => setTest(e.target.value)}
                                     />
-                                    <a
-                                        href="javascript:;"
-                                        className="section-coupon__btn"
+                                    <button
+                                      type="button"
+                                        className="primary-button"
                                         onClick={() => HandleDiscount()}
                                     >
                                         Apply
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>

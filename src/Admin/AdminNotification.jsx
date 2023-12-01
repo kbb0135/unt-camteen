@@ -194,93 +194,89 @@ export const Notifcation = () => {
     }
 
     return (
-        <>
-        <NavBar/>
+      <>
+        <NavBar />
         <section className="section-notification-page">
-            <div className="notification-page__header d-flex">
-                <h2>All Notifications</h2>
-                <button className="btn-noti btn-add" onClick={handleAdd}>
-                    Add New
-                </button>
-            </div>
-            <table className="table">
-                <thead className="table-head">
-                    <tr className="d-flex">
-                        <th className="noti-title">Title</th>
-                        <th className="noti-desc">Description</th>
-                        <th className="noti-action">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {notifications.length ? (
-                        notifications.map((notification) => (
-                            <tr className="d-flex" r>
-                                <td className="noti-title">
-                                    <div className="title-container">
-                                        <img
-                                            className="noti-img"
-                                            src={notification.imageURL}
-                                            alt="uploaded item visual look"
-                                        />
-                                        <h4 className="noti-title_text">
-                                            {notification.title}
-                                        </h4>
-                                    </div>
-                                </td>
-                                <td className="noti-desc">
-                                    <p>{notification.message}</p>
-                                </td>
-                                <td className=" noti-action">
-                                    <div className="d-flex">
-                                        <button
-                                            className=" btn-act btn-noti btn--outline"
-                                            onClick={() =>
-                                                handleEdit(notification)
-                                            }
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className=" btn-act btn-noti btn--full"
-                                            onClick={() =>
-                                                handleDelete(notification)
-                                            }
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <div
-                            style={{
-                                textAlign: 'center',
-                                paddingBlock: '1em',
-                                fontWeight: 600,
-                                color: '#707070'
-                            }}
+          <div className="notification-page__header d-flex">
+            <h2>All Notifications</h2>
+            <button className="primary-button large-button" onClick={handleAdd}>
+              Add New
+            </button>
+          </div>
+          <table className="table">
+            <thead className="table-head">
+              <tr className="d-flex">
+                <th className="noti-title">Title</th>
+                <th className="noti-desc">Description</th>
+                <th className="noti-action">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notifications.length ? (
+                notifications.map((notification) => (
+                  <tr className="d-flex" r>
+                    <td className="noti-title">
+                      <div className="title-container">
+                        <img
+                          className="noti-img"
+                          src={notification.imageURL}
+                          alt="uploaded item visual look"
+                        />
+                        <h4 className="noti-title_text">
+                          {notification.title}
+                        </h4>
+                      </div>
+                    </td>
+                    <td className="noti-desc">
+                      <p>{notification.message}</p>
+                    </td>
+                    <td className=" noti-action">
+                      <div className="d-flex">
+                        <button
+                          className="ghost-button red-button"
+                          onClick={() => handleDelete(notification)}
                         >
-                            No records found
-                        </div>
-                    )}
-                </tbody>
-            </table>
-            <NotificationForm
-                handleSubmit={handleSubmit}
-                data={notification2beUpdate}
-                addIsClicked={addIsClicked}
-                setAddIsClicked={setAddIsClicked}
-                handleCancel={closeForm}
-            />
-            <DeleteForm
-                handleCancel={closeDeleteForm}
-                handleConfirmation={handleDeleteConfirmation}
-            />
-            </section>
-            <Footer/>
-            </>
-    )
+                          Delete
+                        </button>
+                        <button
+                          className="primary-button long-button"
+                          onClick={() => handleEdit(notification)}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <div
+                  style={{
+                    textAlign: "center",
+                    paddingBlock: "1em",
+                    fontWeight: 600,
+                    color: "#707070",
+                  }}
+                >
+                  No records found
+                </div>
+              )}
+            </tbody>
+          </table>
+          <NotificationForm
+            handleSubmit={handleSubmit}
+            data={notification2beUpdate}
+            addIsClicked={addIsClicked}
+            setAddIsClicked={setAddIsClicked}
+            handleCancel={closeForm}
+          />
+          <DeleteForm
+            handleCancel={closeDeleteForm}
+            handleConfirmation={handleDeleteConfirmation}
+          />
+        </section>
+        <Footer />
+      </>
+    );
 }
 
 //////////////////////////////////

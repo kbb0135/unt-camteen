@@ -1,5 +1,5 @@
 /* Applying styles to ChangeUserDetails*/
-.change-user {
+/* .change-user {
     max-width: 600px; 
     margin: 0 auto; 
     padding: 20px;
@@ -14,10 +14,10 @@
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
-  }
+  } */
   
   /* Styling the button */
-  button {
+  /* button {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
@@ -31,18 +31,18 @@
     background-color: #008c39;
     transform: translateY(-3px);
     
-  }
+  } */
   
   /* for spacing between elements */
-  label, button {
+  /* label, button {
     margin-bottom: 10px;
-  }
+  } */
   
   /*for smaller screens */
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     .change-user {
       padding: 10px;
     }
     
   }
-  
+   */

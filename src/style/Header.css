@@ -8,6 +8,7 @@ header {
   align-items: flex-end;
   justify-content: space-between;
   position: relative;
+  border-bottom: 0.1rem solid var(--off-onbackground-color);
 }
 header nav {
   display: flex;
@@ -136,7 +137,6 @@ header ul li a:hover {
 }
 .user-info-dropdown a {
   padding: 1rem;
-  font-size: 1rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -182,18 +182,22 @@ header ul li a:hover {
     position: static;
   }
   #user-icon {
+    width: 100%;
     position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .user-info-dropdown {
-    width: auto;
+    width: 100%;
     position: static;
     transform: translate(0%);
+    box-sizing: border-box;
   }
+
   .mobile-first-li {
     order: -1;
     position: relative;
+    width: 100%;
   }
 }

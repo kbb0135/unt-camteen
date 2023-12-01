@@ -62,3 +62,6 @@ button {
 .small-button {
   padding: 0.25rem 0.5rem;
 }
+.long-button{
+  padding: 0.5rem 1.75rem;
+}

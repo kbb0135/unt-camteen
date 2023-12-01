@@ -260,7 +260,7 @@ const Payment = () => {
 
                             ))}
                         </ul>
-                        <p className="total-pay">Total: {total}</p>
+                        <p className="total-pay">Total: {total.toFixed(2)}</p>
 
                         <div class="container">
                             {
@@ -270,7 +270,7 @@ const Payment = () => {
                                             <p className="total-pay">Discount Code Applied: {couponName}</p>
                                             <p className="total-pay">Discount Amount: ${price}</p>
                                             <hr></hr>
-                                            <p className="total-pay-dicount"> New Total: {discountTotal}</p>
+                                            <p className="total-pay-dicount"> New Total: {discountTotal.toFixed(2)}</p>
                                         </div>
                                     </>
                                 ) : (
@@ -279,7 +279,7 @@ const Payment = () => {
                                             <p className="total-pay">Discount Code Applied: {localStorage.getItem("couponName")}</p>
                                             <p className="total-pay">Discount Amount: ${localStorage.getItem("discountCode")}</p>
                                             <hr></hr>
-                                            <p className="total-pay-dicount"> New Total: {discountTotal}</p>
+                                            <p className="total-pay-dicount"> New Total: {discountTotal.toFixed(2)}</p>
                                         </div>
                                     </>
 
@@ -404,7 +404,7 @@ const Payment = () => {
                             )
                         }
                         {/* <Link to="/success"> */}
-                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
+                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal.toFixed(2)}</button>
                         {/* </Link> */}
                     </div>
                 </div>

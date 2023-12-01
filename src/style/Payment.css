@@ -59,7 +59,7 @@
 }
 
 .input-field {
-  width: 100%;
+  width: 98%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -132,3 +132,53 @@
   left: 90px;
 }
 
+@media screen and (max-width: 900px) {
+  .credit-card-page {
+    flex-direction: column;
+  }
+
+  .items-section,
+  .payment-section {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+    padding: 0px;
+  }
+
+  .my-btn {
+    margin: auto;
+    margin-bottom: 20px;
+    position: unset;
+  }
+
+  .items-ul,
+  .total-pay{
+    margin: 20px;
+  }
+
+  .items-h2 {
+    width: 200px;
+    margin: auto;
+    padding-top: 10px;
+  }
+
+  .payment-section h2 {
+    margin: auto;
+    width: 235px;
+  }
+
+  .card-info {
+    margin-left: 10px;
+  }
+
+  .input-field {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 89%;
+  }
+
+  .pay-btn {
+    display: block;
+    margin: 20px auto;
+  }
+}

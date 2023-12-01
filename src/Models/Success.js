@@ -182,7 +182,6 @@ export default function Success() {
       <Header />
       {
         cartItems.length === 0 ?  (
-          
           <> 
           {navigate("/menu")}  
           </>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../style/AdminMenu.css';
+import React, { useState } from "react";
+import "../style/Menu.css";
 
 const MenuItem = ({ item, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -28,33 +28,30 @@ const MenuItem = ({ item, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="food">
+    <div>
       {isEditing ? (
-        <div>
-          <div className='edit-div'>
-            <label className='edit-label'>Item Name</label>
+        <div className="edit-menu">
+          <div>
+            <label>Item Name</label>
             <input
-              className='edit-input'
               type="text"
               name="name"
               value={editedItem.name}
               onChange={handleInputChange}
             />
           </div>
-          <div className='edit-div'>
-            <label className='edit-label'>Price</label>
+          <div>
+            <label>Price</label>
             <input
-              className='edit-input'
               type="text"
               name="price"
               value={editedItem.price}
               onChange={handleInputChange}
             />
           </div>
-          <div className='edit-div'>
-            <label className='edit-label'>Image</label>
+          <div>
+            <label>Image</label>
             <input
-              className='edit-input'
               type="file"
               accept=".png,.jpg,.jpeg"
               onChange={(e) => {
@@ -66,30 +63,35 @@ const MenuItem = ({ item, onEdit, onDelete }) => {
               }}
             />
           </div>
+          <div>
+            <button className="ghost-button red-button" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button className="primary-button" onClick={handleSave}>
+              Save
+            </button>
+          </div>
         </div>
       ) : (
-        <div>
-          <div className='img-container'>
-            <img src={item.image} alt={item.name} className='food-img'/>
-          </div>
-          <div className='food-content'>
-            <span className='food-header'>{item.name}</span>
-            <span className='food-price'>${item.price}</span>
+        <div className="menu-card">
+          <img src={item.image} alt={item.name} className="food-img" />
+          <div className="menu-card-content">
+            <span>{item.name}</span>
+            <span>${item.price}</span>
+            <span>
+              <button
+                className="primary-button red-button"
+                onClick={() => onDelete(editedItem.id)}
+              >
+                Delete
+              </button>
+              <button className="primary-button" onClick={handleEdit}>
+                Edit
+              </button>
+            </span>
           </div>
         </div>
       )}
-      <div className='food-btns'>
-      {isEditing ? (
-        <div>
-          <button className='food-btn' onClick={handleSave}>Save</button>
-          <button className='food-btn' onClick={handleCancel}>Cancel</button>
-        </div>
-      ) : (
-        <button className='food-btn' onClick={handleEdit}>Edit</button>
-      )}
-       
-      <button className='food-btn' onClick={() => onDelete(editedItem.id)}>Delete</button>
-      </div>
     </div>
   );
 };

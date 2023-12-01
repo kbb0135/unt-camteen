@@ -3,7 +3,7 @@ import FoodContainer from "../Components/FoodContainer";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import "../style/review.css";
-import '../style/AdminMenu.css';
+import '../style/Menu.css';
 
 import Feedback from "../Components/FeedBack";
 
@@ -28,25 +28,24 @@ export default function Reviews() {
    // as the state changes
   useEffect(() => {
     makeApiReq()
+    console.log(menuItems)
   }, []);
 
-    const menuItemtoRender = showMore ? menuItems: menuItems.slice(0,3); 
 
   return (
     <div>
       <Header />
-      {menuItems.length ? (
+      {/* {menuItems.length ? ( */}
         <>
-          <div className="menu-items">
-            <div className="review-container">
-              <div className="food-section">
-                {menuItemtoRender.map((item) => (
+        <div className="menu">
+          <h2>Item reviews</h2>
+            <div className="menu-itemm">
+                {menuItems.map((item) => (
                   <FoodContainer key={item.id} item={item} />
                 ))}
               </div>
-            </div>
           </div>
-          <div className="show-more">
+          {/* <div className="show-more">
             <button
               className="show-more-btn"
               onClick={() => {
@@ -55,15 +54,13 @@ export default function Reviews() {
             >
               {showMore ? "Show less" : "Show more"}
             </button>
-          </div>
-          <br />
-          <br />
+          </div> */}
           <Feedback />
           <Footer />
         </>
-      ) : (
+      {/* ) : (
         <div className="loading">Loading...</div>
-      )}
+      )} */}
     </div>
   );
 }

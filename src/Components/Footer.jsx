@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../style/Footer.css";
 import { ReactComponent as Logo } from "../Assets/Logo.svg";
 import { FaPhone, FaEnvelope, FaMapLocationDot } from "react-icons/fa6";
@@ -9,9 +10,9 @@ const Footer = () => {
       <div>
         <span>
           <h3>University of North Texas</h3>
-          <a>UNT dining services</a> <br />
+          <Link to="https://dining.unt.edu/">UNT dining services</Link> <br />
           <br />
-          <a>University of North Texas</a>/
+          <Link to="https://www.unt.edu/">University of North Texas</Link>/
         </span>
         <span>
           <h3>Contact us</h3>

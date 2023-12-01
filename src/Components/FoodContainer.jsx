@@ -1,5 +1,6 @@
 import React from 'react'
 import '../style/style.css'
+import '../style/Menu.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 import Rating from './Rating';
 
@@ -10,16 +11,15 @@ const FoodContainer = ({ item }) => {
     const location = useLocation()
  
         return (
-                <div className='food'>
-                    <div className='img-container'>
-                    <img src={item.url} alt={item.name} className='food-img'/>
+                <div className='menu-card'>
+                    <div >
+                    <img src={item.url} alt={item.name} />
                     </div>
-                    <div className='food-content'>
-                        <p className='food-header'>{item.name}</p>
-                        <p className='food-category'>{item.category}</p>
+                    <div className='menu-card-content'>
+                        <span>{item.name}</span>
                         <Rating reviews={item.reviews}/>
-                        <div><p className='food-price'>&#x24;{item.price}</p></div>
-                        <button className='review-btn' onClick={() => navigate(`${location.pathname}/${item.category}/${item.id}`)}>Leave Review</button>
+                        <div><span>&#x24;{item.price}</span></div>
+                        <button className='primary-button' onClick={() => navigate(`${location.pathname}/${item.category}/${item.id}`)}>Leave Review</button>
                         
                     </div>
                 </div>

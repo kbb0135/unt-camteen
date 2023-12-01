@@ -57,10 +57,10 @@ function Notification() {
 
 
     return (
-        <div>
+        <div className='notification-page'>
             <Header />
             <h1>UNT Canteen Notifications</h1>
-            <div>
+            <div >
                 {editIndex !== null ? (
                     <>
                         <button onClick={updateNotification}>Update</button>
@@ -76,7 +76,7 @@ function Notification() {
                         <h3 className="notification-title">{notification.title}</h3>
                         <p className="notification-text">{notification.text}</p>
                         <div className="comment-separator"></div>
-                        <div className="notification-buttons">
+                        <div className="primary-button">
                         </div>
                     </li>
                 ))}

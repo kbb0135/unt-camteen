@@ -10,6 +10,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { auth, db } from '../firebase.js'
 import toast from 'react-hot-toast'
 import { collection, getDocs } from '@firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+
 
 
 
@@ -24,15 +27,33 @@ export default function Cart() {
     const location = useLocation()
     const navigate = useNavigate()
     const [stuff, setStuff] = useState([])
-    const[test,setTest] = useState("")
+    const [test, setTest] = useState("")
     const [couponName, setCouponName] = useState("");
+    const [user, setUser] = useState(false);
+    const [value, setValue] = useState(null)
+    const [isCoupon, setIsCoupon] = useState(false);
+
+
+    //get the user profile for coupon
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null)
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+
 
     // ** calculate  total
     const originalPrice = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
     )
-    const discountPer = (discount / originalPrice) * 100
+    var discountPer = (discount / originalPrice) * 100
 
     const messageStyle = {
         margin: 0,
@@ -41,39 +62,102 @@ export default function Cart() {
         color: isValidCoupon ? '#666' : '#b32d0f'
     }
 
-    const handleDiscount = async() => {
+
+    let messages = 'Invalid Discount Code'
+    let discountAmt = 0
+    const HandleDiscount = async () => {
+
+
 
         console.log("here")
         console.log(test)
         const snapshot = await getDocs(collection(db, "Coupons"));
-        const coupons = snapshot.docs.map(doc => ({
+        const coupons = await snapshot.docs.map(doc => ({
             name: doc.data().coupon,
             price: doc.data().price,
-        }));
+        })
+        );
         await setStuff(coupons);
         console.log(stuff)
         const matchedCoupon = coupons.find(coupon => coupon.name === test)
-        console.log("matched coupon=",matchedCoupon)
+        console.log("matched coupon=", matchedCoupon)
         if (matchedCoupon) {
             const discountPrice = matchedCoupon.price;
+            await setValue(discountPrice)
             console.log(discountPrice)
             setCouponName(matchedCoupon.name);
+            if (user) {
+                const couponData = auth.currentUser.email + "Coupons"
+                setDoc(doc(db, couponData, "coupons"), {
+                    coupon: test,
+                    price: discountPrice
+                })
+            }
+
         }
 
-        let message = 'Invalid Discount Code'
-        let discountAmt = 0
+
 
         // ** If code matches
         if (matchedCoupon) {
-            discountAmt = matchedCoupon.price;
-            message = `$${discountAmt} is applied`
-            console.log("coup=", coup)
+            if (user) {
+                discountAmt = matchedCoupon.price;
+                messages = `$${discountAmt} is applied`
+                console.log("coup=", coup)
+            }
+            else {
+                discountAmt = matchedCoupon.price;
+                messages = `$${discountAmt} is applied`
 
-            localStorage.setItem('coupon', couponName)
-            localStorage.setItem('discountCode', discountAmt)
+                console.log("coup=", coup)
+                localStorage.setItem('coupon', couponName)
+                localStorage.setItem('discountCode', discountAmt)
+                localStorage.setItem('couponName', test)
+
+
+
+
+
+            }
+
 
         }
-        console.log("coup=", coup)
+        console.log("coup=", test)
+
+        if (user) {
+            const couponData = auth.currentUser.email + "Coupons"
+            const docRef = await doc(db, couponData, "coupons")
+            const docSnapshot = await getDoc(docRef)
+            if (docSnapshot.exists()) {
+                setIsCoupon(true)
+                messages = `$${discountAmt} is applied`
+
+
+            }
+            else {
+                await setDoc(doc(db, couponData, "coupons"), {
+                    coupon: test,
+                    price: discountAmt
+                })
+                toast.success("Coupon Added")
+            }
+
+        }
+        else {
+            // toast.error("No user here")
+            const data = localStorage.getItem("discountCode")
+            const couponName = localStorage.getItem("couponName") // Retrieve the coupon name for the guest
+            console.log("data=", data)
+            console.log(couponName)
+            if (data && couponName) {
+                setIsCoupon(true)
+                // Coupon applied for the guest
+                messages = `$${data} is applied for ${couponName}`;
+            }
+        }
+
+
+
 
         // ** update state
         setIsValidCoupon(test === couponName)
@@ -82,46 +166,86 @@ export default function Cart() {
         setCoup('')
     }
 
-    const makePayment = async () => {
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (user) {
+                const couponData = auth.currentUser.email + "Coupons"
+                const docRef = await doc(db, couponData, "coupons")
+                const docSnapshot = await getDoc(docRef)
+                if (docSnapshot.exists()) {
+                    setIsCoupon(true)
+                    messages = `$${docSnapshot.data().price} is applied for ${docSnapshot.data().coupon}`
+                    setMessage(messages)
+                    // setTest(docSnapshot.data().coupon)
+                    setDiscount(docSnapshot.data().price)
+                    discountPer = (discount / originalPrice) * 100
 
+
+
+
+                }
+
+            }
+            else {
+               
+                const data = localStorage.getItem("discountCode")
+                const couponName = localStorage.getItem("couponName")
+                console.log("t=",data)
+                console.log("c=", couponName)
+                if (data && couponName) {
+                    setIsCoupon(true);
+                    setDiscount(parseFloat(data)); // Ensure to parse the data if it's a number
+                    setCouponName(couponName);
+                    setMessage(`$${data} is applied for ${couponName}`);
+
+                }
+            }
+        }
+        fetchUser()
+
+    })
+
+
+    const makePayment = async () => {
         /*
         1. We want to make sure that registered user
            only gets to check out items
         */
-        if (!auth.currentUser?.uid) {
-            navigate('/auth/login', { state: { from: location }, replace: true })
-            toast('Please login or register to purchase the meal!', { duration: 6000 })
-            return
-        }
-        const stripe = await loadStripe(
-            'pk_test_51OA0QdECOmJ4IJcKXYeYf5uMFPBsSUfKqcem25byFChYezFxxwSBp5gowGGZzd93FQ0HghGjFmn8x7UT6t9oVlg800lP2W6xoB'
-        )
-        const body = {
-            products: cartItems
-        }
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-        try {
-            const response = await fetch(
-                'http://localhost:7000/api/create-checkout-session',
-                {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify(body)
-                }
-            )
-            const session = await response.json()
-            const result = stripe.redirectToCheckout({
-                sessionId: session.id
-            })
+        // if (!auth.currentUser?.uid) {
+        //     navigate('/auth/login', { state: { from: location }, replace: true })
+        //     toast('Please login or register to purchase the meal!', { duration: 6000 })
+        //     return
+        // }
+        // const stripe = await loadStripe(
+        //     'pk_test_51OA0QdECOmJ4IJcKXYeYf5uMFPBsSUfKqcem25byFChYezFxxwSBp5gowGGZzd93FQ0HghGjFmn8x7UT6t9oVlg800lP2W6xoB'
+        // )
+        // const body = {
+        //     products: cartItems
+        // }
+        // const headers = {
+        //     'Content-Type': 'application/json'
+        // }
+        // try {
+        //     const response = await fetch(
+        //         'http://localhost:7000/api/create-checkout-session',
+        //         {
+        //             method: 'POST',
+        //             headers: headers,
+        //             body: JSON.stringify(body)
+        //         }
+        //     )
+        //     const session = await response.json()
+        //     const result = stripe.redirectToCheckout({
+        //         sessionId: session.id
+        //     })
 
-            console.log(result, 'rest')
-        } catch (error) {
-            toast.error('Could not connect to server')
-            console.error(error)
+        //     console.log(result, 'rest')
+        // } catch (error) {
+        //     toast.error('Could not connect to server')
+        //     console.error(error)
 
-        }
+        // }
+        navigate("/payment")
 
     }
     // const getCoupon = async () => {
@@ -147,7 +271,6 @@ export default function Cart() {
     return (
         <>
             <Header />
-        
 
             <section className="section-cart">
                 <h2 className="section-cart__heading">Shopping Cart</h2>
@@ -163,19 +286,32 @@ export default function Cart() {
                             <p className="checkout__price-discount">
                                 ${(originalPrice - discount).toFixed(2)}
                             </p>
-                            <p className="checkout__price-original">
-                                ${originalPrice.toFixed(2)}
-                            </p>
-                            <p
-                                style={{
-                                    margin: 0,
-                                    marginBottom: '1.5rem',
-                                    fontSize: '1.125rem',
-                                    color: '#444'
-                                }}
-                            >
-                                {discountPer.toFixed(2)}% off
-                            </p>
+                            <>
+                                {isCoupon ? (
+                                    <>
+                                        <p className="checkout__price-original">
+                                            ${originalPrice.toFixed(2)}
+                                        </p>
+
+                                        <p
+                                            style={{
+                                                margin: 0,
+                                                marginBottom: '1.5rem',
+                                                fontSize: '1.125rem',
+                                                color: '#444'
+                                            }}
+                                        >
+                                            {discountPer.toFixed(2)}% off
+                                        </p>
+                                    </>
+
+                                ) : (
+                                    <></>
+                                )}
+                            </>
+
+
+
                             <a
                                 href="javascript:;"
                                 className="checkout-btn"
@@ -185,17 +321,7 @@ export default function Cart() {
                             </a>
                             <hr />
                             <div className="section-promotion">
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        letterSpacing: '1px',
-                                        marginTop: '2rem',
-                                        marginBottom: '1rem',
-                                        fontSize: '1.125rem'
-                                    }}
-                                >
-                                    Promotions
-                                </p>
+                                <p className='promotion-p'>Promotions</p>
                                 <p style={messageStyle}>{message}</p>
                                 <div className="section-coupon">
                                     <input
@@ -207,7 +333,7 @@ export default function Cart() {
                                     <a
                                         href="javascript:;"
                                         className="section-coupon__btn"
-                                        onClick={() => handleDiscount()}
+                                        onClick={() => HandleDiscount()}
                                     >
                                         Apply
                                     </a>

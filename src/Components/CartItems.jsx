@@ -52,13 +52,13 @@ const CartItem = ({item, quantity, id, add2cart, removeFromCart}) => {
                        
                         <div className="cart-action__add">
                             <button  className="cart-action__add-btn" onClick={() => removeFromCart(item.name)}>-</button>
-                            <p style={{padding: 0, margin: 0}}>{quantity}</p>
+                            <p className='cart-quantity'>{quantity}</p>
                             <button className="cart-action__add-btn" onClick={() => add2cart({...item, quantity})}>+</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
+            <div className='cart-item-price-div'>
                 <p className="cart-item__price">${(item.price * quantity).toFixed(2)}</p>
             </div>
         </div>

@@ -360,10 +360,5 @@ const NoItem = () => {
                 <a href="/menu">Keep shopping</a>
             </div>
         </div>
-
-        {/* <Footer /> */}
-      </div>
     )}
-  </div>
-);
-}
+

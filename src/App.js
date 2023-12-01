@@ -21,7 +21,6 @@ import Payment from "./Models/Payment.jsx";
 import ChangePassword from "./Components/ChangePassword.jsx";
 import ForgetPassword from "./Models/ForgetPassword.jsx";
 import ChangeUserDetails from "./Components/ChangeUserDetails.jsx";
-import OrderCategory from "./Models/OrderCategory.jsx";
 import Header from "./Components/Header.jsx";
 import PageNotFound from "./Models/PageNotFound.js";
 import Unauthorized from "./Models/Unauthorized.js";
@@ -118,9 +117,6 @@ const App = () => {
             <Route
             path="/payment"
             element={<Payment />} />
-            <Route
-            path="/ordercategory"
-            element={<OrderCategory />} />
             <Route
             path="/changepassword"
             element={<ChangePassword />} />

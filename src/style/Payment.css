@@ -108,10 +108,10 @@
   margin: 10px 0; /* Add spacing between the paragraphs */
 }
 
-/* Optional: Add media query for smaller screens */
 @media screen and (max-width: 768px) {
   .my-btn {
     padding: 15px;
+    justify-content: flex-start;
   }
 
   .total-pay, .total-pay-dicount {

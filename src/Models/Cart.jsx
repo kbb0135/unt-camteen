@@ -321,17 +321,7 @@ export default function Cart() {
                             </a>
                             <hr />
                             <div className="section-promotion">
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        letterSpacing: '1px',
-                                        marginTop: '2rem',
-                                        marginBottom: '1rem',
-                                        fontSize: '1.125rem'
-                                    }}
-                                >
-                                    Promotions
-                                </p>
+                                <p className='promotion-p'>Promotions</p>
                                 <p style={messageStyle}>{message}</p>
                                 <div className="section-coupon">
                                     <input

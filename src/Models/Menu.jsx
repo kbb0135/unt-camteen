@@ -7,7 +7,7 @@ import { getDocs, collection } from "firebase/firestore";
 function Menu() {
   const [menuItems, setMenuItems] = useState([]);
   const [cart, setCart] = useState([]);
-  const [budget, setBudget] = useState();
+  const [budget, setBudget] = useState("");
   const [isBudgetSet, setIsBudgetSet] = useState(false);
   const [isDisplayEntree, setDisplayEntree] = useState(true);
   const [isDisplaySide, setDisplaySide] = useState(true);
@@ -17,12 +17,23 @@ function Menu() {
     setCart([...cart, item]);
   };
 
+  const handleUserBudget = (e) => {
+    setBudget(parseInt(e.target.value, 10));
+    if (e.target.value) {
+      
+      setIsBudgetSet(true)
+    } else {
+      setIsBudgetSet(false);
+      setBudget("")
+    } 
+  }
   const handleBudgetChange = (item, e) => {
+    console.log("budget change")
     setBudget((prevBudget) => {
       const updatedBudget = prevBudget - item.price;
       if (updatedBudget >= 0) {
         // Update budget only if it's not negative
-        return updatedBudget;
+        return Number(updatedBudget.toFixed(2));
       } else {
         alert("You don't have enough budget!");
         // Revert to the previous budget value if it would become negative
@@ -69,7 +80,6 @@ function Menu() {
 
     setData();
   }, [isDisplayDessert, isDisplayDrink, isDisplayEntree, isDisplaySide]);
-
   return (
     <div className="menu">
       <h2>Menu</h2>
@@ -79,7 +89,7 @@ function Menu() {
           type="text"
           placeholder="Enter your budget $"
           value={budget}
-          onChange={(e) => parseInt(e.target.value, 10)}
+          onChange={(e) => { handleUserBudget(e) }}
         ></input>
       </div>
       <div className="menu-filter">

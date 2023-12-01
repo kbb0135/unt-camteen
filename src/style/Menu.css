@@ -116,10 +116,15 @@
 }
 .budget-planner{
   width: min(25rem, 100%);
-  background-color: var(--off-background-color);
+
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding: 1rem;
+}
+
+.budget-planner input{
+  background-color: var(--off-background-color);
 }
 
 @media (width < 768px) {

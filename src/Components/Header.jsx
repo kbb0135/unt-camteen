@@ -30,7 +30,6 @@ const Header = () => {
   const [isUserDropdown, setUserDropdown] = useState(user);
   useEffect(() => {
     const handleClick = (event) => {
-      console.log(event.target);
       if (event.target.id !== "user-icon") {
         setUserDropdown(false);
       }
@@ -102,7 +101,6 @@ const Header = () => {
               id="user-icon"
               onClick={() => {
                 setUserDropdown((prev) => !prev);
-                console.log(userName);
               }}
             >
               <FaUser />

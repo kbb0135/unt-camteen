@@ -1,3 +1,5 @@
+/* Payment.css */
+
 /* CreditCardPage.css */
 
 .credit-card-page {
@@ -5,7 +7,6 @@
   justify-content: space-between;
   margin: 20px;
 }
-
 
 .img-cart {
   width: 100px;
@@ -31,11 +32,7 @@
   padding: 0;
 }
 
-.items-section ul li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #333;
-}
+
 
 .payment-section {
   flex: 1;
@@ -84,18 +81,54 @@
 #payButton:hover {
   background-color: #b30000;
 }
-.total-pay {
 
- font-weight: bold;
- font-size: 18px;
- margin-left: 150px; 
+
+
+
+/*new addition */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin based on your design */
 }
-.total-pay-dicount {
-  color:red;
+
+.my-btn {
+  background-color: #f0f0f0; /* Add a background color for better visibility */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Add margin to separate from other elements */
+}
+
+.total-pay, .total-pay-dicount {
+  font-size: 16px;
+  margin: 10px 0; /* Add spacing between the paragraphs */
+}
+
+/* Optional: Add media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .my-btn {
+    padding: 15px;
+  }
+
+  .total-pay, .total-pay-dicount {
+    font-size: 14px;
+  }
+}
+.items-section ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
 }
 .my-btn {
-    position: relative;
-    top: 20px;
-    left: 90px;
-  
+  position: relative;
+  top: 20px;
+  left: 90px;
 }
+

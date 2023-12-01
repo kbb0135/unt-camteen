@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-
+import NavBar from "./NavBar.jsx";
+import Footer from '../Components/Footer';
 import {
     fetchNotifications,
     deleteNotification,
@@ -193,6 +194,8 @@ export const Notifcation = () => {
     }
 
     return (
+        <>
+        <NavBar/>
         <section className="section-notification-page">
             <div className="notification-page__header d-flex">
                 <h2>All Notifications</h2>
@@ -274,7 +277,9 @@ export const Notifcation = () => {
                 handleCancel={closeDeleteForm}
                 handleConfirmation={handleDeleteConfirmation}
             />
-        </section>
+            </section>
+            <Footer/>
+            </>
     )
 }
 

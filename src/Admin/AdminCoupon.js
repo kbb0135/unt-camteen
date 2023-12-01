@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { auth, db } from "../firebase.js"
 import { onAuthStateChanged } from 'firebase/auth'
-import Header from '../Components/Header.jsx'
+import NavBar from "./NavBar.jsx";
+import Footer from '../Components/Footer.jsx';
 import { Notifier } from '../Components/Notifier.jsx'
 import { setDoc, doc } from 'firebase/firestore'
 
@@ -45,9 +46,11 @@ export default function AdminCoupon() {
 
 
     return (
+        <>
+             <NavBar />
         <div>
             <div>
-                <Header />
+               
                 <h1 className="text-center">Admin Coupon</h1>
                 <h3>Enter Title</h3>
                 <input
@@ -86,6 +89,8 @@ export default function AdminCoupon() {
             }
 
 
-        </div>
+            </div>
+            <Footer/>
+            </>
     )
 }

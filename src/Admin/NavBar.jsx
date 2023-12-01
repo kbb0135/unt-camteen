@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
+import { ReactComponent as Logo } from "../Assets/Logo.svg";
 import "../style/Header.css";
-import "../style/Utility.css";
 import { auth, db } from "../firebase.js";
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../Models/CartContext.jsx";
@@ -13,30 +13,47 @@ import {
   FaMoon,
   FaBars,
   FaXmark,
+  FaChevronRight,
+  FaArrowRightToBracket,
+  FaPenToSquare,
+  FaLock,
 } from "react-icons/fa6";
 import { ThemeContext } from "../App";
 
-const NavBar = () => {
+const Header = () => {
   const { getTotalQuantity } = useCart();
   const [isNavClosed, setNavClosed] = useState(true);
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [user, setUser] = useState("");
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
+  const [isUserDropdown, setUserDropdown] = useState(user);
+  useEffect(() => {
+    const handleClick = (event) => {
+      console.log(event.target);
+      if (event.target.id !== "user-icon") {
+        setUserDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          const docRef = await doc(db, "Users", user.uid)
-          const snapShot = await getDoc(docRef)
+          const docRef = await doc(db, "Users", user.uid);
+          const snapShot = await getDoc(docRef);
           const userData = snapShot.data();
-          setUserName(userData.FirstName)
-        }
-        catch { }
+          setUserName(userData.FirstName);
+        } catch {}
         user.getIdTokenResult();
         // }
         setUser(user);
-
         console.log((await user.getIdTokenResult()).claims.admin);
       } else {
         setUser(null);
@@ -56,67 +73,91 @@ const NavBar = () => {
   };
 
   return (
-    <header className="flex-row jc-sb ali-end">
-      <div
-        className="Logo"
+    <header>
+      <Logo
+        className="logo"
         onClick={() => {
-          navigate("/");
+          navigate("/adminmenu");
         }}
-      >
-        <span>UNT Canteen</span>
-      </div>
+        style={{ fill: "var(--primary-color)" }}
+      />
 
       <nav>
         <ul navclosed={isNavClosed.toString()}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/adminmenu">Manage Menu</Link>
           </li>
           <li>
-            <Link to="/changeUserDetails">Change Admin Details</Link>
+            <Link to="/adminnotification">Manage Notifications</Link>
           </li>
           <li>
-            <Link to="/changepassword">Change password</Link>
+            <Link to="/admincoupon">Manage Coupon</Link>
           </li>
-          <li>
-            <Link to="/adminmenu">Admin Add/Delete</Link>
-          </li>
-          <li>
-            <Link to="/adminnotification">Admin Notifications</Link>
-          </li>
-          <li>
-            <Link to="/changetoUserView">UserView</Link>
-          </li>
-          <li>
-            {user ? (
-              // If user is logged in, display user's name and logout button
-              <>
-                <p>Welcome, {userName}</p>
-                <button onClick={handleLogOut}>Logout</button>
-              </>
-            ) : (
-              // If user is not logged in, display login button and signup link
-              <>
-                <Link to="/auth/login">Login</Link>
-              </>
-            )}
+          <li className="mobile-first-li">
+            <div
+              className="nav-icon"
+              id="user-icon"
+              onClick={() => {
+                setUserDropdown((prev) => !prev);
+                console.log(userName);
+              }}
+            >
+              <FaUser />
+              <ul
+                className={`user-info-dropdown ${
+                  isUserDropdown ? "user-dropdown-display" : ""
+                }`}
+              >
+                {user ? (
+                  <>
+                    <li>
+                      <h3>Welcome, {userName}</h3>{" "}
+                    </li>
+                    <li>
+                      <Link to="/changeUserDetails">
+                        <FaPenToSquare />
+                        Manage user details
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/changepassword">
+                        <FaLock />
+                        Manage Password
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link to="#" onClick={handleLogOut}>
+                        <FaArrowRightToBracket />
+                        Log out
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/auth/login">Login</Link>
+                    </li>
+                    <li>
+                      <Link to="/auth/signup">Signup</Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
           </li>
           <li onClick={() => toggleDarkMode(!isDarkMode)}>
-            <span className="dark-mode-toggle">
+            <button type="button" className="dark-mode-toggle nav-icon">
               {isDarkMode ? (
                 <FaMoon title="Change to lightmode" />
               ) : (
                 <FaSun title="Change to darkmode" />
               )}
-            </span>
+            </button>
           </li>
         </ul>
       </nav>
-      <div className="flex-row cart nav-icon">
-        <Link to="/cart" title="Go to cart">
-          <FaCartShopping />
-        </Link>
-        <span className="cart-quan">{getTotalQuantity()}</span>
-      </div>
+      <span></span>
       <button
         type="button"
         className="mobile-nav-toggle nav-icon"
@@ -128,4 +169,4 @@ const NavBar = () => {
     </header>
   );
 };
-export default NavBar;
+export default Header;

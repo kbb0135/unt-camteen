@@ -65,33 +65,35 @@
   --gray-7: #cccccc;
   --gray-8: #e6e6e6;
   --background: #FFF6E5;
+  --background-color: var(--white);
+  --off-background-color: var(--gray-8);
+  --on-background-color: var(--gray-2);
+  --off-onbackground-color: var(--gray-4);
   --primary-color: var(--primary-green-2);
-  --primary-color-8: var(--primary-green-8);
-  --primary-color-hover: var(--primary-green-1);
-  --text-color: var(--gray-4);
-  --text-color-hover: var(--primary-green-2);
+  --off-primary-color: var(--primary-green-4);
   --on-primary-color: var(--white);
+  --off-onprimary-color: var(--gray-8);
 }
 .dark-mode{
-  --primary-color: var(--secondary-green-4);  
-  --primary-color-8: var(--secondary-green-8);
-  --primary-color-hover: var(--secondary-green-3);
-  --text-color: var(--white);
-  --text-color-hover: var(--secondary-green-4);
-  --on-primary-color: var(--gray-0);
+  --background-color: var(--gray-0);
+  --off-background-color: var(--gray-1);
+  --on-background-color: var(--white);
+  --off-onbackground-color: var(--gray-7);
+  --primary-color: var(--secondary-green-4);
+  --off-primary-color: var(--secondary-green-5);
+  --on-primary-color: var(--gray-1);
+  --off-onprimary-color: var(--gray-4);
 }
 /*Global Style*/
 html {
   font-size: 16px;
 }
-
 body {
   margin: 0;
   padding: 0;
   background-size: cover; /* Add this property to make the image fit within the body element */
   background-repeat: no-repeat; /* Optional: prevent image from repeating */
   background-position: center center; /* Optional: center the image horizontally and vertically */
-  overflow-x: hidden;
 } 
 body,
 input,
@@ -100,12 +102,12 @@ button {
   font-family: "Roboto", Arial, sans-serif;
   font-size: 1rem;
 }
-
-img {
-  max-width: 100%; /* will prevent the overflow in small screen */
-  display: block;
+a {
+  text-decoration: none;
 }
-
+a:hover {
+  text-decoration: underline;
+}
 .App {
   position: absolute;
   top: 0;
@@ -115,239 +117,47 @@ img {
 }
 label {
   font-weight: var(--font-weight-medium);
-  color: var(--gray-2);
+  color: var(--on-background-color);
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="file"],
+input[type="select"],
+select {
   width: 100%;
-  padding: 8px;
-  border: 1px solid var(--gray-8);
-  border-radius: var(--border-r-4);
+  padding: 0.5rem;
+  border: none;
   box-sizing: border-box;
-  background-color: var(--white);
+  background-color: var(--background-color);
+  color: var(--on-background-color);
+  margin-bottom: 1.5rem;
 }
-input:focus {
-  outline: 4px solid var(--primary-color-hover);
+input[type="checkbox"]{
+
+  background-color: var(--primary-color);
+  color: var(--on-primary-color);
 }
 input::placeholder {
-  color: var(--gray-6);
-}
-/* For accessibility, I'm not sure why*/
-input:focus-visible {
-  outline: 4px solid var(--primary-green-5);
+  color: var(--off-onbackground-color);
 }
 #root{
   max-width: 100%;
-  box-sizing: border-box;
 }
-.dark{
-  --background: var(--gray-0);
-  --call-to-action: var(--secondary-green-2);
-  --text-color: var(--yellow-5);
+p{
+  line-height: 1.5rem;
 }
-.EagleImg {
-  width: 5rem;
-}
-
-.untbar-eagle {
-  position: absolute;
-  left: 7px;
-  top: 5%;
-  height: 7rem;
-}
-
-
-.untHeaderTitle {
-  flex-grow: 1;
-}
-
-.untHeaderCol1 {
-  flex: 0.5;
-}
-
-.untHeaderCol2 {
-  flex: 2;
-}
-
-.untHeaderCol3 {
-  flex: 1;
-  align-items: center;
-  align-content: center;
-}
-
-.Header_btn {
-  color: var(--white);
-  background-color: var(--black);
-  transition: transform 0.2s ease-in-out;
-}
-
-.Header_btn:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-.untbarText {
-  margin: 0;
-}
-
-.untHeaderLogin {
-  align-content: center;
-}
-
-.MenuPage {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.MenuBody {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  padding: 10px;
-}
-
-.card {
-  width: 270px;
-  margin: 20px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-.card__image {
-  margin-bottom: 0;
-}
-
-.card_NameAndPrice {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card__title {
-  margin: 4px;
-}
-
-.card_price {
-  margin: 4px;
-}
-
-.card_rating {
-  margin: 0;
-}
-
-.card__location {
-  background-color: var(--untBackground);
-  color: var(--white);
-  border-radius: 3px;
-  height: 20px;
-  width: 115px;
-  margin-top: 10;
-  font-size: x-small;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.add-delete {
-  background-color: var(--untBackground);
-  color: var(--white);
-  border-radius: 3px;
-  height: 20px;
-  width: 115px;
-  margin-top: 10;
-  font-size: x-small;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.headNavbar {
-  background-color: var(--untBackground);
-  width: 100%;
-  position: absolute;
-  top: 0;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-}
-
-.footerDiv {
-  background-color: var(--untBlack);
-  margin-top: auto;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.footerTitle {
-  color: var(--untOliveGreen);
-  margin: 0;
-}
-
-.footerPara {
-  color: var(--white);
-  font-size: small;
-  margin: 0;
-}
-
-.footerUNTCol {
-  flex: auto;
-}
-
-.footerUNTColEnd {
-  align-content: end;
-}
-
-.footerUNTColSection {
-  margin: 2rem;
-}
-
-.footerUNTColTitle {
-  color: var(--white);
-}
-
-.footerUNTColAddress {
-  color: var(--white);
-}
-
-.footerUNTColLocation {
-  color: var(--untOliveGreen);
-}
-
-.unt-logo {
-  font-size: 1.2em;
-  margin: 0;
-}
-.unt-title {
-  font-size: 1.2em;
-}
-.unt-logo-f {
-  color: #ffff;
-}
-
-
 *:focus {
-  outline: 4px solid var(--primary-green-5);
+  outline: 3px solid var(--primary-green-5);
 }
-
-.eagle-separator{
+.te-invalid{
+  color: var(--red-5)
+}
+.box-invalid{
+  border: 0.2rem solid var(--red-5);
+}
+img{
   width: 100%;
-  height: 3rem;
-  filter: invert(95%) sepia(32%) saturate(6667%) hue-rotate(357deg) brightness(104%) contrast(101%);
-}
-
-@media (width < 600px) {
-  .footerDiv {
-    flex-direction: column;
-  }
-  .decor {
-    display: none;
-  }
 }

@@ -3,7 +3,7 @@ import FoodContainer from "../Components/FoodContainer";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import "../style/review.css";
-import '../style/AdminMenu.css';
+import '../style/Menu.css';
 
 import Feedback from "../Components/FeedBack";
 

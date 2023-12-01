@@ -151,14 +151,14 @@ export default function AdminAddDelete() {
     <div>
       <NavBar />
       <div className="menu">
-        <h1>Menu Edit</h1>
+        <h2>Menu Edit</h2>
         <button
           className="primary-button"
           onClick={async () => setIsFormOpen(true)}
         >
           Add New Item
         </button>
-        {isFormOpen && <ItemForm onAdd={handleAdd} />}
+        {isFormOpen && <ItemForm onAdd={handleAdd} setIsFormOpen={ setIsFormOpen} />}
         <div className="menu-items">
           {menuItems.map((item) => (
             <MenuItem

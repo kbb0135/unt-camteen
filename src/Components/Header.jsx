@@ -122,12 +122,8 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <Link to="/cart" className="cart nav-icon" title="Go to cart">
-        <FaCartShopping />
-        <span className="cart-quan">4</span>
-      </Link>
 
-      <div className="flex-row cart nav-icon">
+      <div className="cart nav-icon">
         <Link to="/cart" title="Go to cart">
           <FaCartShopping />
         </Link>

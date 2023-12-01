@@ -82,7 +82,7 @@ function Home() {
           </button>
           <button
             type="button"
-            className="ghost-button large-button sharp-button"
+            className="outline-button large-button sharp-button"
             onClick={() => {
               navigate("/auth/signup");
             }}

@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
+import { ReactComponent as Logo } from "../Assets/Logo.svg";
 import "../style/Header.css";
-import "../style/Utility.css";
 import { auth, db } from "../firebase.js";
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../Models/CartContext.jsx";
 import {
   FaCartShopping,
   FaUser,
@@ -17,22 +16,20 @@ import {
 import { ThemeContext } from "../App";
 
 const NavBar = () => {
-  const { getTotalQuantity } = useCart();
   const [isNavClosed, setNavClosed] = useState(true);
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [user, setUser] = useState("");
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
-          const docRef = await doc(db, "Users", user.uid)
-          const snapShot = await getDoc(docRef)
+          const docRef = await doc(db, "Users", user.uid);
+          const snapShot = await getDoc(docRef);
           const userData = snapShot.data();
-          setUserName(userData.FirstName)
-        }
-        catch { }
+          setUserName(userData.FirstName);
+        } catch {}
         user.getIdTokenResult();
         // }
         setUser(user);
@@ -56,67 +53,54 @@ const NavBar = () => {
   };
 
   return (
-    <header className="flex-row jc-sb ali-end">
-      <div
-        className="Logo"
+    <header>
+      <Logo
+        className="logo"
         onClick={() => {
           navigate("/");
         }}
-      >
-        <span>UNT Canteen</span>
-      </div>
+        style={{ fill: "var(--primary-color)" }}
+      />
 
       <nav>
         <ul navclosed={isNavClosed.toString()}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/adminmenu">Menu Manage</Link>
           </li>
           <li>
-            <Link to="/changeUserDetails">Change Admin Details</Link>
+            <Link to="/adminnotification">Notification Manage</Link>
           </li>
           <li>
-            <Link to="/changepassword">Change password</Link>
-          </li>
-          <li>
-            <Link to="/adminmenu">Admin Add/Delete</Link>
-          </li>
-          <li>
-            <Link to="/adminnotification">Admin Notifications</Link>
-          </li>
-          <li>
-            <Link to="/changetoUserView">UserView</Link>
+            <Link to="/">Coupon Manage</Link>
           </li>
           <li>
             {user ? (
-              // If user is logged in, display user's name and logout button
               <>
                 <p>Welcome, {userName}</p>
                 <button onClick={handleLogOut}>Logout</button>
               </>
             ) : (
-              // If user is not logged in, display login button and signup link
               <>
-                <Link to="/auth/login">Login</Link>
+                <Link to="/auth/login">
+                  <FaUser />
+                </Link>
               </>
             )}
           </li>
-          <li onClick={() => toggleDarkMode(!isDarkMode)}>
-            <span className="dark-mode-toggle">
+          <li
+            onClick={() => toggleDarkMode(!isDarkMode)}
+            className="dark-mode-toggle"
+          >
+            <button type="button" className="nav-icon">
               {isDarkMode ? (
                 <FaMoon title="Change to lightmode" />
               ) : (
                 <FaSun title="Change to darkmode" />
               )}
-            </span>
+            </button>
           </li>
         </ul>
       </nav>
-      <div className="flex-row cart nav-icon">
-        <Link to="/cart" title="Go to cart">
-          <FaCartShopping />
-        </Link>
-        <span className="cart-quan">{getTotalQuantity()}</span>
-      </div>
       <button
         type="button"
         className="mobile-nav-toggle nav-icon"

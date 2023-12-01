@@ -23,7 +23,7 @@ const MenuItemCard = ({
       } else {
         if (budget - item.price >= 0) {
           addToCart(item);
-          setMessage("Added to cart!!");
+          setMessage( item.name + " added to cart!!");
           setBudget(item);
           console.log("Here");
         } else {
@@ -35,7 +35,7 @@ const MenuItemCard = ({
         //if budget is not set, call this function directly
         console.log("no budget")
       addToCartWithoutBudget(item);
-      setMessage("Item Added to Cart");
+      setMessage( item.name + " added to Cart");
     }
   };
 
@@ -45,10 +45,10 @@ const MenuItemCard = ({
         <img src={item.image} alt={item.name} className="food-img" />
       </Link>
       <div className="menu-card-content">
-        <span className="menu-item-name">{item.name}</span>
-        <span className="menu-item-price">&#x24;{item.price}</span>
+        <span>{item.name}</span>
+        <span className="menu-card-price">&#x24;{item.price}</span>
         <div>
-          <button className="outline-button small-button" onClick={handleAddToCart}>Add to Cart <FaPlus/></button>
+          <button className="outline-button plain-button small-button" onClick={handleAddToCart}>Add to Cart <FaPlus/></button>
           <Notifier message={message} setMessage={setMessage} />
         </div>
       </div>

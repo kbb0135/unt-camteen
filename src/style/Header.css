@@ -33,6 +33,9 @@ header ul li a:hover {
   text-decoration: none;
   color: var(--off-onbackground-color);
 }
+header nav{
+  max-width: 100%;
+}
 .mobile-nav-toggle {
   padding: 0;
   border: none;

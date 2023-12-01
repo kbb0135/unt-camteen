@@ -4,6 +4,7 @@ import { Notifier } from "./Notifier";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import "../style/style.css";
+import toast from "react-hot-toast";
 
 const MenuItemCard = ({
   item,
@@ -23,16 +24,19 @@ const MenuItemCard = ({
                   if (budget - item.price >= 0) {
                       addToCart(item);
                       setMessage('Added to cart!!');
+                      toast.success('Added to cart!!');
                       setBudget(item);
                       console.log("Here");
                   } else {
                       // setMessage("You don't have enough budget!");
-                      alert("You do not have enough budget!");
+                      toast.error("You do not have enough budget!");
+                      toast.error("Item not added to the Cart")
                   }
               }
           } else {
               //if budget is not set, call this function directly
               addToCartWithoutBudget(addToCart(item));
+              toast.success('Item Added to Cart');
               setMessage('Item Added to Cart');
           }
       };

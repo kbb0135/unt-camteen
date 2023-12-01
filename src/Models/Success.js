@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'
 import { Notifier } from '../Components/Notifier';
 import { useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 export default function Success() {
@@ -21,6 +22,7 @@ export default function Success() {
   const [email, setEmail] = useState('');
   const [items, setItems] = useState([])
   const [user,setUser] = useState([])
+  const [isEmail, setIsEmail] =useState(false)
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -43,6 +45,7 @@ export default function Success() {
         setEmail(user.email);
       } else {
         setUser(null)
+        setIsEmail(true)
       }
     });
     return () => unsubscribe();
@@ -66,21 +69,34 @@ export default function Success() {
     if(user) {
       const fetchUser = async () => {
         if (user) {
-            const couponData = auth.currentUser.email + "Coupons"
-            const docRef = await doc(db, couponData, "coupons")
-            const docSnapshot = await getDoc(docRef)
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            const couponData = currentUser.email + "Coupons";
+            const docRef = await doc(db, couponData, "coupons");
+            const docSnapshot = await getDoc(docRef);
             if (docSnapshot.exists()) {
-                setDiscount(docSnapshot.data().price)
-                alert(discount)
+              setDiscount(docSnapshot.data().price);
+              alert(discount);
             }
             setTotal(newTotal);
             setDiscountTotal(newTotal - discount);
-            alert(discountTotal)
-            setTransactionID(uuidv4())
-            setConfirmationNumber(getCurrentTimeAsNumber())
-            setMessage("Order Confirmation sent to your Email if correct Email Address is used")
+    
+            setTransactionID(uuidv4());
+            setConfirmationNumber(getCurrentTimeAsNumber());
+            setMessage("Order Confirmation sent to your Email if correct Email Address is used");
+          } else {
+            setTotal(newTotal);
+            setDiscountTotal(newTotal - discount);
+      
+            setTransactionID(uuidv4());
+            setConfirmationNumber(getCurrentTimeAsNumber());
+            setMessage("Order Confirmation sent to your Email if correct Email Address is used");
+            // Handle the case where currentUser is null or undefined
+            console.log("User is not authenticated or currentUser is null/undefined");
+          }
         }
-      }
+      };
+      
       fetchUser()
     }
     else {
@@ -90,6 +106,7 @@ export default function Success() {
       setTransactionID(uuidv4())
       setConfirmationNumber(getCurrentTimeAsNumber())
       setMessage("Order Confirmation sent to your Email if correct Email Address is used")
+      toast.success("Order Confirmation sent to your Email if correct Email Address is used")
     }
 
 
@@ -127,6 +144,7 @@ export default function Success() {
 
       }
       else {
+        setEmail(e.target.value)
         const transactionDetails = {
           transactionID: transactionID,
           confirmationNumber: confirmationNumber,
@@ -142,6 +160,7 @@ export default function Success() {
         })
         setIsSent(true)
         setMessage("Order Confirmation sent to your Email if correct Email Address is used")
+        toast.success("Order Confirmation sent to your Email if correct Email Address is used")
         setEmail("")
       }
     })

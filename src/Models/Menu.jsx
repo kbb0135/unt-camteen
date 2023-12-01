@@ -13,9 +13,49 @@ function Menu() {
   const [isDisplaySide, setDisplaySide] = useState(true);
   const [isDisplayDrink, setDisplayDrink] = useState(true);
   const [isDisplayDessert, setDisplayDessert] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClick, setIsClicked] = useState(false);
   const addToCartWithoutBudget = (item) => {
     setCart([...cart, item]);
   };
+  const handleClick = () => {
+    setIsClicked(true);
+    setIsBudgetSet(true)
+    setIsOpen(prevOpen => !prevOpen);
+
+    if (!isOpen) {
+    }
+    else {
+      const confirmClose = window.confirm('Are you sure you want to close the budget planner? Progress will be lost!');
+      if (confirmClose) {
+        setIsOpen(false);
+        setBudget(0);
+        setIsBudgetSet(false);
+      }
+
+    }
+
+  }
+
+  const handleBudget = (e) => {
+    setBudget(parseInt(e.target.value));
+  }
+
+
+
+  // const handleBudgetChange = (item, e) => {
+  //   setBudget(prevBudget => {
+  //     const updatedBudget = prevBudget - item.price;
+  //     if (updatedBudget >= 0) {
+  //       // Update budget only if it's not negative
+  //       return updatedBudget;
+  //     } else {
+  //       alert("You don't have enough budget!");
+  //       // Revert to the previous budget value if it would become negative
+  //       return prevBudget;
+  //     }
+  //   });
+  // };
 
   const handleUserBudget = (e) => {
     setBudget(parseInt(e.target.value, 10));
@@ -30,10 +70,10 @@ function Menu() {
   const handleBudgetChange = (item, e) => {
     console.log("budget change")
     setBudget((prevBudget) => {
-      const updatedBudget = prevBudget - item.price;
+      const updatedBudget = (prevBudget - item.price).toFixed(2);
       if (updatedBudget >= 0) {
         // Update budget only if it's not negative
-        return Number(updatedBudget.toFixed(2));
+        return Number(updatedBudget);
       } else {
         alert("You don't have enough budget!");
         // Revert to the previous budget value if it would become negative
@@ -83,14 +123,35 @@ function Menu() {
   return (
     <div className="menu">
       <h2>Menu</h2>
+
       <div className="budget-planner">
+
         <label htmlFor="budget">Budget Planner</label>
-        <input
+        <h1 className="click-Handle" onClick={handleClick}>
+        {isOpen ? "Click Here to Close the Budget Planner" : "Click here to get Started for budget Planner"}
+      </h1>
+      <div>
+        {isOpen && isClick ? (
+          <>
+            <h1>Enter you budget:${budget}</h1>
+            <input
           type="text"
           placeholder="Enter your budget $"
           value={budget}
-          onChange={(e) => { handleUserBudget(e) }}
+          onChange={handleBudget}
         ></input>
+          </>
+        ) : (
+          <></>
+        )
+        }
+      </div>
+        {/* <input
+          type="text"
+          placeholder="Enter your budget $"
+          value={budget}
+          onChange={handleBudget}
+        ></input> */}
       </div>
       <div className="menu-filter">
         <h3>Category:</h3>

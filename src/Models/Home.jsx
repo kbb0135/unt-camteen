@@ -186,7 +186,7 @@ function Home() {
         <div className="shop">
           <h2>Order by category</h2>
           <div>
-            <Link to="/orderbycategory">
+            <Link to="/menu">
               <img src={Entree} alt="img" />
               <span>
 
@@ -195,7 +195,7 @@ function Home() {
             </Link>
           </div>
           <div>
-            <Link to="/orderbycategory">
+            <Link to="/menu">
 
               <img src={Side} alt="img" />
               <span>
@@ -205,7 +205,7 @@ function Home() {
             </Link>
           </div>
           <div>
-            <Link to="/orderbycategory">
+            <Link to="/menu">
 
               <img src={Beverage} alt="img" />
               <span>

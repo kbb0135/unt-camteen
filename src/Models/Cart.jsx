@@ -18,8 +18,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 export default function Cart() {
     const { cartItems, removeFromCart, addToCart } = useCart()
-    // console.log(cartItems)
-    // console.log("Cart Items here")
     const [message, setMessage] = useState('No coupon applied')
     const [isValidCoupon, setIsValidCoupon] = useState(true)
     const [discount, setDiscount] = useState(0)
@@ -69,8 +67,6 @@ export default function Cart() {
 
 
 
-        console.log("here")
-        console.log(test)
         const snapshot = await getDocs(collection(db, "Coupons"));
         const coupons = await snapshot.docs.map(doc => ({
             name: doc.data().coupon,

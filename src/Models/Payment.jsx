@@ -228,6 +228,9 @@ const Payment = () => {
                     setPrice(docSnapshot.data().price)
                     setDiscountTotal(total - docSnapshot.data().price)
                 }
+                else {
+                    setDiscountTotal(total)
+                }
             } else {
                 // Fallback to local storage if user is not authenticated
                 setPrice(localStorage.getItem("discountCode"))

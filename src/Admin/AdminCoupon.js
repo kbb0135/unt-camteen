@@ -4,6 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import Header from '../Components/Header.jsx'
 import { Notifier } from '../Components/Notifier.jsx'
 import { setDoc, doc } from 'firebase/firestore'
+import '../style/AdminCoupon.css'
 
 export default function AdminCoupon() {
     const [input, setInput] = useState("")

@@ -1,0 +1,48 @@
+/* Applying styles to ChangeUserDetails*/
+.change-user {
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling the button */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .change-user button:hover {
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    background-color: #008c39;
+    transform: translateY(-3px);
+    
+  }
+  
+  /* for spacing between elements */
+  label, button {
+    margin-bottom: 10px;
+  }
+  
+  /*for smaller screens */
+  @media screen and (max-width: 768px) {
+    .change-user {
+      padding: 10px;
+    }
+    
+  }
+  

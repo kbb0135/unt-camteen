@@ -49,11 +49,7 @@ const CartItem = ({item, quantity, id, add2cart, removeFromCart}) => {
                     {/* <Rating reviews={item.reviews || []} /> */}
                     <div className="cart-action">
                         <p className="rev-category">{item.category}</p>
-                        <div>
-                            <a href="javascript:;" className="cart-action__remove" onClick={() => toast('Api needs to be implemented')}>
-                                Remove
-                            </a>
-                        </div>
+                       
                         <div className="cart-action__add">
                             <button  className="cart-action__add-btn" onClick={() => removeFromCart(item.name)}>-</button>
                             <p style={{padding: 0, margin: 0}}>{quantity}</p>

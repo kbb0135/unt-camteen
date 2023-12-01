@@ -172,8 +172,6 @@ const Payment = () => {
             e.preventDefault();
         }
 
-
-
         const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
         if (!expiryRegex.test(expiry)) {
             setIsExpired(true)

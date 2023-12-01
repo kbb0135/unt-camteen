@@ -11,6 +11,9 @@ import {
     formatExpirationDate
 } from './utils';
 import 'react-credit-cards/es/styles-compiled.css';
+import { auth, db } from "../firebase.js"
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Payment = () => {
     const [number, setNumber] = useState('');
@@ -31,13 +34,45 @@ const Payment = () => {
     const [mNum, setMNum] = useState("")
     const [mCVC, setMCVC] = useState("")
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
-    const navigate =useNavigate()
+    const navigate = useNavigate()
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isC, setIsC] = useState(false);
+    const [isN, setIsN] = useState(false);
+    const [isV, setIsV] = useState(false)
+    const [isE, setIsE] = useState(false);
+    const [isNa, setIsNa] = useState(false)
+    const [user, setUser] = useState([])
+    const [isCoupon, setIsCoupon] = useState(false);
+    const [couponName, setCouponName] = useState("")
+    const [price, setPrice] = useState(null)
+
 
     const { getTotalQuantity, cartItems } = useCart();
 
     useEffect(() => {
         setAmount(getTotalQuantity());
     }, [getTotalQuantity]);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                setUser(user);
+                // Check if the user has an email before accessing it
+
+
+            } else {
+                setUser(null);
+            }
+            
+        });
+        return () => unsubscribe();
+        
+    }, [total]);
+    
+
+
+
+
 
     const handleCallback = ({ issuer }, isValid) => {
         if (isValid) {
@@ -70,14 +105,18 @@ const Payment = () => {
         const newTotal = cartItems.reduce((acc, item) => {
             return acc + (item.price * item.quantity);
         }, 0)
-
         setTotal(newTotal);
 
-        setDiscountTotal(newTotal - localStorage.getItem("discountCode"));
+
+
     }, [cartItems])
 
 
+
+
+
     const handleForm = (e) => {
+
 
         if (!number && !name && !expiry && !cvc) {
             setIsName(true)
@@ -97,11 +136,17 @@ const Payment = () => {
             e.preventDefault();
             return;
         }
+        else {
+            setIsN(true)
+        }
         if (!name) {
             setIsName(true)
             setMNum('Please enter number');
             e.preventDefault();
             return;
+        }
+        else {
+            setIsNa(true)
         }
         if (!expiry) {
             setIsExpired(true)
@@ -109,19 +154,23 @@ const Payment = () => {
             e.preventDefault();
             return;
         }
+        else {
+            setIsE(true)
+        }
         if (!cvc) {
             setIsCVC(true)
             setMCVC('Please enter valid cvc');
             e.preventDefault();
             return;
         }
-        if(number.length <15) {
+        else {
+            setIsV(true)
+        }
+        if (number.length < 15) {
             setIsNumber(true)
             setMNum("Please enter valid 15 digits num")
             e.preventDefault();
         }
-
-
 
         const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
         if (!expiryRegex.test(expiry)) {
@@ -142,15 +191,54 @@ const Payment = () => {
             return;
         }
 
-        if(number === '1111 1111 1111 1111') {
+        if (number === '1111 1111 1111 1111') {
             navigate("/fail")
             e.preventDefault();
             console.log("test")
         }
         console.log("here")
         console.log(number);
-        setIsPaymentSuccess(true);
+        setIsSuccess(true);
+        console.log(isPaymentSuccess)
+        console.log(isN, isNa, isE, isV)
+
+  
+        e.preventDefault();
     }
+
+    useEffect(()=> {
+        if (isNa && isN && isE && isV) {
+            setIsSuccess(true)
+            console.log("success=", isSuccess)
+            navigate('/success', { state: { isSuccess } })
+        }
+        
+    })
+    useEffect(() => {
+        const fetchPay = async () => {
+            const currentUser = auth.currentUser;
+            if (currentUser) {
+                // Update promotion based on user's coupon data from Firebase
+                const couponData = auth.currentUser.email + "Coupons"
+                const docRef = doc(db, couponData, "coupons")
+                const docSnapshot = await getDoc(docRef)
+                if (docSnapshot.exists()) {
+                    setIsCoupon(true);
+                    setCouponName(docSnapshot.data().coupon)
+                    setPrice(docSnapshot.data().price)
+                    setDiscountTotal(total - docSnapshot.data().price)
+                }
+            } else {
+                // Fallback to local storage if user is not authenticated
+                setPrice(localStorage.getItem("discountCode"))
+                setCouponName(localStorage.getItem("couponName"))
+                setDiscountTotal(total- price)
+            }
+        }
+    
+        fetchPay();
+    }, [total, user]);
+    
 
 
     return (
@@ -173,17 +261,23 @@ const Payment = () => {
 
                         <div class="container">
                             {
-                                localStorage.getItem("discountCode") > 0 ? (
+                                user  ? (
                                     <>
                                         <div className="my-btn">
-                                            <p className="total-pay">Discount Code Applied</p>
-                                            <p className="total-pay">Discount Code {localStorage.getItem("value")} applied: ${localStorage.getItem("discountCode")}</p>
+                                            <p className="total-pay">Discount Code Applied: {couponName}</p>
+                                            <p className="total-pay">Discount Amount: ${price}</p>
                                             <hr></hr>
                                             <p className="total-pay-dicount"> New Total: {discountTotal}</p>
                                         </div>
                                     </>
                                 ) : (
                                     <>
+                                        <div className="my-btn">
+                                            <p className="total-pay">Discount Code Applied: {localStorage.getItem("couponName")}</p>
+                                            <p className="total-pay">Discount Amount: ${localStorage.getItem("discountCode")}</p>
+                                            <hr></hr>
+                                            <p className="total-pay-dicount"> New Total: {discountTotal}</p>
+                                        </div>
                                     </>
 
                                 )
@@ -306,9 +400,9 @@ const Payment = () => {
                                 </>
                             )
                         }
-                        <Link to="/success">
-                            <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
-                        </Link>
+                        {/* <Link to="/success"> */}
+                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
+                        {/* </Link> */}
                     </div>
                 </div>
 

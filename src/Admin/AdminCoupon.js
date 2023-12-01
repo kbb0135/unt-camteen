@@ -5,6 +5,7 @@ import NavBar from "./NavBar.jsx";
 import Footer from '../Components/Footer.jsx';
 import { Notifier } from '../Components/Notifier.jsx'
 import { setDoc, doc } from 'firebase/firestore'
+import '../style/AdminCoupon.css'
 
 export default function AdminCoupon() {
     const [input, setInput] = useState("")

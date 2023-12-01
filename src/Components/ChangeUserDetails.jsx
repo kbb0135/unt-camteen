@@ -4,6 +4,7 @@ import Header from './Header'
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import '../style/change.css';
+import '../style/ChangeUserDetails.css'
 
 export default function ChangeUserDetails() {
     const [firstName, setFirstName] = useState("");
@@ -51,7 +52,10 @@ export default function ChangeUserDetails() {
 
     return (
         <div>
+            <>
             <Header/>
+            </>
+            
             <div className='change-user'>
                 <h1 className="text-center">Change User Details</h1>
                 <label htmlFor="First Name">Change First Name</label>

@@ -35,7 +35,7 @@ const Payment = () => {
     const [mCVC, setMCVC] = useState("")
     const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
     const navigate = useNavigate()
-    const [isSuccess, setIsSuccess] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(null);
     const [isC, setIsC] = useState(false);
     const [isN, setIsN] = useState(false);
     const [isV, setIsV] = useState(false)
@@ -201,19 +201,21 @@ const Payment = () => {
         setIsSuccess(true);
         console.log(isPaymentSuccess)
         console.log(isN, isNa, isE, isV)
+        
 
   
         e.preventDefault();
     }
+  
 
     useEffect(()=> {
+        
         if (isNa && isN && isE && isV) {
             setIsSuccess(true)
-            console.log("success=", isSuccess)
             navigate('/success', { state: { isSuccess } })
         }
         
-    })
+    },[isNa, isN, isE, isV,isSuccess, navigate])
     useEffect(() => {
         const fetchPay = async () => {
             const currentUser = auth.currentUser;
@@ -228,6 +230,9 @@ const Payment = () => {
                     setPrice(docSnapshot.data().price)
                     setDiscountTotal(total - docSnapshot.data().price)
                 }
+                else {
+                    setDiscountTotal(total)
+                }
             } else {
                 // Fallback to local storage if user is not authenticated
                 setPrice(localStorage.getItem("discountCode"))
@@ -237,7 +242,7 @@ const Payment = () => {
         }
     
         fetchPay();
-    }, [total, user]);
+    }, [total, user,price]);
     
 
 
@@ -257,7 +262,7 @@ const Payment = () => {
 
                             ))}
                         </ul>
-                        <p className="total-pay">Total: {total}</p>
+                        <p className="total-pay">Total: {total.toFixed(2)}</p>
 
                         <div class="container">
                             {
@@ -267,7 +272,7 @@ const Payment = () => {
                                             <p className="total-pay">Discount Code Applied: {couponName}</p>
                                             <p className="total-pay">Discount Amount: ${price}</p>
                                             <hr></hr>
-                                            <p className="total-pay-dicount"> New Total: {discountTotal}</p>
+                                            <p className="total-pay-dicount"> New Total: {discountTotal.toFixed(2)}</p>
                                         </div>
                                     </>
                                 ) : (
@@ -276,7 +281,7 @@ const Payment = () => {
                                             <p className="total-pay">Discount Code Applied: {localStorage.getItem("couponName")}</p>
                                             <p className="total-pay">Discount Amount: ${localStorage.getItem("discountCode")}</p>
                                             <hr></hr>
-                                            <p className="total-pay-dicount"> New Total: {discountTotal}</p>
+                                            <p className="total-pay-dicount"> New Total: {discountTotal.toFixed(2)}</p>
                                         </div>
                                     </>
 
@@ -401,7 +406,7 @@ const Payment = () => {
                             )
                         }
                         {/* <Link to="/success"> */}
-                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal}</button>
+                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal.toFixed(2)}</button>
                         {/* </Link> */}
                     </div>
                 </div>

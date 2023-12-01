@@ -216,7 +216,8 @@ const Payment = () => {
     })
     useEffect(() => {
         const fetchPay = async () => {
-            if (user) {
+            const currentUser = auth.currentUser;
+            if (currentUser) {
                 // Update promotion based on user's coupon data from Firebase
                 const couponData = auth.currentUser.email + "Coupons"
                 const docRef = doc(db, couponData, "coupons")
@@ -229,7 +230,9 @@ const Payment = () => {
                 }
             } else {
                 // Fallback to local storage if user is not authenticated
-                setDiscountTotal(total - parseFloat(localStorage.getItem("discountCode")));
+                setPrice(localStorage.getItem("discountCode"))
+                setCouponName(localStorage.getItem("couponName"))
+                setDiscountTotal(total- price)
             }
         }
     

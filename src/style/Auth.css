@@ -1,19 +1,17 @@
 .auth-page {
-  width: 100vw;
-  width: 100svw;
-  height: 100vh;
-  height: 100svh;
+  width: 100%;
   background-color: var(--background-color);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--on-background-color);
+  padding: 2rem 0;
 }
 .auth-form {
   display: flex;
   flex-direction: column;
-  width: 30rem;
-  padding: 3rem;
+  width: min(30rem, 90%);
+  padding: 2rem;
   gap: 2rem;
   box-sizing: border-box;
   justify-content: center;

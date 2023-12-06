@@ -6,6 +6,9 @@ import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import { FaExclamationTriangle } from "react-icons/fa";
+import Header
+  from "../Components/Header";
+import Footer from "../Components/Footer";
 function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [FnCheck, setFnCheck] = useState(false);
@@ -92,6 +95,8 @@ function SignUp() {
     }
   };
   return (
+    <>
+      <Header/>
     <div className="auth-page">
       <div className={`auth-form  ${signUpError && "box-invalid"}`}>
         <div>
@@ -190,7 +195,9 @@ function SignUp() {
           <Link to="/auth/login">Log in</Link>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer/>
+      </>
   );
 }
 

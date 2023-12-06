@@ -19,6 +19,7 @@ import {
   FaLock,
 } from "react-icons/fa6";
 import { ThemeContext } from "../App";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const { getTotalQuantity } = useCart();
@@ -64,10 +65,10 @@ const Header = () => {
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        alert("User is successfully logged out");
+        toast.success("User logged out.")
       })
       .catch((error) => {
-        alert(error);
+        toast.error("There is an error logging out.")
       });
   };
 

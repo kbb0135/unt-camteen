@@ -157,7 +157,7 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-.hours > div:nth-child(2){
+.hours > div:nth-child(2) {
   padding-left: 4rem;
 }
 .hours div > :nth-child(2) {
@@ -173,7 +173,7 @@
   gap: 1rem;
   overflow: auto;
 }
-.shop div {
+.shop > a {
   flex: 1;
   position: relative;
   cursor: pointer;
@@ -184,11 +184,12 @@
   flex: 1;
   min-height: 200px;
   min-width: 200px;
+  text-align: center;
 }
 .shop span {
   position: absolute;
   bottom: 0;
-  z-index: 9999;
+  z-index: 9000;
   height: 5rem;
   width: 100%;
   color: var(--white);
@@ -200,6 +201,10 @@
   justify-content: center;
   transition: 0.2s ease-in;
   gap: 1rem;
+}
+.shop div{
+  min-height: 15rem;
+  min-width: 15rem;
 }
 .shop a:hover span {
   background-color: rgb(51, 51, 51, 0.6);
@@ -218,15 +223,14 @@
   .hero > div:nth-child(5) {
     left: 0;
   }
-
 }
 @media (width < 768px) {
   .hero {
-    height: 1150vh;
-    height: 1150svh;
+    height: 1000vh;
+    height: 1000svh;
     padding: 4rem 2rem 0 2rem;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.5fr repeat(5, 1fr) 5fr repeat(3, 3fr);
+    grid-template-rows: 1fr 0.5fr repeat(5, 1fr) 3.5fr repeat(2, 2fr) 4fr ;
     grid-template-areas:
       "slogan"
       "button"
@@ -267,6 +271,8 @@
   .hero > div:nth-child(8) {
     margin: 0;
     padding: 0;
+    text-align: center;
+
   }
   .hero > div:nth-child(9) {
     flex-direction: column;
@@ -286,7 +292,20 @@
     gap: 6rem;
   }
   .hours div {
-    padding: 0;
     text-align: left;
   }
+  .hours > div:nth-child(2) {
+    padding: 0;
+  }
+}
+.expand-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+.expand-container > * {
+  overflow: hidden;
+}
+.expand-container:hover {
+  grid-template-rows: 1fr;
 }

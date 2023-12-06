@@ -22,7 +22,7 @@ import { ThemeContext } from "../App";
 
 const Header = () => {
   const { getTotalQuantity } = useCart();
-  const [isNavClosed, setNavClosed] = useState(false);
+  const [isNavClosed, setNavClosed] = useState(true);
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [user, setUser] = useState("");

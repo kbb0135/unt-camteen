@@ -13,7 +13,7 @@ import {
   FaMoon,
   FaBars,
   FaXmark,
-  FaChevronRight,
+  FaCaretDown,
   FaArrowRightToBracket,
   FaPenToSquare,
   FaLock,
@@ -103,8 +103,11 @@ const Header = () => {
                 setUserDropdown((prev) => !prev);
               }}
             >
-              <FaUser />
+         
+              {isNavClosed ? null : <FaCaretDown is-user-dropdown={isUserDropdown.toString() } className="user-dropdown-indicator"/>}
 
+              <FaUser />
+    
               <ul
                 className={`user-info-dropdown ${
                   isUserDropdown ? "user-dropdown-display" : ""

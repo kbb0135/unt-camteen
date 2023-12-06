@@ -22,7 +22,7 @@ import { ThemeContext } from "../App";
 
 const Header = () => {
   const { getTotalQuantity } = useCart();
-  const [isNavClosed, setNavClosed] = useState(true);
+  const [isNavClosed, setNavClosed] = useState(false);
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
   const [user, setUser] = useState("");
@@ -82,7 +82,7 @@ const Header = () => {
       />
 
       <nav>
-        <ul navclosed={isNavClosed.toString()}>
+        <ul navclosed={isNavClosed.toString()} className="primary-ul">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -104,6 +104,7 @@ const Header = () => {
               }}
             >
               <FaUser />
+
               <ul
                 className={`user-info-dropdown ${
                   isUserDropdown ? "user-dropdown-display" : ""
@@ -112,7 +113,7 @@ const Header = () => {
                 {user ? (
                   <>
                     <li>
-                      <h3>Welcome, {userName}</h3>{" "}
+                      <h5>Welcome, {userName}</h5>{" "}
                     </li>
                     <li>
                       <Link to="/changeUserDetails">
@@ -144,7 +145,8 @@ const Header = () => {
                     </li>
                   </>
                 )}
-              </ul>
+                </ul>
+           
             </div>
           </li>
           <li onClick={() => toggleDarkMode(!isDarkMode)}>
@@ -168,7 +170,7 @@ const Header = () => {
       </span>
       <button
         type="button"
-        className="mobile-nav-toggle nav-icon"
+        className={`mobile-nav-toggle nav-icon ${isNavClosed? '': 'mobile-nav-toggle-open'}`}
         title="Toggle menu"
         onClick={() => setNavClosed(!isNavClosed)}
       >

@@ -252,8 +252,8 @@ const Payment = () => {
             <form >
                 <div className="credit-card-page">
                     <div className="items-section">
-                        <h2>Items in Your Cart:</h2>
-                        <ul>
+                        <h2 className='items-h2'>Items in Your Cart:</h2>
+                        <ul className='items-ul'>
                             {cartItems.map((item) => (
                                 <li key={item.id} index={item.name} className="cart-item">
                                     <img src={item.image} className="img-cart"></img>-{item.name} - ${item.price}{' '}
@@ -294,7 +294,7 @@ const Payment = () => {
 
                     <div className="payment-section">
 
-                        <h2>Payment Information:</h2>
+                        <h2 className='payments-h2'>Payment Information:</h2>
                         <Card
                             number={number}
                             name={name}
@@ -304,7 +304,7 @@ const Payment = () => {
                             callback={handleCallback}
                         />
 
-                        <label htmlFor="name">CardName</label>
+                        <label className='card-info' htmlFor="name">Card Name</label>
                         <input
                             type='tel'
                             name='name'
@@ -328,7 +328,7 @@ const Payment = () => {
                                 </>
                             )
                         }
-                        <label htmlFor="cardNumber">Card Number:</label>
+                        <label className='card-info' htmlFor="cardNumber">Card Number:</label>
                         <input
                             type='tel'
                             name='number'
@@ -355,7 +355,7 @@ const Payment = () => {
                                 </>
                             )
                         }
-                        <label htmlFor="expiration">Expiration Date:</label>
+                        <label className='card-info' htmlFor="expiration">Expiration Date:</label>
                         <input
                             type='tel'
                             name='expiry'
@@ -380,7 +380,7 @@ const Payment = () => {
                                 </>
                             )
                         }
-                        <label htmlFor="cvv">CVV:</label>
+                        <label className='card-info' htmlFor="cvv">CVV:</label>
                         <input
                             type='tel'
                             name='cvc'
@@ -406,7 +406,7 @@ const Payment = () => {
                             )
                         }
                         {/* <Link to="/success"> */}
-                        <button id="payButton" onClick={(e) => handleForm(e)}>Pay {discountTotal.toFixed(2)}</button>
+                        <button id="payButton" className='pay-btn' onClick={(e) => handleForm(e)}>Pay {discountTotal.toFixed(2)}</button>
                         {/* </Link> */}
                     </div>
                 </div>

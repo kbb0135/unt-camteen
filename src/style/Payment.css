@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   margin: 20px;
+  color: black; 
 }
 
 .img-cart {
@@ -25,6 +26,7 @@
 
 .items-section h2 {
   margin-top: 0;
+  color: black; 
 }
 
 .items-section ul {
@@ -32,6 +34,9 @@
   padding: 0;
 }
 
+.total-pay-dicount {
+  color: black; 
+}
 
 
 .payment-section {
@@ -59,7 +64,7 @@
 }
 
 .input-field {
-  width: 100%;
+  width: 98%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -92,39 +97,27 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  margin-top: 20px; /* Adjust the margin based on your design */
+  margin-top: 20px; 
 }
-
 .my-btn {
-  background-color: #f0f0f0; /* Add a background color for better visibility */
+  background-color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Add margin to separate from other elements */
+  margin-bottom: 20px; 
 }
 
-.total-pay, .total-pay-dicount {
-  font-size: 16px;
-  margin: 10px 0; /* Add spacing between the paragraphs */
-}
-
-/* Optional: Add media query for smaller screens */
 @media screen and (max-width: 768px) {
   .my-btn {
-    padding: 15px;
+    margin-top: 20px; 
+    text-align: center;
   }
 
-  .total-pay, .total-pay-dicount {
+  .total-pay,
+  .total-pay-dicount {
     font-size: 14px;
+    color: black; 
   }
-}
-.items-section ul li {
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #333;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; 
 }
 .my-btn {
   position: relative;
@@ -132,3 +125,53 @@
   left: 90px;
 }
 
+@media screen and (max-width: 900px) {
+  .credit-card-page {
+    flex-direction: column;
+  }
+
+  .items-section,
+  .payment-section {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-bottom: 20px;
+    padding: 0px;
+  }
+
+  .my-btn {
+    margin: auto;
+    margin-bottom: 20px;
+    position: unset;
+  }
+
+  .items-ul,
+  .total-pay{
+    margin: 20px;
+  }
+
+  .items-h2 {
+    width: 200px;
+    margin: auto;
+    padding-top: 10px;
+  }
+
+  .payment-section h2 {
+    margin: auto;
+    width: 235px;
+  }
+
+  .card-info {
+    margin-left: 10px;
+  }
+
+  .input-field {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 89%;
+  }
+
+  .pay-btn {
+    display: block;
+    margin: 20px auto;
+  }
+}

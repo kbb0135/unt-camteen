@@ -20,28 +20,21 @@ function Menu() {
   };
   const handleClick = () => {
     setIsClicked(true);
-    setIsBudgetSet(true)
-    setIsOpen(prevOpen => !prevOpen);
+    setIsBudgetSet(true);
+    setIsOpen((prevOpen) => !prevOpen);
 
     if (!isOpen) {
-    }
-    else {
-      const confirmClose = window.confirm('Are you sure you want to close the budget planner? Progress will be lost!');
+    } else {
+      const confirmClose = window.confirm(
+        "Are you sure you want to close the budget planner? Progress will be lost!"
+      );
       if (confirmClose) {
         setIsOpen(false);
         setBudget(0);
         setIsBudgetSet(false);
       }
-
     }
-
-  }
-
-  const handleBudget = (e) => {
-    setBudget(parseInt(e.target.value));
-  }
-
-
+  };
 
   // const handleBudgetChange = (item, e) => {
   //   setBudget(prevBudget => {
@@ -57,18 +50,17 @@ function Menu() {
   //   });
   // };
 
-  const handleUserBudget = (e) => {
-    setBudget(parseInt(e.target.value, 10));
+  const handleBudget = (e) => {
     if (e.target.value) {
-      
-      setIsBudgetSet(true)
+      setBudget(parseInt(e.target.value, 10));
+      setIsBudgetSet(true);
     } else {
       setIsBudgetSet(false);
-      setBudget("")
-    } 
-  }
+      setBudget("");
+    }
+  };
   const handleBudgetChange = (item, e) => {
-    console.log("budget change")
+    console.log("budget change");
     setBudget((prevBudget) => {
       const updatedBudget = (prevBudget - item.price).toFixed(2);
       if (updatedBudget >= 0) {
@@ -85,6 +77,7 @@ function Menu() {
   const getMenuItems = async (category) => {
     try {
       const snapshot = await getDocs(collection(db, category));
+      console.log(snapshot.docs);
       const result = snapshot.docs.map((doc) => ({
         id: doc.id,
         name: doc.data().Name,
@@ -117,7 +110,6 @@ function Menu() {
         setMenuItems(mergeData);
       }
     };
-
     setData();
   }, [isDisplayDessert, isDisplayDrink, isDisplayEntree, isDisplaySide]);
   return (
@@ -125,37 +117,34 @@ function Menu() {
       <h2>Menu</h2>
 
       <div className="budget-planner">
-
         <label htmlFor="budget">Budget Planner</label>
-        <h1 className="click-Handle" onClick={handleClick}>
-        {isOpen ? "Click Here to Close the Budget Planner" : "Click here to get Started for budget Planner"}
-      </h1>
-      <div>
-        {isOpen && isClick ? (
-          <>
-            <h1>Enter you budget:${budget}</h1>
-            <input
-          type="text"
-          placeholder="Enter your budget $"
-          value={budget}
-          onChange={handleBudget}
-        ></input>
-          </>
-        ) : (
-          <></>
-        )
-        }
-      </div>
-        {/* <input
-          type="text"
-          placeholder="Enter your budget $"
-          value={budget}
-          onChange={handleBudget}
-        ></input> */}
+        <button className="primary-button" onClick={handleClick}>
+          {isOpen
+            ? "Close Budget Planner"
+            : "Open budget Planner"}
+        </button>
+        <div>
+          {isOpen && isClick ? (
+            <>
+              <h1>Enter you budget:${budget}</h1>
+              <input
+                type="text"
+                placeholder="Enter your budget $"
+                value={budget}
+                onChange={handleBudget}
+              ></input>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       <div className="menu-filter">
         <h3>Category:</h3>
-        <span className="category-filter">
+        <span
+          className="category-filter"
+          isChecked={isDisplayEntree.toString()}
+        >
           <label htmlFor="Entree">Entree</label>
           <input
             id="Entree"
@@ -166,7 +155,7 @@ function Menu() {
             }}
           />
         </span>{" "}
-        <span className="category-filter">
+        <span className="category-filter" isChecked={isDisplaySide.toString()}>
           <label htmlFor="Side">Side</label>
           <input
             id="Side"
@@ -177,7 +166,7 @@ function Menu() {
             }}
           />
         </span>{" "}
-        <span className="category-filter">
+        <span className="category-filter" isChecked={isDisplayDrink.toString()}>
           <label htmlFor="Beverage">Beverage</label>
           <input
             id="Beverage"
@@ -188,7 +177,10 @@ function Menu() {
             }}
           />
         </span>{" "}
-        <span className="category-filter">
+        <span
+          className="category-filter"
+          isChecked={isDisplayDessert.toString()}
+        >
           <label htmlFor="Dessert">Dessert</label>
           <input
             id="Dessert"

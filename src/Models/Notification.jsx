@@ -76,8 +76,7 @@ function Notification() {
                         <h3 className="notification-title">{notification.title}</h3>
                         <p className="notification-text">{notification.text}</p>
                         <div className="comment-separator"></div>
-                        <div className="primary-button">
-                        </div>
+                
                     </li>
                 ))}
             </ul>

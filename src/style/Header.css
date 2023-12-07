@@ -53,6 +53,7 @@ header ul li a:hover {
   margin-top: -1.85rem;
   cursor: pointer;
   border: none;
+  padding: 0;
 }
 .mobile-nav-toggle-open {
   position: fixed;
@@ -92,7 +93,7 @@ header ul li a:hover {
   background-color: var(--primary-color);
 }
 .logo {
-  max-height: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -108,7 +109,7 @@ header ul li a:hover {
   border: none;
 }
 #user-icon {
-  right: 13rem;
+  right: 13rem; 
   position: absolute;
 }
 .user-info-dropdown {
@@ -119,7 +120,6 @@ header ul li a:hover {
   background-color: var(--off-background-color);
   color: var(--on-background-color);
   padding: 0;
-  right: 1rem;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -133,7 +133,7 @@ header ul li a:hover {
   padding: 0.75rem;
   box-sizing: border-box;
   text-align: center;
-  border-bottom: 0.1rem solid var(--background-color);
+  border-bottom: 0.2rem solid var(--background-color);
 }
 
 .user-info-dropdown > li:hover {
@@ -150,6 +150,7 @@ header ul li a:hover {
   margin: 0.75rem;
 }
 .user-dropdown-display {
+
   max-height: 25rem;
   transition: max-height 300ms ease-in;
 }
@@ -206,16 +207,20 @@ header ul li a:hover {
     position: relative;
     width: 100%;
   }
-  .user-dropdown-indicator[is-user-dropdown="false"] {
+  .user-dropdown-indicator {
+    font-size: 1.5rem;
+    color: var(--on-background-color);
     position: absolute;
     left: 0.75rem;
-    transform: rotate(-180deg);
+    top: 0.5rem;
+    pointer-events: none;
+  }
+  .user-dropdown-indicator[is-user-dropdown="false"] {
+    transform: rotate(0deg);
     transition: transform 300ms ease-out;
   }
   .user-dropdown-indicator[is-user-dropdown="true"] {
-    position: absolute;
-    left: 0.75rem;
-    transform: rotate(0deg);
+    transform: rotate(-180deg);
     transition: transform 300ms ease-out;
   }
 }

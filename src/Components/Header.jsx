@@ -65,23 +65,22 @@ const Header = () => {
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        toast.success("User logged out.")
+        toast.success("User logged out.");
+        navigate('/')
       })
       .catch((error) => {
-        toast.error("There is an error logging out.")
+        toast.error("There is an error logging out.");
       });
   };
 
   return (
     <header>
-      <Logo
-        className="logo"
-        onClick={() => {
-          navigate("/");
-        }}
-        style={{ fill: "var(--primary-color)" }}
-      />
-
+      <Link to="/"className="logo">
+        <Logo
+          className="logo"
+          style={{ fill: "var(--primary-color)" }}
+        />
+      </Link>
       <nav>
         <ul navclosed={isNavClosed.toString()} className="primary-ul">
           <li>
@@ -97,18 +96,26 @@ const Header = () => {
             <Link to="/notification">Notifications</Link>
           </li>
           <li className="mobile-first-li">
-            <div
-              className="nav-icon"
-              id="user-icon"
-              onClick={() => {
-                setUserDropdown((prev) => !prev);
-              }}
-            >
-         
-              {isNavClosed ? null : <FaCaretDown is-user-dropdown={isUserDropdown.toString() } className="user-dropdown-indicator"/>}
+            <div>
+              {isNavClosed ? null : (
+                <FaCaretDown
+                  is-user-dropdown={isUserDropdown.toString()}
+                  className="user-dropdown-indicator"
+                />
+              )}
 
-              <FaUser />
-    
+              <button
+                type="button"
+                className="nav-icon"
+                id="user-icon"
+                onClick={() => {
+                  setUserDropdown((prev) => !prev);
+                }}
+                title="Manage Account"
+              >
+                <FaUser />{" "}
+              </button>
+
               <ul
                 className={`user-info-dropdown ${
                   isUserDropdown ? "user-dropdown-display" : ""
@@ -117,7 +124,7 @@ const Header = () => {
                 {user ? (
                   <>
                     <li>
-                      <h5>Welcome, {userName}</h5>{" "}
+                      <h4>Welcome, {userName}</h4>{" "}
                     </li>
                     <li>
                       <Link to="/changeUserDetails">
@@ -149,17 +156,16 @@ const Header = () => {
                     </li>
                   </>
                 )}
-                </ul>
-           
+              </ul>
             </div>
           </li>
           <li onClick={() => toggleDarkMode(!isDarkMode)}>
-            <button type="button" className="dark-mode-toggle nav-icon">
-              {isDarkMode ? (
-                <FaMoon title="Change to lightmode" />
-              ) : (
-                <FaSun title="Change to darkmode" />
-              )}
+            <button
+              type="button"
+              className="dark-mode-toggle nav-icon"
+              title={isDarkMode ? "Change to lightmode" : "Change to darkmode"}
+            >
+              {isDarkMode ? <FaMoon /> : <FaSun />}
             </button>
           </li>
         </ul>
@@ -174,7 +180,9 @@ const Header = () => {
       </span>
       <button
         type="button"
-        className={`mobile-nav-toggle nav-icon ${isNavClosed? '': 'mobile-nav-toggle-open'}`}
+        className={`mobile-nav-toggle nav-icon ${
+          isNavClosed ? "" : "mobile-nav-toggle-open"
+        }`}
         title="Toggle menu"
         onClick={() => setNavClosed(!isNavClosed)}
       >

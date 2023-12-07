@@ -213,7 +213,7 @@ function Home() {
               <FaArrowRight />
             </span>
           </Link>
-          <Link to="/orderbycategory">
+          <Link to="/menu">
             <img src={Dessert} alt="img" />
             <span>
               Order Dessert

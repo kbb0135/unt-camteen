@@ -1,23 +1,27 @@
 import React from "react"
 
-const Input = ({placeholder, name, label}) => {
-    return <div className="feedback-input-div">
-        <label>{label}</label>
-        <input placeholder={placeholder} name={name} className="feedback-input" required/>
-    </div>
-}
 const Feedback = () => {
-    return <div className="feedback">
-            <div className="feedback-info">
-                <h3 className="feedback-head">Provide us your feedback</h3>
-                <p className="feedback-subhead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
-        <form className="feedback-form">
-            <Input name='fullName' placeholder='John Wick' label='Full Name' />
-            <Input name='email' placeholder='john@wick.com' label='Email' />
-            <textarea className="feedback-textarea" rows='3'></textarea>
-            <button className="feedback-submit">Submit</button>
+    return (
+        <div className="feedback-page">
+            <h1>Give us your feedback</h1>
+        <form >
+          <div>
+            <label for="feedback_fullname">Full name:</label>
+            <input type="text" id="feedback_fullname" placeholder="Full name" />
+          </div>
+          <div>
+            <label for="feedback_email">Email:</label>
+            <input type="email" id="feedback_fullname" placeholder="Email" />
+          </div>
+          <div>
+            <label for="feedback_comments">Comments:</label>
+            <textarea
+              id="feedback_fullname"
+              placeholder="Comments"
+            />
+          </div>
         </form>
-        </div>
+      </div>
+    );
 }
 export default Feedback; 

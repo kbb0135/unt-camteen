@@ -109,9 +109,6 @@ const Review = () => {
                             <div className='rev-info-box'>
                                 <div className="rev-content">
                                     <p className="rev-name">{item.name}</p>
-                                    <p className="rev-category">
-                                        {item.category}
-                                    </p>
                                     <p className="rev-desc">
                                         {item.description}
                                     </p>
@@ -130,7 +127,6 @@ const Review = () => {
                     </main>
 
                     <div className="comments-section">
-                        <hr></hr>
                         <h2>User Comments</h2>
                         {renderableReviews.map((review, index) => (
                             <Comment
@@ -143,7 +139,7 @@ const Review = () => {
                             />
                         ))}
                         <div className='comment-show-more-btn'>
-                        <button className='show-more-btn' onClick={() => setShowAll(prev => !prev)}>
+                        <button className='primary-button' onClick={() => setShowAll(prev => !prev)}>
                             {showAll ? 'Show less' : 'Show all reviews'}
                             </button>
                         </div>

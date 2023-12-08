@@ -3,6 +3,8 @@ import "../style/Auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { FaExclamationTriangle } from "react-icons/fa";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +63,8 @@ function Login() {
   };
 
   return (
+    <>
+      <Header/>
     <div className="auth-page">
       <div className={`auth-form  ${loginError && "box-invalid"}`}>
         <span className="form-name">Log in to your account</span>
@@ -111,7 +115,9 @@ function Login() {
           <Link to="/auth/signup">Sign Up</Link>
         </div>
       </div>
-    </div>
+      </div>
+      <Footer/>
+      </>
   );
 }
 

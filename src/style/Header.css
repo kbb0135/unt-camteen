@@ -10,24 +10,18 @@ header {
   position: relative;
   border-bottom: 0.1rem solid var(--off-onbackground-color);
 }
-header nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-header ul {
+
+.primary-ul {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-between;
-  z-index: 9000;
+  z-index: 9999;
+  gap: 2rem;
 }
-header ul {
-  gap: 2.5rem;
-}
+
 header li {
   border: none;
   border-radius: 0;
@@ -47,20 +41,22 @@ header ul li a:hover {
 .mobile-nav-toggle {
   padding: 0;
   border: none;
-  position: fixed;
-  right: 4rem;
   display: none;
-  cursor: pointer;
+  position: absolute;
   z-index: 9999;
 }
+
 .nav-icon {
   background-color: transparent;
   font-size: 2rem;
   color: var(--on-background-color);
   margin-top: -1.85rem;
   cursor: pointer;
-  position: absolute;
   border: none;
+  padding: 0;
+}
+.mobile-nav-toggle-open {
+  position: fixed;
 }
 .nav-icon svg {
   display: block;
@@ -77,6 +73,7 @@ header ul li a:hover {
 .cart {
   border: none;
   right: 5.5rem;
+  position: absolute;
 }
 .cart-and-quan {
   position: relative;
@@ -96,7 +93,7 @@ header ul li a:hover {
   background-color: var(--primary-color);
 }
 .logo {
-  max-height: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -104,79 +101,90 @@ header ul li a:hover {
   color: var(--on-background-color);
   display: flex;
   justify-content: center;
-  cursor: pointer;
   right: 9rem;
   border: none;
+  position: absolute;
 }
 .dark-mode-toggle button {
   border: none;
 }
 #user-icon {
-  right: 13rem;
+  right: 13rem; 
+  position: absolute;
 }
 .user-info-dropdown {
   width: 20rem;
+  max-height: 0;
+  overflow: hidden;
   margin-top: 1rem;
   background-color: var(--off-background-color);
   color: var(--on-background-color);
-  right: 1rem;
-  display: none;
-  gap: 0;
-  padding: 0.5rem;
-  transition: 0.5s ease-in;
-  text-align: center;
-  position: absolute;
-}
-.user-info-dropdown > li {
-  border-bottom: 0.1rem solid var(--background-color);
   padding: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: max-height 300ms ease-out;
+  z-index: 9999;
 }
+
+.user-info-dropdown > li {
+  width: 100%;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  text-align: center;
+  border-bottom: 0.2rem solid var(--background-color);
+}
+
 .user-info-dropdown > li:hover {
-  border-bottom: 0.1rem solid var(--background-color);
-  background-color: var(--background-color);
+  border-color: var(--primary-color);
 }
 .user-info-dropdown a {
-  padding: 1rem;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
   gap: 1rem;
+  text-align: center;
+}
+.user-info-dropdown h5 {
+  margin: 0.75rem;
 }
 .user-dropdown-display {
-  display: block;
+
+  max-height: 25rem;
+  transition: max-height 300ms ease-in;
 }
 .user-info-dropdown svg {
   margin: 0;
   font-size: 1rem;
 }
-@media (max-width: 768px) {
-  header {
-    padding: 2rem;
-  }
-  header ul {
+
+@media (width < 1024px) {
+  .primary-ul {
     padding-top: 8rem;
     padding-bottom: 4rem;
     position: fixed;
     inset: 0 0 0 40%;
     flex-direction: column;
     background-color: var(--off-background-color);
-    transform: translateX(100%);
     align-items: center;
+    transform: translateX(100%);
+    overflow: auto;
   }
-  header ul[navclosed="false"] {
+  .primary-ul[navclosed="false"] {
     transform: translateX(0%);
-    transition: transform 0.2s ease-out;
+    transition: transform 300ms ease-out;
   }
   .mobile-nav-toggle {
     display: block;
-    right: 2rem;
+    right: 6rem;
   }
   .nav-icon {
     margin: 0;
   }
   .cart {
-    position: absolute;
     top: 4rem;
+    right: 10rem;
   }
   .dark-mode-toggle {
     position: static;
@@ -194,10 +202,36 @@ header ul li a:hover {
     transform: translate(0%);
     box-sizing: border-box;
   }
-
   .mobile-first-li {
     order: -1;
     position: relative;
     width: 100%;
+  }
+  .user-dropdown-indicator {
+    font-size: 1.5rem;
+    color: var(--on-background-color);
+    position: absolute;
+    left: 0.75rem;
+    top: 0.5rem;
+    pointer-events: none;
+  }
+  .user-dropdown-indicator[is-user-dropdown="false"] {
+    transform: rotate(0deg);
+    transition: transform 300ms ease-out;
+  }
+  .user-dropdown-indicator[is-user-dropdown="true"] {
+    transform: rotate(-180deg);
+    transition: transform 300ms ease-out;
+  }
+}
+@media (width < 768px) {
+  header {
+    padding: 2rem;
+  }
+  .mobile-nav-toggle {
+    right: 2rem;
+  }
+  .cart {
+    right: 5.5rem;
   }
 }

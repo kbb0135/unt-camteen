@@ -16,30 +16,30 @@ const MenuItemCard = ({
   const { addToCart } = useCart();
   const [message, setMessage] = useState("");
 
-      const handleAddToCart = () => {
-          if (isBudgetSet) {
-              if (item.price <= 0) {
-                  alert('Item price should be greater than 0 to add to cart.');
-              } else {
-                  if (budget - item.price >= 0) {
-                      addToCart(item);
-                      setMessage('Added to cart!!');
-                      toast.success('Added to cart!!');
-                      setBudget(item);
-                      console.log("Here");
-                  } else {
-                      // setMessage("You don't have enough budget!");
-                      toast.error("You do not have enough budget!");
-                      toast.error("Item not added to the Cart")
-                  }
-              }
-          } else {
-              //if budget is not set, call this function directly
-              addToCartWithoutBudget(addToCart(item));
-              toast.success('Item Added to Cart');
-              setMessage('Item Added to Cart');
-          }
-      };
+  const handleAddToCart = () => {
+    if (isBudgetSet) {
+      if (item.price <= 0) {
+        alert("Item price should be greater than 0 to add to cart.");
+      } else {
+        if (budget - item.price >= 0) {
+          addToCart(item);
+          toast.success(`${item.name} added to Cart`);
+          setMessage(`${item.name} added to Cart`);
+          setBudget(item);
+          console.log("Here");
+        } else {
+          // setMessage("You don't have enough budget!");
+          toast.error("You do not have enough budget!");
+          toast.error(`${item.name} not added to the Cart`);
+        }
+      }
+    } else {
+      //if budget is not set, call this function directly
+      addToCartWithoutBudget(addToCart(item));
+      toast.success(`${item.name} added to Cart`);
+      setMessage(`${item.name} added to Cart`);
+    }
+  };
   return (
     <div className="menu-card">
       <Link to={`/reviews/${item.category}/${item.id}`}>
@@ -47,6 +47,7 @@ const MenuItemCard = ({
       </Link>
       <div className="menu-card-content">
         <span>{item.name}</span>
+
         <span className="menu-card-price">&#x24;{item.price}</span>
         <div>
           <button
@@ -61,4 +62,4 @@ const MenuItemCard = ({
     </div>
   );
 };
-export default MenuItemCard; 
+export default MenuItemCard;

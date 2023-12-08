@@ -48,7 +48,6 @@ const CartItem = ({item, quantity, id, add2cart, removeFromCart}) => {
                     </p>
                     {/* <Rating reviews={item.reviews || []} /> */}
                     <div className="cart-action">
-                        <p className="rev-category">{item.category}</p>
                        
                         <div className="cart-action__add">
                             <button  className="cart-action__add-btn" onClick={() => removeFromCart(item.name)}>-</button>

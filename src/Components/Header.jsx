@@ -13,12 +13,13 @@ import {
   FaMoon,
   FaBars,
   FaXmark,
-  FaChevronRight,
+  FaCaretDown,
   FaArrowRightToBracket,
   FaPenToSquare,
   FaLock,
 } from "react-icons/fa6";
 import { ThemeContext } from "../App";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const { getTotalQuantity } = useCart();
@@ -64,25 +65,24 @@ const Header = () => {
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        alert("User is successfully logged out");
+        toast.success("User logged out.");
+        navigate('/')
       })
       .catch((error) => {
-        alert(error);
+        toast.error("There is an error logging out.");
       });
   };
 
   return (
     <header>
-      <Logo
-        className="logo"
-        onClick={() => {
-          navigate("/");
-        }}
-        style={{ fill: "var(--primary-color)" }}
-      />
-
+      <Link to="/"className="logo">
+        <Logo
+          className="logo"
+          style={{ fill: "var(--primary-color)" }}
+        />
+      </Link>
       <nav>
-        <ul navclosed={isNavClosed.toString()}>
+        <ul navclosed={isNavClosed.toString()} className="primary-ul">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -96,14 +96,26 @@ const Header = () => {
             <Link to="/notification">Notifications</Link>
           </li>
           <li className="mobile-first-li">
-            <div
-              className="nav-icon"
-              id="user-icon"
-              onClick={() => {
-                setUserDropdown((prev) => !prev);
-              }}
-            >
-              <FaUser />
+            <div>
+              {isNavClosed ? null : (
+                <FaCaretDown
+                  is-user-dropdown={isUserDropdown.toString()}
+                  className="user-dropdown-indicator"
+                />
+              )}
+
+              <button
+                type="button"
+                className="nav-icon"
+                id="user-icon"
+                onClick={() => {
+                  setUserDropdown((prev) => !prev);
+                }}
+                title="Manage Account"
+              >
+                <FaUser />{" "}
+              </button>
+
               <ul
                 className={`user-info-dropdown ${
                   isUserDropdown ? "user-dropdown-display" : ""
@@ -112,7 +124,7 @@ const Header = () => {
                 {user ? (
                   <>
                     <li>
-                      <h3>Welcome, {userName}</h3>{" "}
+                      <h4>Welcome, {userName}</h4>{" "}
                     </li>
                     <li>
                       <Link to="/changeUserDetails">
@@ -148,12 +160,12 @@ const Header = () => {
             </div>
           </li>
           <li onClick={() => toggleDarkMode(!isDarkMode)}>
-            <button type="button" className="dark-mode-toggle nav-icon">
-              {isDarkMode ? (
-                <FaMoon title="Change to lightmode" />
-              ) : (
-                <FaSun title="Change to darkmode" />
-              )}
+            <button
+              type="button"
+              className="dark-mode-toggle nav-icon"
+              title={isDarkMode ? "Change to lightmode" : "Change to darkmode"}
+            >
+              {isDarkMode ? <FaMoon /> : <FaSun />}
             </button>
           </li>
         </ul>
@@ -168,7 +180,9 @@ const Header = () => {
       </span>
       <button
         type="button"
-        className="mobile-nav-toggle nav-icon"
+        className={`mobile-nav-toggle nav-icon ${
+          isNavClosed ? "" : "mobile-nav-toggle-open"
+        }`}
         title="Toggle menu"
         onClick={() => setNavClosed(!isNavClosed)}
       >

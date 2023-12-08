@@ -3,9 +3,7 @@ import { auth, db } from "../firebase.js"
 import Header from './Header'
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import '../style/change.css';
-import '../style/ChangeUserDetails.css'
-
+import Footer from './Footer.jsx';
 export default function ChangeUserDetails() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -51,20 +49,20 @@ export default function ChangeUserDetails() {
     }
 
     return (
-        <div>
-            <>
-            <Header/>
-            </>
-            
-            <div className='change-user'>
-                <h1 className="text-center">Change User Details</h1>
+        <> 
+            <Header />
+            <div className='user-detail-page'>
+            <h1>Change User Details</h1>
+            <form onSubmit={handleChange}>
                 <label htmlFor="First Name">Change First Name</label>
                 <input type="tel" value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
                 <label htmlFor="First Name">Change Last Name</label>
                 <input type="tel" value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
                 <br></br>
-                <button onClick={handleChange}>Submit</button>
-            </div>
-        </div>
+                <button type="submit" className='primary-button'>Accept changes</button>
+                    </form>
+                </div>
+            <Footer/>
+        </>
     )
 }

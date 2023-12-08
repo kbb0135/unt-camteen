@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { auth } from "../firebase.js"
 import { onAuthStateChanged, updatePassword } from 'firebase/auth';
 import Header from './Header.jsx';
-import '../style/change.css';
+import Footer from './Footer.jsx';
+import '../style/Menu.css'
 
 export default function () {
     const [password, setPassword] = useState("");
@@ -32,14 +33,18 @@ export default function () {
     }
 
     return (
-        <div>
+        <>
             <Header />
-            <h1 className="text-center">Change Password</h1>
-            <div className='change-user'>
+            <div className='user-detail-page'>
+                <div></div>
+            <h1>Edit Password</h1>
+            <form className="menu-edit" onSubmit={handlePassword}>
                 <label htmlFor="password">Password</label>
                 <input type="password" className="password" onChange={getPassword} placeholder="Enter your new password" />
-                <button onClick={() => handlePassword()}>Change Password</button>
+                <button  type="submit" className='primary-button'>Change Password</button>
+                </form>
             </div>
-        </div>
+            <Footer/>
+        </>
     )
 }

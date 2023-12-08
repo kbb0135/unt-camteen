@@ -171,3 +171,18 @@ img{
   cursor:pointer;
   color:green;
 }
+.user-detail-page{
+  padding: 2rem 6rem;
+  width: 100%;
+  background-color: var(--background-color);
+  box-sizing: border-box;
+}
+.user-detail-page h1{
+  margin-top: 0;
+}
+.user-detail-page form{
+  width: min(20rem, 80%);
+  background-color: var(--off-background-color);
+  padding: 1rem;
+  box-sizing: border-box;
+}

@@ -14,7 +14,8 @@ export default function () {
 
     }
 
-    const handlePassword = () => {
+    const handlePassword = (e) => {
+        e.preventDefault();
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 updatePassword(user, password).then(() => {
@@ -38,7 +39,7 @@ export default function () {
             <div className='user-detail-page'>
                 <div></div>
             <h1>Edit Password</h1>
-            <form className="menu-edit" onSubmit={handlePassword}>
+            <form className="menu-edit" onSubmit={ (e) => handlePassword(e)}>
                 <label htmlFor="password">Password</label>
                 <input type="password" className="password" onChange={getPassword} placeholder="Enter your new password" />
                 <button  type="submit" className='primary-button'>Change Password</button>

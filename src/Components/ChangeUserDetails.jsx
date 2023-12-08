@@ -28,7 +28,8 @@ export default function ChangeUserDetails() {
         return () => unsuscribe();
     }, [])
 
-    const handleChange = async () => {
+    const handleChange = async (e) => {
+        e.preventDefault();
         const user = auth.currentUser;
         if (user) {
             const docRef = doc(db, 'Users', user.uid);
@@ -53,7 +54,7 @@ export default function ChangeUserDetails() {
             <Header />
             <div className='user-detail-page'>
             <h1>Change User Details</h1>
-            <form onSubmit={handleChange}>
+                <form onSubmit={(e) => handleChange(e)}>
                 <label htmlFor="First Name">Change First Name</label>
                 <input type="tel" value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
                 <label htmlFor="First Name">Change Last Name</label>

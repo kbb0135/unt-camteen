@@ -32,11 +32,11 @@ const ReviewForm = ({fetchReviews}) => {
     }
     return <form onSubmit={submitHandler} className="rev-form">
         <div className="rev-form-info">
-            <h3 className="rev-form-head">How was your experience?</h3>
+            <h2 className="rev-form-head">How was your experience?</h2>
             <Star stars={rating} changeHandler={(val) => setRating(val)}/>
         </div>
         <textarea rows={5} placeholder="Your feedback matters..." value={message} onChange={event => setMessage(event.target.value)} required></textarea>
-        <button type="submit" className="rev-form-btn">Submit Review</button>
+        <button type="submit" className="primary-button">Submit Review</button>
     </form>
 }
 

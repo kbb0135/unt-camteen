@@ -230,8 +230,8 @@ export const Notifcation = () => {
                     <td className="noti-desc">
                       <p>{notification.message}</p>
                     </td>
-                    <td className=" noti-action">
-                      <div className="d-flex">
+                    <td className="noti-action">
+                      <div className="button-flex">
                         <button
                           className="ghost-button red-button"
                           onClick={() => handleDelete(notification)}

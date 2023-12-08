@@ -12,7 +12,7 @@ export default function AdminCoupon() {
   const [user, setUser] = useState(null);
   const [isSet, setIsSet] = useState(false);
   const [message, setMessage] = useState("");
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState("");
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -23,6 +23,13 @@ export default function AdminCoupon() {
       }
     });
   });
+  const handleCouponchange = (e) => {
+    if (e.target.value) {
+      setVal(parseInt(e.target.value, 10));
+    } else {
+      setVal("");
+    }
+  }
   const SetCoupon = async () => {
     if (user) {
       await setDoc(doc(db, "Coupons", title), {
@@ -46,7 +53,6 @@ export default function AdminCoupon() {
       <div>
         <div className="edit-menu">
           <h1>Admin Coupon</h1>
-          <h3>Enter Title</h3>
           <div>
             <label htmlFor="coupon-title">Enter coupon title:</label>
             <input
@@ -63,15 +69,15 @@ export default function AdminCoupon() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
-            <h3>Enter Coupon Price</h3>
+            <h3>Enter Coupon Amount</h3>
             <input
               placeholder="Enter the Coupon Price"
-              type="number"
+              type="text"
               value={val}
-              onChange={(e) => setVal(e.target.value)}
+              onChange={(e) => handleCouponchange(e)}
             />
           </div>
-          <button onClick={() => SetCoupon()}>Click Me</button>
+          <button className="primary-button" onClick={() => SetCoupon()}>Add Coupon</button>
         </div>
         {isSet ? (
           <>
